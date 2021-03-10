@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package assignment1;
+package pdc.assignment.pkg1;
 
 /**
  *
  * @author Weaselcore
  */
-public class Assignment1 {
+public class PDCAssignment1 {
 
     /**
      * @param args the command line arguments
