@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 **/nbproject/private/
 **/nbproject/Makefile-*.mk
 **/nbproject/Package-*.bash
@@ -6,3 +7,7 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
+=======
+/build/
+nbproject/private/private.properties
+>>>>>>> Stashed changes

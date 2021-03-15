@@ -5,6 +5,8 @@
  */
 package pdc.assignment.pkg1;
 
+import java.util.Scanner;
+
 /**
  *
  * @author Weaselcore
@@ -15,7 +17,33 @@ public class PDCAssignment1 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        
+        Boolean isRunning = true;
+        Scanner input = new Scanner(System.in);
+        
+        
+        while (isRunning) {
+            
+            System.out.println("PLACEHOLDER SHOOTER\n");
+            System.out.println("1: New Game");
+            System.out.println("2: Load Game");
+            System.out.println("3: Exit");
+            System.out.print("Input: ");
+            
+            String result = input.nextLine();
+            
+            if ("1".equals(result)) {
+                //gamecreator();
+            } else if ("2".equals(result)) {
+                //loadGAme();
+            } else {
+                System.out.println("Thanks for playing!\n");
+                System.exit(0);
+            }
+            
+        }
+
+        
     }
     
 }
