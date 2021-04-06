@@ -9,7 +9,7 @@ package pdc.assignment.pkg1;
  *
  * @author ieuan
  */
-public abstract class AbstractEnemy {
+public abstract class AbstractEntity {
     
     String name;
     int health;
@@ -24,5 +24,7 @@ public abstract class AbstractEnemy {
     abstract void defeatLine();
     
     abstract void victoryLine();
+    
+    abstract void displayInfo();
     
 }

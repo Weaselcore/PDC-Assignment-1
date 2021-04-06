@@ -33,6 +33,13 @@ public class PDCAssignment1 {
             String result = input.nextLine();
             
             if ("1".equals(result)) {
+                
+                System.out.println("Please enter a name for your new brave adventurer:");
+                String user_input = input.nextLine();
+  
+                
+                GameSession newGameSession = new GameSession(false, user_input);
+                break;
                 //gamecreator();
             } else if ("2".equals(result)) {
                 //loadGAme();
