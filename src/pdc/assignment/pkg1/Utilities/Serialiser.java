@@ -3,16 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pdc.assignment.pkg1.ItemCreation;
+package pdc.assignment.pkg1.Utilities;
 
 /**
  *
- * @author Weaselcore
+ * @author whackaweasel
  */
-public class ItemFactory {
-    
-    public static Item CreateItem(String itemType) {
-        
-    }
+public class Serialiser {
     
 }

@@ -5,7 +5,8 @@
  */
 package pdc.assignment.pkg1;
 
-import java.io.IOException;
+import pdc.assignment.pkg1.Entities.Enemy;
+import pdc.assignment.pkg1.Entities.Player;
 
 /**
  *

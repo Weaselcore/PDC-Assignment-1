@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pdc.assignment.pkg1;
+package pdc.assignment.pkg1.Entities;
 
 /**
  *
  * @author whackaweasel
  */
-public class Serialiser {
+public class IEntity {
     
 }

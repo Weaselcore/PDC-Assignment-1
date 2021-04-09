@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pdc.assignment.pkg1;
+package pdc.assignment.pkg1.Entities;
 
 /**
  *
@@ -11,7 +11,7 @@ package pdc.assignment.pkg1;
  */
 public abstract class AbstractEntity {
     
-    String name;
+    public String name;
     int health;
     int damage;
     
