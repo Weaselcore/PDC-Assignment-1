@@ -5,6 +5,7 @@
  */
 package pdc.assignment.pkg1;
 
+import java.io.IOException;
 import pdc.assignment.pkg1.Entities.Enemy;
 import pdc.assignment.pkg1.Entities.Player;
 
@@ -30,7 +31,7 @@ public class GameSession {
         // Load (deserialise) everything here.
         this.isNewGame = isNewGame;
         this.name = name;
-        Player player = new Player(this.name);
+        this.player = new Player(this.name);
 
         
         // if not new game, create new game.
@@ -78,7 +79,7 @@ public final static void clearScreen()
             Runtime.getRuntime().exec("clear");
         }
     }
-    catch (final Exception e)
+    catch (final IOException e)
     {
         //  Handle any exceptions.
     }

@@ -12,7 +12,7 @@ package pdc.assignment.pkg1.Entities;
 public class Player extends AbstractEntity {
 
     // TODO create interface to have default health and damage.
-    Player(String name) {
+    public Player(String name) {
         this.name = name;
         health = 10;
         damage = 3;
@@ -46,7 +46,7 @@ public class Player extends AbstractEntity {
     }
     
     @Override
-    void displayInfo() {
+    public void displayInfo() {
         System.out.println("You: " + this.name + " | Health: " + this.health + "| Damage: " + this.damage);
     }
     

@@ -9,6 +9,8 @@ package pdc.assignment.pkg1.Entities;
  *
  * @author whackaweasel
  */
-public class IEntity {
+public interface IEntity {
+    
+    public void Create();
     
 }

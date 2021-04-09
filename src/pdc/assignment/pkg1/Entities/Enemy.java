@@ -11,7 +11,7 @@ package pdc.assignment.pkg1.Entities;
  */
 public class Enemy extends AbstractEntity{
     
-        Enemy(String name, int health, int damage) {
+        public Enemy(String name, int health, int damage) {
         // This will be randomly generated unlike the players name.
         this.name = name;
         this.health = health;
@@ -46,7 +46,7 @@ public class Enemy extends AbstractEntity{
     }
     
     @Override
-    void displayInfo() {
+    public void displayInfo() {
         System.out.println("Enemy: " + this.name + " | Health: " + this.health + "| Damage: " + this.damage);
     }
 }
