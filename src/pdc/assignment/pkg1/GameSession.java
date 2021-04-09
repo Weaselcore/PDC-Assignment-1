@@ -7,6 +7,7 @@ package pdc.assignment.pkg1;
 
 import java.io.IOException;
 import pdc.assignment.pkg1.Entities.Enemy;
+import pdc.assignment.pkg1.Entities.EntityFactory;
 import pdc.assignment.pkg1.Entities.Player;
 
 /**
@@ -15,31 +16,22 @@ import pdc.assignment.pkg1.Entities.Player;
  */
 public class GameSession {
     
-    // Keep track of what level it's on 1 - 3.
-    // Should load in player info if loading from save.
-    // Player player; (Placeholder)
-    // Enemy currentEnemy;
-    // Level level;
     boolean isNewGame;
     int currentLevel = 1;
     int maxLevel = 3;
-    String name;
     Player player;
     Enemy currentEnemy;
     
-        GameSession(boolean isNewGame, String name) {
-        // Load (deserialise) everything here.
-        this.isNewGame = isNewGame;
-        this.name = name;
-        this.player = new Player(this.name);
-
+        GameSession(boolean isNewGame) throws Exception {
         
+        this.isNewGame = isNewGame;
+        this.player = (Player) EntityFactory.CreateEntity("player");
+        this.currentEnemy = (Enemy) EntityFactory.CreateEntity("enemy");
+
         // if not new game, create new game.
         // else load a game from save file.
         clearScreen();
         displayLevel();
-        player.displayInfo();
-        newLevel();
     }
         
     // Initialise Level
@@ -59,30 +51,35 @@ public class GameSession {
         System.out.println(stringbuilder.toString());
     }
     
-    private void newLevel() {
-        this.currentEnemy = new Enemy("Slime", 10, 2);
-        this.currentEnemy.displayInfo();
+    
+    public void playerTurn() {
+        this.player.attack(this.currentEnemy);
     }
     
-public final static void clearScreen()
-{
-    try
+    public void enemyTurn() {
+        this.currentEnemy.attack(this.player);
+        
+    }
+    
+    public final static void clearScreen()
     {
-        final String os = System.getProperty("os.name");
+        try
+        {
+            final String os = System.getProperty("os.name");
 
-        if (os.contains("Windows"))
-        {
-            Runtime.getRuntime().exec("cls");
+            if (os.contains("Windows"))
+            {
+                Runtime.getRuntime().exec("cls");
+            }
+            else
+            {
+                Runtime.getRuntime().exec("clear");
+            }
         }
-        else
+        catch (final IOException e)
         {
-            Runtime.getRuntime().exec("clear");
+            //  Handle any exceptions.
         }
     }
-    catch (final IOException e)
-    {
-        //  Handle any exceptions.
-    }
-}
     
 }

@@ -14,11 +14,17 @@ public class EntityFactory {
         public static IEntity CreateEntity(String entityType) throws Exception {
         switch(entityType) {
             case "player":
-                System.out.println("You have created a player.");
+                Player player = new Player();
+                player.create();
+                System.out.println("You have created a new player.");
+                return player;
             case "enemy":
+                Enemy enemy = new Enemy();
+                enemy.create();
                 System.out.println("You have created an enemy.");
+                return enemy;
             default:
-                throw new Exception("Invalid enemy type.");
+                throw new Exception("Invalid entity type.");
         }
     }
     

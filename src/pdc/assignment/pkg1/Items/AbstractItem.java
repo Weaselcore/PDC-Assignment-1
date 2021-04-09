@@ -9,7 +9,7 @@ package pdc.assignment.pkg1.Items;
  *
  * @author ieuan
  */
-public abstract class AbstractItem {
+public abstract class AbstractItem implements IItem{
     
     String name;
     String description;

@@ -11,6 +11,6 @@ package pdc.assignment.pkg1.Entities;
  */
 public interface IEntity {
     
-    public void Create();
+    public void create();
     
 }
