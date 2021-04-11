@@ -31,27 +31,39 @@ public final class GameSession {
         // else load a game from save file.
         clearScreen();
         this.displayLevel();
+        this.levelLoop();
     }
         
-
+    /**
+     * Creates a loops to handle the turns which is uses the Entity interface
+     * and type to handle both Player and Enemy.
+     */
     public void levelLoop() {
         
         boolean levelInProgress = true;
-        
+        // Since there is no parallel assignments in Java,
+        // a temp variable is used to swap around the current entityForTurn.
+        Entity entityForTurn = this.player;
+        Entity entityWaiting = this.currentEnemy;
+        Entity temp;
         
         while (levelInProgress) {
-            this.playerTurn();
-            if (this.player.isDead()) {
+            boolean targetHasDied = entityForTurn.turn(entityWaiting);
+            if (targetHasDied) {
                 levelInProgress = false;
-            }
-            else {
-                this.enemyTurn();
-                if 
+            } else {
+                temp = entityForTurn;
+                entityForTurn = entityWaiting;
+                entityWaiting = temp;
             }
         }
     }
     
-    // Display level on command.
+    /**
+     * Displays the current level the Player is currently on,
+     * Example: [ ] [*] [ ] [ ] [ ] [ ]
+     * The Player is on the second level out of 6.
+     */
     public void displayLevel() {
         StringBuilder stringbuilder = new StringBuilder();
         stringbuilder.append("Progress: ");
@@ -66,16 +78,9 @@ public final class GameSession {
         System.out.println(stringbuilder.toString());
     }
     
-    
-    public void playerTurn() {
-        this.player.attack(this.currentEnemy);
-    }
-    
-    public void enemyTurn() {
-        this.currentEnemy.attack(this.player);
-        
-    }
-    
+    /**
+     * This is an operating system agnostic way of clearing the terminal.
+     */
     public final static void clearScreen()
     {
         try

@@ -26,14 +26,7 @@ public final class Player extends AbstractEntity {
     // public Player() {
     //  Retrieve data from file and assign name, health and damage.
     // };
-    
-    public void attack(Enemy enemy) {
-        // TODO randomise damage in range.
-        enemy.displayInfo();
-        enemy.takeDamage(this.damage);
-        System.out.println("You have attacked, Roger, with " + this.damage + ".");
-        enemy.displayInfo();
-    }
+
      
     @Override
     void specialAttack() {
@@ -71,7 +64,7 @@ public final class Player extends AbstractEntity {
             System.out.println("Are you happy with this name? " + char_name);
             System.out.println("Press y to continue or n to choose another name: ");
             String confirmation = input.nextLine();
-            switch (confirmation.strip()) {
+            switch (confirmation.trim()) {
                 case "y":
                     this.name = char_name;
                     confirmed = true;
@@ -87,16 +80,38 @@ public final class Player extends AbstractEntity {
     }
 
     @Override
-    void takeDamage(int damage) {
+    public void takeDamage(int damage) {
         this.health -= damage;
     }
     
     @Override
     public boolean isDead() {
-        if (this.health <= 0) {
-          return true;
-        } else {
+        return this.health <= 0;
+    }
+
+    @Override
+    public void attack(Entity currentEnemy) {
+        currentEnemy.displayInfo();
+        currentEnemy.takeDamage(this.damage);
+        System.out.println("You have attacked," + currentEnemy.getName() + ", with " + this.damage + ".");
+        currentEnemy.displayInfo();
+    }
+
+    @Override
+    public boolean turn(Entity currentEnemy) {
+        this.attack(currentEnemy);
+        boolean targetDead = currentEnemy.isDead();
+        if (targetDead) {
+            System.out.println("You have slain" + currentEnemy.getName());
+            return true;
+        }
+        else {
             return false;
         }
+    }
+
+    @Override
+    public String getName() {
+        return this.name;
     }
 }

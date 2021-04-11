@@ -15,10 +15,14 @@ public interface Entity {
 
     public boolean isDead();
 
-    public void attack(Entity currentEnemy);
+    public void attack(Entity entity);
 
     public void displayInfo();
 
     public void takeDamage(int damage);
+    
+    public boolean turn(Entity entity);
+    
+    public String getName();
     
 }

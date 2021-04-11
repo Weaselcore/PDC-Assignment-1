@@ -26,6 +26,10 @@ public final class Enemy extends AbstractEntity{
     // Pass in target entity to reduce their health.
     public void attack(Player player) {
         // TODO randomise damage in range.
+        player.displayInfo();
+        player.takeDamage(this.damage);
+        System.out.println(this.name + " has attacked, Roger, with " + this.damage + ".");
+        player.displayInfo();
 
     }
      
@@ -73,5 +77,23 @@ public final class Enemy extends AbstractEntity{
         player.takeDamage(this.damage);
         System.out.println("Roger has attacked you with " + this.damage + ".");
         player.displayInfo();
+    }
+
+    @Override
+    public boolean turn(Entity player) {
+        this.attack(player);
+        boolean targetDead = player.isDead();
+        if (targetDead) {
+            System.out.println("You have slain " + player.getName());
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    
+    @Override
+    public String getName() {
+        return this.name;
     }
 }

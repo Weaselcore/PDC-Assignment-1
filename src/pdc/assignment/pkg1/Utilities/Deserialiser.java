@@ -4,11 +4,12 @@
  * and open the template in the editor.
  */
 package pdc.assignment.pkg1.Utilities;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * Deserialisation should be done using the Jackson library.
  * @author whackaweasel
  */
-public class Deserialiser {
-    
+public class Deserialiser { 
+    ObjectMapper objectMapper = new ObjectMapper();
 }

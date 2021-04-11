@@ -34,8 +34,6 @@ public class PDCAssignment1 {
             
             if ("1".equals(result)) {             
                 GameSession newGameSession = new GameSession(true);
-                newGameSession.playerTurn();
-                newGameSession.enemyTurn();
                 break;
                 //gamecreator();
             } else if ("2".equals(result)) {
