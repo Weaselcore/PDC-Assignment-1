@@ -50,7 +50,7 @@ public final class Player extends AbstractEntity {
     
     @Override
     public void displayInfo() {
-        System.out.println("You: " + this.name+ " | Health: " + this.health + "| Damage: " + this.damage);
+        System.out.println("You: " + this.name+ " | Health: " + this.health + " | Damage: " + this.damage);
     }
 
     // When new player is being initialised, it will prompt for a name.
@@ -61,7 +61,7 @@ public final class Player extends AbstractEntity {
             Scanner input = new Scanner(System.in);
             System.out.print("Please enter a name for your adventurer: ");
             String char_name = input.nextLine();
-            System.out.println("Are you happy with this name? " + char_name);
+            System.out.println("Are you happy with this name?: " + char_name);
             System.out.println("Press y to continue or n to choose another name: ");
             String confirmation = input.nextLine();
             switch (confirmation.trim()) {
@@ -93,7 +93,7 @@ public final class Player extends AbstractEntity {
     public void attack(Entity currentEnemy) {
         currentEnemy.displayInfo();
         currentEnemy.takeDamage(this.damage);
-        System.out.println("You have attacked," + currentEnemy.getName() + ", with " + this.damage + ".");
+        System.out.println("You have attacked " + currentEnemy.getName() + " with " + this.damage + ".");
         currentEnemy.displayInfo();
     }
 
@@ -115,7 +115,7 @@ public final class Player extends AbstractEntity {
                 this.attack(currentEnemy);
                 boolean targetDead = currentEnemy.isDead();
                 if (targetDead) {
-                    System.out.println("\n" + this.getName() + " have slain " + currentEnemy.getName());
+                    System.out.println("\n" + this.getName() + " has slain " + currentEnemy.getName() + "!");
                     toReturn = true;
                 }
                 else {

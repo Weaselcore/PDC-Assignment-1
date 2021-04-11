@@ -11,5 +11,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * @author whackaweasel
  */
 public class Deserialiser { 
-    ObjectMapper objectMapper = new ObjectMapper();
+    
+    private ObjectMapper objectMapper = new ObjectMapper();
+    
+    
 }

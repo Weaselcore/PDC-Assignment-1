@@ -28,7 +28,7 @@ public final class Enemy extends AbstractEntity{
         // TODO randomise damage in range.
         player.displayInfo();
         player.takeDamage(this.damage);
-        System.out.println(this.name + " has attacked, Roger, with " + this.damage + ".");
+        System.out.println(this.name + " has attacked Roger with " + this.damage + ".");
         player.displayInfo();
 
     }
@@ -55,7 +55,7 @@ public final class Enemy extends AbstractEntity{
     
     @Override
     public void displayInfo() {
-        System.out.println("Enemy: " + this.name + " | Health: " + this.health + "| Damage: " + this.damage);
+        System.out.println("Enemy: " + this.name + " | Health: " + this.health + " | Damage: " + this.damage);
     }
 
     @Override
@@ -80,7 +80,7 @@ public final class Enemy extends AbstractEntity{
         this.attack(player);
         boolean targetDead = player.isDead();
         if (targetDead) {
-            System.out.println(this.getName() + " has slain " + player.getName());
+            System.out.println(this.getName() + " has slain " + player.getName() + "!");
             return true;
         }
         else {
