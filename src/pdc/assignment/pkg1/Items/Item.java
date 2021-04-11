@@ -9,7 +9,7 @@ package pdc.assignment.pkg1.Items;
  *
  * @author Weaselcore
  */
-public interface IItem {
+public interface Item {
     
     public void Create();
     

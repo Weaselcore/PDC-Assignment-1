@@ -25,5 +25,4 @@ public class EntityFactory {
                 throw new Exception("Invalid entity type.");
         }
     }
-    
 }

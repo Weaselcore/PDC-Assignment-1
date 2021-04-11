@@ -11,7 +11,7 @@ package pdc.assignment.pkg1.Items;
  */
 public class ItemFactory {
     
-    public static IItem CreateItem(String itemType) throws Exception {
+    public static Item CreateItem(String itemType) throws Exception {
         switch(itemType) {
             case "weapon":
                 System.out.println("You have recieved a weapon.");
