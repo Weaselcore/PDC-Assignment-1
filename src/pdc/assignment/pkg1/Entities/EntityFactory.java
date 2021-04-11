@@ -11,16 +11,14 @@ package pdc.assignment.pkg1.Entities;
  */
 public class EntityFactory {
     
-        public static IEntity CreateEntity(String entityType) throws Exception {
+        public static Entity CreateEntity(String entityType) throws Exception {
         switch(entityType) {
             case "player":
                 Player player = new Player();
-                player.create();
                 System.out.println("You have created a new player.");
                 return player;
             case "enemy":
                 Enemy enemy = new Enemy();
-                enemy.create();
                 System.out.println("You have created an enemy.");
                 return enemy;
             default:

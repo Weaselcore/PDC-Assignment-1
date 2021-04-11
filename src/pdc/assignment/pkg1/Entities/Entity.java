@@ -9,8 +9,16 @@ package pdc.assignment.pkg1.Entities;
  *
  * @author whackaweasel
  */
-public interface IEntity {
+public interface Entity {
     
     public void create();
+
+    public boolean isDead();
+
+    public void attack(Entity currentEnemy);
+
+    public void displayInfo();
+
+    public void takeDamage(int damage);
     
 }

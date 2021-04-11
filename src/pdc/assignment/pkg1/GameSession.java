@@ -6,38 +6,53 @@
 package pdc.assignment.pkg1;
 
 import java.io.IOException;
-import pdc.assignment.pkg1.Entities.Enemy;
 import pdc.assignment.pkg1.Entities.EntityFactory;
-import pdc.assignment.pkg1.Entities.Player;
+import pdc.assignment.pkg1.Entities.Entity;
 
 /**
  *
  * @author whackaweasel
  */
-public class GameSession {
+public final class GameSession {
     
     boolean isNewGame;
     int currentLevel = 1;
     int maxLevel = 3;
-    Player player;
-    Enemy currentEnemy;
+    Entity player;
+    Entity currentEnemy;
     
         GameSession(boolean isNewGame) throws Exception {
         
         this.isNewGame = isNewGame;
-        this.player = (Player) EntityFactory.CreateEntity("player");
-        this.currentEnemy = (Enemy) EntityFactory.CreateEntity("enemy");
+        this.player = EntityFactory.CreateEntity("player");
+        this.currentEnemy =  EntityFactory.CreateEntity("enemy");
 
         // if not new game, create new game.
         // else load a game from save file.
         clearScreen();
-        displayLevel();
+        this.displayLevel();
     }
         
-    // Initialise Level
+
+    public void levelLoop() {
+        
+        boolean levelInProgress = true;
+        
+        
+        while (levelInProgress) {
+            this.playerTurn();
+            if (this.player.isDead()) {
+                levelInProgress = false;
+            }
+            else {
+                this.enemyTurn();
+                if 
+            }
+        }
+    }
     
     // Display level on command.
-    private void displayLevel() {
+    public void displayLevel() {
         StringBuilder stringbuilder = new StringBuilder();
         stringbuilder.append("Progress: ");
         for (int i = 0; i < this.maxLevel; i++) {
@@ -80,6 +95,7 @@ public class GameSession {
         {
             //  Handle any exceptions.
         }
+
     }
     
 }

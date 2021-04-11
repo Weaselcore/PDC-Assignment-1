@@ -9,7 +9,7 @@ package pdc.assignment.pkg1.Entities;
  *
  * @author ieuan
  */
-public abstract class AbstractEntity implements IEntity{
+public abstract class AbstractEntity implements Entity{
     
     String name;
     int health;
@@ -23,7 +23,4 @@ public abstract class AbstractEntity implements IEntity{
     
     abstract void victoryLine();
     
-    abstract void displayInfo();
-    
-    abstract void takeDamage(int damage);    
 }

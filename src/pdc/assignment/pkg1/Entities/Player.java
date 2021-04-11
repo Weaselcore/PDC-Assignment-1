@@ -11,12 +11,13 @@ import java.util.Scanner;
  *
  * @author whackaweasel
  */
-public class Player extends AbstractEntity {
+public final class Player extends AbstractEntity {
     
     // TODO Create two constructors for new and old players.
     
     // New player.
     public Player() {
+        this.create();
         health = 10;
         damage = 3;
     };
@@ -56,7 +57,7 @@ public class Player extends AbstractEntity {
     
     @Override
     public void displayInfo() {
-        System.out.println("You: " + this.getName() + " | Health: " + this.health + "| Damage: " + this.damage);
+        System.out.println("You: " + this.name+ " | Health: " + this.health + "| Damage: " + this.damage);
     }
 
     // When new player is being initialised, it will prompt for a name.
@@ -88,5 +89,14 @@ public class Player extends AbstractEntity {
     @Override
     void takeDamage(int damage) {
         this.health -= damage;
+    }
+    
+    @Override
+    public boolean isDead() {
+        if (this.health <= 0) {
+          return true;
+        } else {
+            return false;
+        }
     }
 }

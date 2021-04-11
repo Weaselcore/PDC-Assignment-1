@@ -9,10 +9,11 @@ package pdc.assignment.pkg1.Entities;
  *
  * @author whackaweasel
  */
-public class Enemy extends AbstractEntity{
+public final class Enemy extends AbstractEntity{
     
     public Enemy() {
     // This will be randomly generated unlike the players name.
+        this.create();
     };
         
     @Override
@@ -25,9 +26,7 @@ public class Enemy extends AbstractEntity{
     // Pass in target entity to reduce their health.
     public void attack(Player player) {
         // TODO randomise damage in range.
-        player.takeDamage(this.damage);
-        System.out.println("Roger has attacked you with " + this.damage + ".");
-        player.displayInfo();
+
     }
      
     @Override
@@ -52,11 +51,27 @@ public class Enemy extends AbstractEntity{
     
     @Override
     public void displayInfo() {
-        System.out.println("Enemy: " + this.getName() + " | Health: " + this.health + "| Damage: " + this.damage);
+        System.out.println("Enemy: " + this.name + " | Health: " + this.health + "| Damage: " + this.damage);
     }
 
     @Override
-    void takeDamage(int damage) {
+    public void takeDamage(int damage) {
         this.health -= damage;
-    }    
+    }
+    
+    @Override
+    public boolean isDead() {
+        if (this.health <= 0) {
+          return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public void attack(Entity player) {
+        player.takeDamage(this.damage);
+        System.out.println("Roger has attacked you with " + this.damage + ".");
+        player.displayInfo();
+    }
 }
