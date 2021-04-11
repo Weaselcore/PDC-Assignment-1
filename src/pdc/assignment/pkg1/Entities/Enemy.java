@@ -65,11 +65,7 @@ public final class Enemy extends AbstractEntity{
     
     @Override
     public boolean isDead() {
-        if (this.health <= 0) {
-          return true;
-        } else {
-            return false;
-        }
+        return this.health <= 0;
     }
 
     @Override
@@ -84,7 +80,7 @@ public final class Enemy extends AbstractEntity{
         this.attack(player);
         boolean targetDead = player.isDead();
         if (targetDead) {
-            System.out.println("You have slain " + player.getName());
+            System.out.println(this.getName() + " has slain " + player.getName());
             return true;
         }
         else {

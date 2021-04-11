@@ -14,7 +14,7 @@ import java.util.Scanner;
 public class PDCAssignment1 {
 
     /**
-     * @param args the command line arguments
+     * Entry point to start a game.
      */
     public static void main(String[] args) throws Exception {
         

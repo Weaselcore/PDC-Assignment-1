@@ -99,15 +99,41 @@ public final class Player extends AbstractEntity {
 
     @Override
     public boolean turn(Entity currentEnemy) {
-        this.attack(currentEnemy);
-        boolean targetDead = currentEnemy.isDead();
-        if (targetDead) {
-            System.out.println("You have slain" + currentEnemy.getName());
-            return true;
-        }
-        else {
-            return false;
-        }
+        Scanner input = new Scanner(System.in);
+        
+        System.out.println(
+                "1. Attack \n2. Use Item\n3. Run Away");
+
+        boolean chosen = false;
+        boolean toReturn = false;
+
+        while (!chosen) {
+
+            String chosenOption = input.next();
+
+            if ("1".equals(chosenOption)) {
+                this.attack(currentEnemy);
+                boolean targetDead = currentEnemy.isDead();
+                if (targetDead) {
+                    System.out.println("\n" + this.getName() + " have slain " + currentEnemy.getName());
+                    toReturn = true;
+                }
+                else {
+                    toReturn = false;
+                }
+                chosen = true;
+            }
+            else if ("2".equals(chosenOption)) {
+                System.out.println("Items are not implemented.");
+            }
+            else if ("3".equals(chosenOption)) {
+                System.out.println("Running away is not implemented.");
+            }
+            else {
+                System.out.println("Please input a proper input!");
+            }
+        } 
+        return toReturn;
     }
 
     @Override

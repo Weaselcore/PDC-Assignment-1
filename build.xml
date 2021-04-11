@@ -10,6 +10,36 @@
 <project name="PDC-Assignment-1" default="default" basedir=".">
     <description>Builds, tests, and runs the project PDC-Assignment-1.</description>
     <import file="nbproject/build-impl.xml"/>
+
+    <!-- <target name="-post-jar">
+      <jar destfile="dist_custom/PDC-game.jar">
+        <manifest>
+          <attribute name="Main-Class" value="pdc.assignment.pkg1.PDCAssignment1"/>
+        </manifest>
+        <fileset dir="build" excludes="**/test/*.class"/>
+        <zipfileset src="lib/lib/jackson-annotations-2.12.2.jar"/>
+        <zipfileset src="lib/lib/jackson-core-2.12.2.jar"/>
+        <zipfileset src="lib/lib/jackson-databind-2.12.2.jar"/>
+      </jar>
+    </target> -->
+    <target name="-post-jar">
+        <jar destfile="output/PDC-game.jar">
+        <fileset dir="build/classes"/>
+        <restrict>
+          <name name="**/*.class"/>
+          <archives>
+            <zips>
+              <fileset dir="lib/lib/" includes="**/*.jar"/>
+            </zips>
+          </archives>
+        </restrict>
+        <manifest>
+          <attribute name="Main-Class"
+                value="pdc.assignment.pkg1.PDCAssignment1"/>
+        </manifest>
+      </jar>
+    </target> 
+
     <!--
 
     There exist several targets which are by default empty and which can be 
