@@ -5,15 +5,34 @@
  */
 package pdc.assignment.pkg1.Items;
 
+import java.util.HashMap;
+
 /**
  *
  * @author whackaweasel
  */
-public class Potion extends AbstractItem{
+public final class Potion extends AbstractItem{
+     
+    private String name;
+    private Integer value;
+    private String description;
+    
+    // Randomiser for loot drop.
+    Potion(HashMap info){
+        // Create loot drop algorithm to generate object.
+        
+    }
+    
+    // Specific constructor for loading up saves.
+    Potion(String name, HashMap info) {
+        this.name = name;
+        this.value = (Integer) info.get("value");
+        this.description = (String) info.get("description");
+    }
 
     @Override
     void getDesc() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     @Override
@@ -22,6 +41,7 @@ public class Potion extends AbstractItem{
     }
 
     @Override
+    // Pass player object to edit values. Either health or super attack.
     void onUse() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

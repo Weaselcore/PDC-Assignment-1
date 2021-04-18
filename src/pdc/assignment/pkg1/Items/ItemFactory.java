@@ -5,23 +5,28 @@
  */
 package pdc.assignment.pkg1.Items;
 
+import pdc.assignment.pkg1.Utilities.Deserialiser;
+
 /**
  *
  * @author Weaselcore
  */
 public class ItemFactory {
-    
-    public static Item CreateItem(String itemType) throws Exception {
-        switch(itemType) {
+
+    public static Item createItem(String itemType) throws Exception {
+        switch (itemType) {
             case "weapon":
                 System.out.println("You have recieved a weapon.");
             case "armour":
                 System.out.println("You have recieved a armour.");
             case "potion":
                 System.out.println("You have recieved a potion.");
+            case "starter":
+                return new Potion("Small Health Potion", Deserialiser.readItemJSON("potion.json"));
+                
             default:
                 throw new Exception("Invalid item type.");
         }
     }
-    
+
 }

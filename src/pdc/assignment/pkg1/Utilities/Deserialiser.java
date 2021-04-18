@@ -5,9 +5,14 @@
  */
 package pdc.assignment.pkg1.Utilities;
 
-import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import pdc.assignment.pkg1.Entities.Entity;
+import pdc.assignment.pkg1.Items.Item;
 
 /**
  * Deserialisation should be done using the Jackson library.
@@ -15,21 +20,23 @@ import java.io.IOException;
  * @author whackaweasel
  */
 public class Deserialiser {
-
-    private static ObjectMapper objectMapper = getDefaultObjectMapper();
     
-    public Deserialiser(){
-        
+    public static void readSave(Integer number) throws JsonGenerationException, JsonMappingException, IOException{
+        String string = "save.json";
+        ObjectMapper mapper = new ObjectMapper();
+        string = number.toString() + string;
+        System.out.println(mapper.readValue(new File(string), SaveData.class));
     }
-
-    private static ObjectMapper getDefaultObjectMapper() {
-        ObjectMapper defaultObjectMapper = new ObjectMapper();
-        // configure
-        return defaultObjectMapper;
+    
+    public static HashMap readItemJSON(String string) throws JsonGenerationException, JsonMappingException, IOException{
+        ObjectMapper mapper = new ObjectMapper();
+        return (HashMap) mapper.readValue(new File(string), Item.class);
     }
-
-    public static JsonNode parse(String src) throws IOException {
-        return objectMapper.readTree(src);
+    
+    public static HashMap readEntityJSON(String string) throws JsonGenerationException, JsonMappingException, IOException{
+        ObjectMapper mapper = new ObjectMapper();
+        return (HashMap) mapper.readValue(new File(string), Entity.class);
     }
-
+    
+    
 }

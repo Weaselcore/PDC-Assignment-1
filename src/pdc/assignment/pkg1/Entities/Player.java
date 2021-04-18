@@ -5,7 +5,10 @@
  */
 package pdc.assignment.pkg1.Entities;
 
+import java.util.ArrayList;
 import java.util.Scanner;
+import pdc.assignment.pkg1.Items.Item;
+import pdc.assignment.pkg1.Items.ItemFactory;
 
 /**
  *
@@ -13,11 +16,14 @@ import java.util.Scanner;
  */
 public final class Player extends AbstractEntity {
     
+    private ArrayList<Item> inventory;
+    
     // TODO Create two constructors for new and old players.
     
     // New player.
-    public Player() {
+    public Player() throws Exception {
         this.create();
+        inventory.add(ItemFactory.createItem("starter"));
         health = 10;
         damage = 3;
     };
