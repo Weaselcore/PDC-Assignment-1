@@ -16,7 +16,7 @@ import java.io.IOException;
  */
 public class Deserialiser {
 
-    private static ObjectMapper objectMapper = new ObjectMapper();
+    private static ObjectMapper objectMapper = getDefaultObjectMapper();
     
     public Deserialiser(){
         
