@@ -19,6 +19,7 @@ public class PDCAssignment1 {
     public static void main(String[] args) throws Exception {
         
         Boolean isRunning = true;
+        GameSession gameSession;
         Scanner input = new Scanner(System.in);
         
         
@@ -33,11 +34,11 @@ public class PDCAssignment1 {
             String result = input.nextLine();
             
             if ("1".equals(result)) {             
-                GameSession newGameSession = new GameSession(true);
+                gameSession = new GameSession(true);
                 break;
                 //gamecreator();
             } else if ("2".equals(result)) {
-                GameSession newGameSession = new GameSession(false);   
+                gameSession = new GameSession(false);   
                 break;
                 // Display save files in resource package.
                 // Create menu for 3 saves.

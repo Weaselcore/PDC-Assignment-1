@@ -11,8 +11,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
-import pdc.assignment.Entities.Entity;
-import pdc.assignment.Items.Item;
 
 /**
  * Deserialisation should be done using the Jackson library.
@@ -28,15 +26,10 @@ public class Deserialiser {
         System.out.println(mapper.readValue(new File(string), SaveData.class));
     }
     
-    public static HashMap readItemJSON(String string) throws JsonGenerationException, JsonMappingException, IOException{
-        ObjectMapper mapper = new ObjectMapper();
-        return (HashMap) mapper.readValue(new File(string), Item.class);
-    }
-    
-    public static HashMap readEntityJSON(String string) throws JsonGenerationException, JsonMappingException, IOException{
-        ObjectMapper mapper = new ObjectMapper();
-        return (HashMap) mapper.readValue(new File(string), Entity.class);
-    }
-    
+    public static HashMap jsonDataToHashmap(String string) throws JsonGenerationException, JsonMappingException, IOException{
+        HashMap<String, Object> map = new ObjectMapper().readValue(new File(string), HashMap.class);
+        System.out.println("Data loaded from " + string);
+        return map;
+    } 
     
 }

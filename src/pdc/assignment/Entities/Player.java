@@ -6,6 +6,7 @@
 package pdc.assignment.Entities;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 import pdc.assignment.Items.Item;
 import pdc.assignment.Items.ItemFactory;
@@ -23,7 +24,6 @@ public final class Player extends AbstractEntity {
     // New player.
     public Player() throws Exception {
         this.create();
-        inventory.add(ItemFactory.createItem("starter"));
         health = 10;
         damage = 3;
     };

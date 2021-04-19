@@ -1,21 +1,21 @@
 {
   "Stone Sword":{
-    "Description": "A crude blade.",
+    "description": "A crude blade.",
     "value": 1,
     "chance": 0.8
   },
   "Copper Axe":{
-    "Description": "A hefty cutting tool for slashing.",
+    "description": "A hefty cutting tool for slashing.",
     "value": 3,
     "chance": 0.6
   },
   "Iron Spear":{
-    "Description": "A good weapon to toast marshmallows.",
+    "description": "A good weapon to toast marshmallows.",
     "value": 5,
     "chance": 0.4
   },
   "Diamond Mace":{
-    "Description": "You cannot break this tool by hitting something.",
+    "description": "You cannot break this tool by hitting something.",
     "value": 7,
     "chance": 0.2
   }
