@@ -6,10 +6,8 @@
 package pdc.assignment.Entities;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Scanner;
 import pdc.assignment.Items.Item;
-import pdc.assignment.Items.ItemFactory;
 
 /**
  *
@@ -18,6 +16,8 @@ import pdc.assignment.Items.ItemFactory;
 public final class Player extends AbstractEntity {
     
     private ArrayList<Item> inventory;
+    private int currentSuperAttackLevel;
+    private final int maxSuperAttackLevel;
     
     // TODO Create two constructors for new and old players.
     
@@ -26,6 +26,8 @@ public final class Player extends AbstractEntity {
         this.create();
         health = 10;
         damage = 3;
+        this.maxSuperAttackLevel = 5;
+        this.currentSuperAttackLevel = 1;
     };
 
     // Import save game file here.
@@ -64,9 +66,9 @@ public final class Player extends AbstractEntity {
         boolean confirmed = false;
         while (!confirmed) {
             Scanner input = new Scanner(System.in);
-            System.out.print("Please enter a name for your adventurer: ");
+            System.out.print("\nPlease enter a name for your adventurer: ");
             String char_name = input.nextLine();
-            System.out.println("Are you happy with this name?: " + char_name);
+            System.out.println("\nAre you happy with this name?: " + char_name);
             System.out.println("Press y to continue or n to choose another name: ");
             String confirmation = input.nextLine();
             switch (confirmation.trim()) {
@@ -100,11 +102,14 @@ public final class Player extends AbstractEntity {
         currentEnemy.takeDamage(this.damage);
         System.out.println("You have attacked " + currentEnemy.getName() + " with " + this.damage + ".");
         currentEnemy.displayInfo();
+        this.currentSuperAttackLevel += 1;
     }
 
     @Override
     public boolean turn(Entity currentEnemy) {
         Scanner input = new Scanner(System.in);
+        
+        this.displaySuperAttack();
         
         System.out.println(
                 "1. Attack \n2. Use Item\n3. Run Away");
@@ -139,6 +144,19 @@ public final class Player extends AbstractEntity {
             }
         } 
         return toReturn;
+    }
+    
+    public void displaySuperAttack() {
+        StringBuilder stringbuilder = new StringBuilder();
+        stringbuilder.append("Super Attack  : ");
+        for (int i = 0; i < maxSuperAttackLevel; i++) {
+            if (i >= (this.currentSuperAttackLevel - 1)) {
+                stringbuilder.append("[ ]");
+            } else {
+                stringbuilder.append("[*]");
+            }
+        }
+        System.out.println(stringbuilder.toString());
     }
 
     @Override

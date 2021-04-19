@@ -5,13 +5,15 @@
  */
 package pdc.assignment.Entities;
 
+import pdc.assignment.Utilities.GameData;
+
 /**
  *
  * @author whackaweasel
  */
 public class EntityFactory {
     
-        public static Entity CreateEntity(String entityType) throws Exception {
+        public static Entity CreateEntity(String entityType, GameData gameData) throws Exception {
         switch(entityType) {
             case "player":
                 Player player = new Player();
