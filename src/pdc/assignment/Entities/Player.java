@@ -98,9 +98,18 @@ public final class Player extends AbstractEntity {
 
     @Override
     public void attack(Entity currentEnemy) {
+       
+        int damageToDeal = this.damage;
+        String attackString = "You have attacked " + currentEnemy.getName() + " with " + damageToDeal + ".";
+        
+        if (this.currentSuperAttackLevel == this.maxSuperAttackLevel) {
+            damageToDeal = damageToDeal * 2;
+            attackString = "You have CRIT " + currentEnemy.getName() + " with " + damageToDeal + ".";
+        }
+        
         currentEnemy.displayInfo();
-        currentEnemy.takeDamage(this.damage);
-        System.out.println("You have attacked " + currentEnemy.getName() + " with " + this.damage + ".");
+        currentEnemy.takeDamage(damageToDeal);
+        System.out.println(attackString);
         currentEnemy.displayInfo();
         this.currentSuperAttackLevel += 1;
     }
