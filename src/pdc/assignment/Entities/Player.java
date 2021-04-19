@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pdc.assignment.pkg1.Entities;
+package pdc.assignment.Entities;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-import pdc.assignment.pkg1.Items.Item;
-import pdc.assignment.pkg1.Items.ItemFactory;
+import pdc.assignment.Items.Item;
+import pdc.assignment.Items.ItemFactory;
 
 /**
  *

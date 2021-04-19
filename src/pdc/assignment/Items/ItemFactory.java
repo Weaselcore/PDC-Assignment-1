@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pdc.assignment.pkg1.Items;
+package pdc.assignment.Items;
 
-import pdc.assignment.pkg1.Utilities.Deserialiser;
+import pdc.assignment.Utilities.Deserialiser;
 
 /**
  *

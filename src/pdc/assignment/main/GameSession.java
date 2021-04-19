@@ -5,8 +5,8 @@
  */
 package pdc.assignment.main;
 
-import pdc.assignment.pkg1.Entities.EntityFactory;
-import pdc.assignment.pkg1.Entities.Entity;
+import pdc.assignment.Entities.EntityFactory;
+import pdc.assignment.Entities.Entity;
 
 /**
  *

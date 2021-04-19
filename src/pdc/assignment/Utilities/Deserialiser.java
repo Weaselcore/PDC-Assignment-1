@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pdc.assignment.pkg1.Utilities;
+package pdc.assignment.Utilities;
 
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -11,8 +11,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
-import pdc.assignment.pkg1.Entities.Entity;
-import pdc.assignment.pkg1.Items.Item;
+import pdc.assignment.Entities.Entity;
+import pdc.assignment.Items.Item;
 
 /**
  * Deserialisation should be done using the Jackson library.
