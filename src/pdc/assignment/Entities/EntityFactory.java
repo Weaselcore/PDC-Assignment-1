@@ -20,7 +20,7 @@ public class EntityFactory {
                 System.out.println("You have created a new player.");
                 return player;
             case "enemy":
-                Enemy enemy = new Enemy();
+                Enemy enemy = new Enemy(gameData);
                 System.out.println("You have created an enemy.");
                 return enemy;
             default:

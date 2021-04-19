@@ -39,6 +39,7 @@ public class Level {
         /**
      * Creates a loops to handle the turns which is uses the Entity interface
      * and type to handle both Player and Enemy.
+     * @return current level.
      */
     public int run() throws Exception {
 
@@ -54,11 +55,11 @@ public class Level {
             if (targetHasDied) {
                 levelInProgress = false;
             } else {
+                entityWaiting.displayInfo();
                 temp = entityForTurn;
                 entityForTurn = entityWaiting;
                 entityWaiting = temp;
             }
-            System.out.println("\n*******************************************\n");
         }
         
         // After fight, if the player is left standing, create new enemy.

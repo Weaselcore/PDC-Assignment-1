@@ -19,7 +19,7 @@ public interface Entity {
 
     public void displayInfo();
 
-    public void takeDamage(int damage);
+    public void takeDamage(double damage);
     
     public boolean turn(Entity entity);
     

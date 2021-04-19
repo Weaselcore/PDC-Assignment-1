@@ -87,7 +87,7 @@ public final class Player extends AbstractEntity {
     }
 
     @Override
-    public void takeDamage(int damage) {
+    public void takeDamage(double damage) {
         this.health -= damage;
     }
     
@@ -99,18 +99,16 @@ public final class Player extends AbstractEntity {
     @Override
     public void attack(Entity currentEnemy) {
        
-        int damageToDeal = this.damage;
-        String attackString = "You have attacked " + currentEnemy.getName() + " with " + damageToDeal + ".";
+        double damageToDeal = this.damage;
+        String attackString = "\nYou have attacked " + currentEnemy.getName() + " with " + damageToDeal + ".";
         
         if (this.currentSuperAttackLevel == this.maxSuperAttackLevel) {
             damageToDeal = damageToDeal * 2;
             attackString = "You have CRIT " + currentEnemy.getName() + " with " + damageToDeal + ".";
         }
         
-        currentEnemy.displayInfo();
         currentEnemy.takeDamage(damageToDeal);
         System.out.println(attackString);
-        currentEnemy.displayInfo();
         this.currentSuperAttackLevel += 1;
     }
 
@@ -121,7 +119,8 @@ public final class Player extends AbstractEntity {
         this.displaySuperAttack();
         
         System.out.println(
-                "1. Attack \n2. Use Item\n3. Run Away");
+                "1. Attack 2. Use Item 3. Run Away");
+        System.out.println("Option (#): ");
 
         boolean chosen = false;
         boolean toReturn = false;
@@ -157,7 +156,7 @@ public final class Player extends AbstractEntity {
     
     public void displaySuperAttack() {
         StringBuilder stringbuilder = new StringBuilder();
-        stringbuilder.append("Super Attack  : ");
+        stringbuilder.append("\nSuper Attack  : ");
         for (int i = 0; i < maxSuperAttackLevel; i++) {
             if (i >= (this.currentSuperAttackLevel - 1)) {
                 stringbuilder.append("[ ]");
@@ -166,6 +165,7 @@ public final class Player extends AbstractEntity {
             }
         }
         System.out.println(stringbuilder.toString());
+        System.out.println("");
     }
 
     @Override

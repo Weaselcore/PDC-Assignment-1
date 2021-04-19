@@ -12,8 +12,10 @@ package pdc.assignment.Entities;
 public abstract class AbstractEntity implements Entity{
     
     String name;
-    int health;
-    int damage;
+    String description;
+    double health;
+    double damage;
+    double armour;
     
     abstract void specialAttack();
     

@@ -5,32 +5,49 @@
  */
 package pdc.assignment.Entities;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Random;
+import pdc.assignment.Utilities.GameData;
+
 /**
  *
  * @author whackaweasel
  */
 public final class Enemy extends AbstractEntity{
     
-    public Enemy() {
+    HashMap enemyData;
+    
+    public Enemy(GameData gameData) {
     // This will be randomly generated unlike the players name.
+        this.enemyData = gameData.getEnemyData();
         this.create();
+        
     };
         
     @Override
     public void create() {
-        this.name = "Rog-aarrgh";
-        this.health = 10;
-        this.damage = 2;
+        this.name = randomisedEnemy();
+        HashMap enemyDetails = (HashMap) this.enemyData.get(this.name);
+        this.health =  (double) enemyDetails.get("health");
+        this.description = (String) enemyDetails.get("description");
+        //this.armour = this.enemyData.get(this.name).get("armour");
+        //this.description = this.enemyData.get(this.name).get("description");
     }
     
     // Pass in target entity to reduce their health.
     public void attack(Player player) {
         // TODO randomise damage in range.
-        player.displayInfo();
         player.takeDamage(this.damage);
         System.out.println(this.name + " has attacked Roger with " + this.damage + ".");
-        player.displayInfo();
-
+    }
+    
+    private String randomisedEnemy() {
+        ArrayList<String> enemyList = new ArrayList<>(Arrays.asList("Orc", "Wolf", "Thief", "Korg"));
+        Random generator = new Random();
+        int randomNumber = generator.nextInt(4);
+        return enemyList.get(randomNumber);
     }
      
     @Override
@@ -59,7 +76,7 @@ public final class Enemy extends AbstractEntity{
     }
 
     @Override
-    public void takeDamage(int damage) {
+    public void takeDamage(double damage) {
         this.health -= damage;
     }
     
@@ -72,7 +89,6 @@ public final class Enemy extends AbstractEntity{
     public void attack(Entity player) {
         player.takeDamage(this.damage);
         System.out.println("Roger has attacked you with " + this.damage + ".");
-        player.displayInfo();
     }
 
     @Override
