@@ -5,10 +5,10 @@
  */
 package pdc.assignment.main;
 
-import pdc.assignment.Entities.Entity;
-import pdc.assignment.Entities.EntityFactory;
-import pdc.assignment.Entities.Player;
-import pdc.assignment.Utilities.GameData;
+import pdc.assignment.entities.Entity;
+import pdc.assignment.entities.EntityFactory;
+import pdc.assignment.entities.Player;
+import pdc.assignment.utilities.GameData;
 
 /**
  *
@@ -26,14 +26,12 @@ public final class Level {
         this.gameData = gameData;
         this.currentLevel = 1;
         this.player = player;
-        this.generateEnemy();
     }
     
     // If it's a loaded game.
      public Level(GameData gameData, Entity player, int Level) throws Exception {
         this.currentLevel = 1;
         this.player = player;
-        this.generateEnemy();
     }   
        
     
@@ -42,7 +40,7 @@ public final class Level {
      * and type to handle both Player and Enemy.
      * @return current level.
      */
-    public int run() throws Exception {
+    public int run() throws Exception { 
         
         this.generateEnemy();
 

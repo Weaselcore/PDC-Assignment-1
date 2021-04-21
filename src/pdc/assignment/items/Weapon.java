@@ -3,19 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pdc.assignment.Items;
+package pdc.assignment.items;
 
 /**
  *
- * @author ieuan
+ * @author whackaweasel
  */
-public abstract class AbstractItem implements Item{
-
-    
-    abstract void getDesc();
-    
-    abstract void setDesc();
-    
-    abstract void onUse();
+public class Weapon {
     
 }

@@ -5,9 +5,9 @@
  */
 package pdc.assignment.main;
 
-import pdc.assignment.Entities.EntityFactory;
-import pdc.assignment.Entities.Entity;
-import pdc.assignment.Utilities.GameData;
+import pdc.assignment.entities.EntityFactory;
+import pdc.assignment.entities.Entity;
+import pdc.assignment.utilities.GameData;
 
 /**
  *

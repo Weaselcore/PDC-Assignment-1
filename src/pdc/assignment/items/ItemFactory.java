@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pdc.assignment.Items;
+package pdc.assignment.items;
 
-import pdc.assignment.Utilities.GameData;
+import pdc.assignment.utilities.GameData;
 
 /**
  *

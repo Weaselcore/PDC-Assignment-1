@@ -3,12 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pdc.assignment.Items;
+package pdc.assignment.items;
 
 /**
  *
- * @author whackaweasel
+ * @author Weaselcore
  */
-public class Weapon {
+public interface Item {
+    
+    public void Create();
     
 }

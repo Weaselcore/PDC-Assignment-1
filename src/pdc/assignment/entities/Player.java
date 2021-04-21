@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pdc.assignment.Entities;
+package pdc.assignment.entities;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-import pdc.assignment.Items.Item;
+import pdc.assignment.items.Item;
 
 /**
  *
@@ -123,7 +123,7 @@ public final class Player extends AbstractEntity {
         this.displaySuperAttack();
         
         System.out.println(
-                "1. Attack 2. Use Item 3. Run Away");
+                "1. Attack 2. Use Potions 3. Run Away");
         System.out.println("Option (#): ");
 
         boolean chosen = false;

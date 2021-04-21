@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pdc.assignment.Utilities;
+package pdc.assignment.utilities;
 
 import com.fasterxml.jackson.databind.JsonMappingException;
 import java.io.IOException;
@@ -15,10 +15,10 @@ import java.util.HashMap;
  */
 public class GameData {
     
-    static String armourPath = "src/Resources/armour.json";
-    static String potionPath = "src/Resources/potion.json";
-    static String weaponPath = "src/Resources/weapon.json";
-    static String enemyPath = "src/Resources/enemy.json";
+    static String armourPath = "src/pdc/assignment/resources/armour.json";
+    static String potionPath = "src/pdc/assignment/resources/potion.json";
+    static String weaponPath = "src/pdc/assignment/resources/weapon.json";
+    static String enemyPath = "src/pdc/assignment/resources/enemy.json";
     
     private HashMap armourData;
     private HashMap potionData;
