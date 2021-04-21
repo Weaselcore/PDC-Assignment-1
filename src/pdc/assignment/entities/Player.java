@@ -121,7 +121,7 @@ public final class Player extends AbstractEntity {
             this.displaySuperAttack();
             
             System.out.println(
-                "[1]. Attack [2]. Use Potions [3]. Run Away");
+                "[#1]. Attack [#2]. Use Potions [#3]. Run Away");
             System.out.println("Option (#): ");
 
             String chosenOption = inputScanner.nextLine();
