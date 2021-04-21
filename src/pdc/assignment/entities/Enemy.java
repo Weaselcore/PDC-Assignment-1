@@ -51,26 +51,6 @@ public final class Enemy extends AbstractEntity{
         int randomNumber = generator.nextInt(4);
         return enemyList.get(randomNumber);
     }
-     
-    @Override
-    void specialAttack() {
-
-    }
-    
-    @Override
-    void openingLine() {
-        
-    }
-    
-    @Override
-    void defeatLine() {
-        
-    }
-    
-    @Override
-    void victoryLine() {
-        
-    }
     
     @Override
     public void displayInfo() {

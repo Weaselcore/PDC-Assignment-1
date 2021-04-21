@@ -15,30 +15,11 @@ import java.util.Set;
  * @author whackaweasel
  */
 public final class Armour extends AbstractItem implements Item{
-    
-    private final String name;
-    private final String description;
-    private final Integer value;
 
     public Armour(String name, HashMap info){
         this.name = name;
         this.value = getIntegerData(info, "value");
         this.description = getStringData(info, "description");
-    }
-
-    @Override
-    void getDesc() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    void setDesc() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    void onUse() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     public double getValue() {
@@ -48,11 +29,6 @@ public final class Armour extends AbstractItem implements Item{
     @Override
     public String toString(){
         return "\n" + this.name + ": " + this.description + "\nDamage Reduction: " + this.value;
-    }
-
-    @Override
-    public void displayInfo() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override

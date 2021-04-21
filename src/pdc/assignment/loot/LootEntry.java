@@ -41,8 +41,4 @@ public class LootEntry {
     public String getName() {
         return name;
     }
-    
-    
-    
-    
 }

@@ -13,9 +13,6 @@ import java.util.HashMap;
  */
 public final class Potion extends AbstractItem{
      
-    private final String name;
-    private final Integer value;
-    private final String description;
     private final String type;
     
     // Specific constructor for loading up saves.
@@ -25,27 +22,6 @@ public final class Potion extends AbstractItem{
         this.value = getIntegerData(info, "value");
         this.description = getStringData(info, "description");
         this.type = getStringData(info, "type");
-    }
-
-    @Override
-    void getDesc() {
-        
-    }
-
-    @Override
-    void setDesc() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    // Pass player object to edit values. Either health or super attack.
-    void onUse() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void displayInfo() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -80,7 +56,5 @@ public final class Potion extends AbstractItem{
     public Integer getValue() {
         return value;
     }
-    
-    
     
 }

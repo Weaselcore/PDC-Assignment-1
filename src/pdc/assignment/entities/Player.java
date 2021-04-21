@@ -42,26 +42,6 @@ public final class Player extends AbstractEntity {
     // public Player() {
     //  Retrieve data from file and assign name, health and damage.
     // };
-
-    @Override
-    void specialAttack() {
-
-    }
-    
-    @Override
-    void openingLine() {
-        
-    }
-    
-    @Override
-    void defeatLine() {
-        
-    }
-    
-    @Override
-    void victoryLine() {
-        
-    }
     
     @Override
     public void displayInfo() {

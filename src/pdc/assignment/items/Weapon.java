@@ -11,21 +11,12 @@ import java.util.HashMap;
  *
  * @author whackaweasel
  */
-public final class Weapon implements Item{
-
-    private final String name;
-    private final Integer value;
-    private final String description;
+public final class Weapon extends AbstractItem implements Item{
     
     public Weapon(String name, HashMap info){
         this.name = name;
         this.value = getIntegerData(info, "value");
         this.description =  getStringData(info,"description");
-    }
-    
-    @Override
-    public void displayInfo() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     public Integer getValue(){
@@ -50,4 +41,5 @@ public final class Weapon implements Item{
         String entry = (String) mapNeeded.get(key);
         return entry;
     }
+    
 }

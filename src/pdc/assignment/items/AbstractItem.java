@@ -11,11 +11,8 @@ package pdc.assignment.items;
  */
 public abstract class AbstractItem implements Item{
 
-    
-    abstract void getDesc();
-    
-    abstract void setDesc();
-    
-    abstract void onUse();
+    String name;
+    Integer value;
+    String description;
     
 }
