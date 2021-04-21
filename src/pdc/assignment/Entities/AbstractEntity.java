@@ -13,9 +13,10 @@ public abstract class AbstractEntity implements Entity{
     
     String name;
     String description;
-    double health;
+    double currentHealth;
     double damage;
     double armour;
+    double maxHealth;
     
     abstract void specialAttack();
     

@@ -13,7 +13,7 @@ import java.util.HashMap;
  *
  * @author whackaweasel
  */
-public final class GameData {
+public class GameData {
     
     static String armourPath = "src/Resources/armour.json";
     static String potionPath = "src/Resources/potion.json";

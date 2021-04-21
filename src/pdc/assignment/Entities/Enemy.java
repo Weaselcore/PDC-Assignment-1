@@ -30,17 +30,19 @@ public final class Enemy extends AbstractEntity{
     public void create() {
         this.name = randomisedEnemy();
         HashMap enemyDetails = (HashMap) this.enemyData.get(this.name);
-        this.health =  (double) enemyDetails.get("health");
+        this.currentHealth =  (double) enemyDetails.get("health");
+        this.maxHealth = (double) enemyDetails.get("health");
         this.description = (String) enemyDetails.get("description");
-        //this.armour = this.enemyData.get(this.name).get("armour");
-        //this.description = this.enemyData.get(this.name).get("description");
+        this.armour = (double) enemyDetails.get("armour");
+        this.damage = (double) enemyDetails.get("attack");
+        
+        System.out.println("A " + this.name + " has appeared!");
     }
     
     // Pass in target entity to reduce their health.
     public void attack(Player player) {
-        // TODO randomise damage in range.
         player.takeDamage(this.damage);
-        System.out.println(this.name + " has attacked Roger with " + this.damage + ".");
+        System.out.println(this.name + " has attacked " + this.name + " with " + this.damage + ".");
     }
     
     private String randomisedEnemy() {
@@ -72,23 +74,25 @@ public final class Enemy extends AbstractEntity{
     
     @Override
     public void displayInfo() {
-        System.out.println("Enemy: " + this.name + " | Health: " + this.health + " | Damage: " + this.damage);
+        System.out.println(this.name + ": | Health: " 
+                + this.currentHealth + "/" + this.maxHealth + " | Damage: " 
+                + this.damage);
     }
 
     @Override
     public void takeDamage(double damage) {
-        this.health -= damage;
+        this.currentHealth -= damage;
     }
     
     @Override
     public boolean isDead() {
-        return this.health <= 0;
+        return this.currentHealth <= 0;
     }
 
     @Override
     public void attack(Entity player) {
         player.takeDamage(this.damage);
-        System.out.println("Roger has attacked you with " + this.damage + ".");
+        System.out.println(this.name + " has attacked you with " + this.damage + ".");
     }
 
     @Override

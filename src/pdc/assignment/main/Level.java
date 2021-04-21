@@ -14,7 +14,7 @@ import pdc.assignment.Utilities.GameData;
  *
  * @author whackaweasel
  */
-public class Level {
+public final class Level {
     
     private int currentLevel;
     Entity currentEnemy;
@@ -23,16 +23,17 @@ public class Level {
     
     // If it's a new game.
     public Level(GameData gameData, Entity player) throws Exception {
+        this.gameData = gameData;
         this.currentLevel = 1;
         this.player = player;
-        this.currentEnemy = EntityFactory.CreateEntity("enemy", gameData);
+        this.generateEnemy();
     }
     
     // If it's a loaded game.
      public Level(GameData gameData, Entity player, int Level) throws Exception {
         this.currentLevel = 1;
         this.player = player;
-        this.currentEnemy = EntityFactory.CreateEntity("enemy", gameData);
+        this.generateEnemy();
     }   
        
     
@@ -42,6 +43,8 @@ public class Level {
      * @return current level.
      */
     public int run() throws Exception {
+        
+        this.generateEnemy();
 
         boolean levelInProgress = true;
         // Since there is no parallel assignments in Java,
@@ -64,11 +67,10 @@ public class Level {
         
         // After fight, if the player is left standing, create new enemy.
         if (entityForTurn.getClass() == Player.class ) {    
-            this.currentEnemy = EntityFactory.CreateEntity("enemy", this.gameData);
-            run();
+            this.currentLevel += 1;
         }
         else {
-            this.currentLevel += 1;
+            this.currentLevel = -1;
         }
         return this.currentLevel;
     }
@@ -107,6 +109,10 @@ public class Level {
      */
     public int getCurrentLevel() {
         return currentLevel;
+    }
+    
+    private void generateEnemy() throws Exception {
+        this.currentEnemy = EntityFactory.createEntity("enemy", this.gameData);
     }
     
     

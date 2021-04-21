@@ -24,10 +24,11 @@ public final class Player extends AbstractEntity {
     // New player.
     public Player() throws Exception {
         this.create();
-        health = 10;
-        damage = 3;
-        this.maxSuperAttackLevel = 5;
-        this.currentSuperAttackLevel = 1;
+        this.currentHealth = 10;
+        this.maxHealth = 10;
+        this.damage = 3;
+        this.maxSuperAttackLevel = 4;
+        this.currentSuperAttackLevel = 0;
     };
 
     // Import save game file here.
@@ -57,7 +58,8 @@ public final class Player extends AbstractEntity {
     
     @Override
     public void displayInfo() {
-        System.out.println("You: " + this.name+ " | Health: " + this.health + " | Damage: " + this.damage);
+        System.out.println(this.name+ ": | Health: " + this.currentHealth 
+                + "/" +this.maxHealth + " | Damage: " + this.damage);
     }
 
     // When new player is being initialised, it will prompt for a name.
@@ -88,28 +90,30 @@ public final class Player extends AbstractEntity {
 
     @Override
     public void takeDamage(double damage) {
-        this.health -= damage;
+        this.currentHealth -= damage;
     }
     
     @Override
     public boolean isDead() {
-        return this.health <= 0;
+        return this.currentHealth <= 0;
     }
 
     @Override
     public void attack(Entity currentEnemy) {
        
         double damageToDeal = this.damage;
-        String attackString = "\nYou have attacked " + currentEnemy.getName() + " with " + damageToDeal + ".";
+        String attackString = this.name +" has attacked " + currentEnemy.getName() + " with " + damageToDeal + ".";
         
         if (this.currentSuperAttackLevel == this.maxSuperAttackLevel) {
             damageToDeal = damageToDeal * 2;
-            attackString = "You have CRIT " + currentEnemy.getName() + " with " + damageToDeal + ".";
+            attackString = this.name + " has CRIT " + currentEnemy.getName() + " with " + damageToDeal + ".";
+            this.currentSuperAttackLevel = 0;
+        } else {
+            this.currentSuperAttackLevel += 1;
         }
-        
+       
         currentEnemy.takeDamage(damageToDeal);
         System.out.println(attackString);
-        this.currentSuperAttackLevel += 1;
     }
 
     @Override
@@ -133,7 +137,7 @@ public final class Player extends AbstractEntity {
                 this.attack(currentEnemy);
                 boolean targetDead = currentEnemy.isDead();
                 if (targetDead) {
-                    System.out.println("\n" + this.getName() + " has slain " + currentEnemy.getName() + "!");
+                    System.out.println("\n" + this.getName() + " has slain " + currentEnemy.getName() + "!\n");
                     toReturn = true;
                 }
                 else {
@@ -158,7 +162,7 @@ public final class Player extends AbstractEntity {
         StringBuilder stringbuilder = new StringBuilder();
         stringbuilder.append("\nSuper Attack  : ");
         for (int i = 0; i < maxSuperAttackLevel; i++) {
-            if (i >= (this.currentSuperAttackLevel - 1)) {
+            if (i >= this.currentSuperAttackLevel) {
                 stringbuilder.append("[ ]");
             } else {
                 stringbuilder.append("[*]");

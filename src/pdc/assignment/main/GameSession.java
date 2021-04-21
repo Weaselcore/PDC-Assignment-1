@@ -26,7 +26,7 @@ public final class GameSession {
         this.isNewGame = isNewGame;
         // Initialise game data from json.
         gameData = new GameData();
-        this.player = EntityFactory.CreateEntity("player", this.gameData);
+        this.player = EntityFactory.createEntity("player", this.gameData);
         this.level = new Level(this.gameData, this.player);
 
         // if not new game, create new game.
@@ -42,8 +42,11 @@ public final class GameSession {
             this.level.clearScreen();
             this.level.displayLevel(this.maxLevel);
             currentLevel = this.level.run();
-            if (currentLevel == maxLevel) {
-                System.out.println("You have beaten the game!\n");
+            if (currentLevel > maxLevel) {
+                System.out.println("\nYou have beaten the game!\n");
+                System.exit(0);
+            } else if (currentLevel == -1) {
+                System.out.println("\nYou have been defeated!\n");
                 System.exit(0);
             }
         }

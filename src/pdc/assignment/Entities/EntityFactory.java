@@ -13,7 +13,7 @@ import pdc.assignment.Utilities.GameData;
  */
 public class EntityFactory {
     
-        public static Entity CreateEntity(String entityType, GameData gameData) throws Exception {
+        public static Entity createEntity(String entityType, GameData gameData) throws Exception {
         switch(entityType) {
             case "player":
                 Player player = new Player();
@@ -21,7 +21,6 @@ public class EntityFactory {
                 return player;
             case "enemy":
                 Enemy enemy = new Enemy(gameData);
-                System.out.println("You have created an enemy.");
                 return enemy;
             default:
                 throw new Exception("Invalid entity type.");
