@@ -11,7 +11,7 @@ package pdc.assignment.loot;
  */
 public class LootEntry {
     
-    String name;
+    private String name;
     private Integer minRoll;
     private Integer maxRoll;
     
@@ -34,6 +34,14 @@ public class LootEntry {
     public Integer getMaxRoll() {
         return maxRoll;
     }
+
+    /**
+     * @return the name
+     */
+    public String getName() {
+        return name;
+    }
+    
     
     
     

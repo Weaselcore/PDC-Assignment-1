@@ -13,6 +13,9 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 import pdc.assignment.items.Item;
+import pdc.assignment.items.ItemFactory;
+import pdc.assignment.items.Potion;
+import pdc.assignment.items.Weapon;
 import pdc.assignment.utilities.GameData;
 
 /**
@@ -42,9 +45,9 @@ public class LootTableGenerator {
         
         ArrayList<Item> itemsToReturn = new ArrayList();
         
-
-        
-        
+        Potion potion = this.rollItem(this.potionLootTable, 'potion');
+        Weapon weapon = this.rollItem(this.weaponLootTable, 'weapon');
+        Arnour armour = this.rollItem(this.armourLootTable, 'armour');
 
         return itemsToReturn;
         
@@ -77,12 +80,13 @@ public class LootTableGenerator {
         return newTable;
     }
     
-    public Item rollItem(LootTable lootTable) {
+    public Item rollItem(LootTable lootTable, String type) throws Exception {
             
         Random randomiser = new Random();
         int roll = randomiser.nextInt(lootTable.getMaxRoll());
         
-        itemData = lootTable.getItemData(roll);
+        String itemName = lootTable.getName(roll);
         
+        return ItemFactory.createItem(type, itemName, gameData);
     }
 }

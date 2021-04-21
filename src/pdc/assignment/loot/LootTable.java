@@ -32,14 +32,15 @@ public class LootTable {
         return maxRoll;
     }
     
-    public getItemData(Integer roll) {
+    public String getName(Integer roll) {
         
         for (LootEntry entry: this.lootTable) {
             
-            if (entry.get)
-            
+            if (entry.getMinRoll() >= roll && entry.getMaxRoll() <= roll) {
+                return entry.getName();
+            }  
         }
-        
+        return null;
     }
     
 }
