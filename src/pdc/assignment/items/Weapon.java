@@ -19,7 +19,7 @@ public final class Weapon extends AbstractItem implements Item{
         this.description =  getStringData(info,"description");
     }
     
-    public Integer getValue(){
+    public int getValue(){
         return value;
     }
     
@@ -29,7 +29,7 @@ public final class Weapon extends AbstractItem implements Item{
     }
     
     @Override
-    public Integer getIntegerData(HashMap map, String key) {
+    public int getIntegerData(HashMap map, String key) {
         HashMap mapNeeded = (HashMap) map.get(this.name);
         Integer entry = (Integer) mapNeeded.get(key);
         return entry;

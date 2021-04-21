@@ -6,9 +6,6 @@
 package pdc.assignment.items;
 
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
 
 /**
  *
@@ -32,7 +29,7 @@ public final class Armour extends AbstractItem implements Item{
     }
 
     @Override
-    public Integer getIntegerData(HashMap map, String key) {
+    public int getIntegerData(HashMap map, String key) {
         HashMap mapNeeded = (HashMap) map.get(this.name);
         Integer entry = (Integer) mapNeeded.get(key);
         return entry;

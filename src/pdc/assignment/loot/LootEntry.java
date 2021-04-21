@@ -12,10 +12,10 @@ package pdc.assignment.loot;
 public class LootEntry {
     
     private String name;
-    private Integer minRoll;
-    private Integer maxRoll;
+    private int minRoll;
+    private int maxRoll;
     
-    public LootEntry(String name, Integer chance, Integer maxRoll) {
+    public LootEntry(String name, int chance, int maxRoll) {
         this.name = name;
         this.minRoll = maxRoll + 1;
         this.maxRoll = maxRoll + chance;
@@ -24,14 +24,14 @@ public class LootEntry {
     /**
      * @return the minRoll
      */
-    public Integer getMinRoll() {
+    public int getMinRoll() {
         return minRoll;
     }
 
     /**
      * @return the maxRoll
      */
-    public Integer getMaxRoll() {
+    public int getMaxRoll() {
         return maxRoll;
     }
 

@@ -14,7 +14,7 @@ import java.util.HashMap;
 public class SaveData {
     
     private String playerName;
-    private Integer level;
+    private int level;
     private HashMap Inventory;
     
     /**
@@ -27,7 +27,7 @@ public class SaveData {
     /**
      * @param level the level to set
      */
-    public void setLevel(Integer level) {
+    public void setLevel(int level) {
         this.level = level;
     }
 
@@ -38,6 +38,7 @@ public class SaveData {
         this.Inventory = Inventory;
     }
     
+    @Override
     public String toString() {
         return this.playerName + " | Level: " + this.level + "/4"; 
     }   
