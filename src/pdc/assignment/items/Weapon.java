@@ -9,6 +9,11 @@ package pdc.assignment.items;
  *
  * @author whackaweasel
  */
-public class Weapon {
+public class Weapon implements Item{
+
+    @Override
+    public void displayInfo() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

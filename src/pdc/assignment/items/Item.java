@@ -11,6 +11,6 @@ package pdc.assignment.items;
  */
 public interface Item {
     
-    public void Create();
+    public void displayInfo();
     
 }

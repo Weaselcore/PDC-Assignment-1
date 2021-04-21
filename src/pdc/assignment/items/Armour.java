@@ -59,11 +59,6 @@ public class Armour extends AbstractItem implements Item{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public void Create() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     /**
      * @return the value
      */
@@ -76,6 +71,11 @@ public class Armour extends AbstractItem implements Item{
      */
     public void setValue(double value) {
         this.value = value;
+    }
+
+    @Override
+    public void displayInfo() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     

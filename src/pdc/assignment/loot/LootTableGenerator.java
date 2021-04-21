@@ -8,10 +8,10 @@ package pdc.assignment.loot;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
+import pdc.assignment.items.Armour;
 import pdc.assignment.items.Item;
 import pdc.assignment.items.ItemFactory;
 import pdc.assignment.items.Potion;
@@ -41,13 +41,21 @@ public class LootTableGenerator {
         armourLootTable = this.generateLootTable(armours);
     }
     
-    public ArrayList<Item> generateItem(HashMap map) {
+    public ArrayList<Item> generateItem(HashMap map) throws Exception {
         
         ArrayList<Item> itemsToReturn = new ArrayList();
         
-        Potion potion = this.rollItem(this.potionLootTable, 'potion');
-        Weapon weapon = this.rollItem(this.weaponLootTable, 'weapon');
-        Arnour armour = this.rollItem(this.armourLootTable, 'armour');
+        Potion potion;
+        Weapon weapon;
+        Armour armour;
+        
+        potion = (Potion) this.rollItem(this.potionLootTable,"potion");
+        weapon = (Weapon) this.rollItem(this.weaponLootTable, "weapon");
+        armour = (Armour) this.rollItem(this.armourLootTable, "armour");
+        
+        itemsToReturn.add(potion);
+        itemsToReturn.add(weapon);
+        itemsToReturn.add(armour);
 
         return itemsToReturn;
         
