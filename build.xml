@@ -35,7 +35,7 @@
         </restrict>
         <manifest>
           <attribute name="Main-Class"
-                value="pdc.assignment.pkg1.PDCAssignment1"/>
+                value="pdc.assignment.main.PDCAssignment1"/>
         </manifest>
       </jar>
     </target> 

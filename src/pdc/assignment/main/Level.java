@@ -5,6 +5,7 @@
  */
 package pdc.assignment.main;
 
+import pdc.assignment.loot.LootTableGenerator;
 import pdc.assignment.entities.Entity;
 import pdc.assignment.entities.EntityFactory;
 import pdc.assignment.entities.Player;
@@ -20,18 +21,22 @@ public final class Level {
     Entity currentEnemy;
     Entity player;
     GameData gameData;
+    LootTableGenerator lootGenerator;
     
     // If it's a new game.
     public Level(GameData gameData, Entity player) throws Exception {
         this.gameData = gameData;
         this.currentLevel = 1;
         this.player = player;
+        this.lootGenerator = new LootTableGenerator(this.gameData);
+        this.lootGenerator.generateLootTable();
     }
     
     // If it's a loaded game.
      public Level(GameData gameData, Entity player, int Level) throws Exception {
         this.currentLevel = 1;
         this.player = player;
+        this.lootGenerator = new LootTableGenerator(this.gameData);
     }   
        
     
@@ -64,7 +69,8 @@ public final class Level {
         }
         
         // After fight, if the player is left standing, create new enemy.
-        if (entityForTurn.getClass() == Player.class ) {    
+        if (entityForTurn.getClass() == Player.class ) {  
+            // Player will check if weapon/armour is better, equip.
             this.currentLevel += 1;
         }
         else {
@@ -96,6 +102,7 @@ public final class Level {
      * It moves the cursor at the top left corner of the screen or console.
      * 033[2J: It clears the screen from the cursor to the end of the screen.
      * System.out.flush() resets cursor position.
+     * ONLY WORKS WHEN RUNNING JAR in terminal/console, not in IDE.
      */
     public void clearScreen() {
         System.out.print("\033[H\033[2J");

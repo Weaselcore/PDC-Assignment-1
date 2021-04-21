@@ -7,7 +7,9 @@ package pdc.assignment.entities;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import pdc.assignment.items.Armour;
 import pdc.assignment.items.Item;
+import pdc.assignment.items.Weapon;
 
 /**
  *
@@ -18,6 +20,8 @@ public final class Player extends AbstractEntity {
     private ArrayList<Item> inventory;
     private int currentSuperAttackLevel;
     private final int maxSuperAttackLevel;
+    private Armour currentArmour = null;
+    private Weapon currentWeapon = null;
     
     // TODO Create two constructors for new and old players.
     

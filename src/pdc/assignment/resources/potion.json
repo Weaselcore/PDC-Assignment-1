@@ -2,31 +2,31 @@
   "Small Health Potion": {
     "description": "Heals 3 Health Points.",
     "value": 3,
-    "chance": 0.6
+    "chance": 0.7
   },
     "Medium Health Potion": {
     "description": "Heals 5 Health Points.",
     "value": 5,
-    "chance": 0.4
+    "chance": 0.5
   },
     "Large Health Potion": {
     "description": "Heals 7 Health Points.",
     "value": 7.0,
-    "chance": 0.2
+    "chance": 0.3
   },
     "Small Super Attack Potion": {
     "description": "Adds 1 Super Attack Points.",
     "value": 1.0,
-    "chance": 0.5
+    "chance": 0.6
   },
     "Medium Super Attack Potion": {
     "description": "Adds 2 Super Attack Points.",
     "value": 2.0,
-    "chance": 0.2
+    "chance": 0.3
   },
     "Large Super Attack Potion": {
     "description": "Adds 3 Super Attack Points.",
     "value": 3.0,
-    "chance": 0.1
+    "chance": 0.2
   }
 }
