@@ -81,7 +81,8 @@ public final class Enemy extends AbstractEntity{
 
     @Override
     public void takeDamage(double damage) {
-        this.currentHealth -= damage;
+        this.currentHealth -= (damage-this.armour);
+        System.out.println(this.name + "'s armour has reduced damage by " + this.armour);
     }
     
     @Override

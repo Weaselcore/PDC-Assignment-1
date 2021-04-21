@@ -6,14 +6,12 @@
 package pdc.assignment.entities;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Scanner;
 import pdc.assignment.items.Armour;
 import pdc.assignment.items.Item;
-import pdc.assignment.items.ItemFactory;
 import pdc.assignment.items.Potion;
 import pdc.assignment.items.Weapon;
-import pdc.assignment.loot.LootTableGenerator;
-import pdc.assignment.utilities.GameData;
 
 /**
  *
@@ -21,11 +19,11 @@ import pdc.assignment.utilities.GameData;
  */
 public final class Player extends AbstractEntity {
     
-    private ArrayList<Item> inventory;
-    private int currentSuperAttackLevel;
-    private final int maxSuperAttackLevel;
-    private Armour currentArmour = null;
-    private Weapon currentWeapon = null;
+    public LinkedList<Potion> inventory;
+    public int currentSuperAttackLevel;
+    public final int maxSuperAttackLevel;
+    public Armour currentArmour = null;
+    public Weapon currentWeapon = null;
     
     // TODO Create two constructors for new and old players.
     
@@ -34,9 +32,10 @@ public final class Player extends AbstractEntity {
         this.create();
         this.currentHealth = 10;
         this.maxHealth = 10;
-        this.damage = 3;
+        this.damage = 20;
         this.maxSuperAttackLevel = 4;
         this.currentSuperAttackLevel = 0;
+        this.inventory = new LinkedList<>();
     };
 
     // Import save game file here.
@@ -98,7 +97,12 @@ public final class Player extends AbstractEntity {
 
     @Override
     public void takeDamage(double damage) {
-        this.currentHealth -= damage;
+        if (this.currentArmour != null) {
+            this.currentHealth -= (damage-this.armour);
+            System.out.println(this.name + "'s armour has reduced damage by " + this.armour);
+        } else {
+            this.currentHealth -= damage;
+        }
     }
     
     @Override
@@ -109,7 +113,7 @@ public final class Player extends AbstractEntity {
     @Override
     public void attack(Entity currentEnemy) {
        
-        double damageToDeal = this.damage;
+        double damageToDeal = this.getDamage();
         String attackString = this.name +" has attacked " + currentEnemy.getName() + " with " + damageToDeal + ".";
         
         if (this.currentSuperAttackLevel == this.maxSuperAttackLevel) {
@@ -126,20 +130,21 @@ public final class Player extends AbstractEntity {
 
     @Override
     public boolean turn(Entity currentEnemy) {
-        Scanner input = new Scanner(System.in);
         
-        this.displaySuperAttack();
-        
-        System.out.println(
-                "1. Attack 2. Use Potions 3. Run Away");
-        System.out.println("Option (#): ");
+        Scanner inputScanner = new Scanner(System.in);
 
         boolean chosen = false;
         boolean toReturn = false;
 
         while (!chosen) {
+                    
+            this.displaySuperAttack();
+            
+            System.out.println(
+                "[1]. Attack [2]. Use Potions [3]. Run Away");
+            System.out.println("Option (#): ");
 
-            String chosenOption = input.next();
+            String chosenOption = inputScanner.nextLine();
 
             if ("1".equals(chosenOption)) {
                 this.attack(currentEnemy);
@@ -154,7 +159,35 @@ public final class Player extends AbstractEntity {
                 chosen = true;
             }
             else if ("2".equals(chosenOption)) {
-                System.out.println("Items are not implemented.");
+                if (!this.inventory.isEmpty()) {
+                    Integer count = 0;
+                    
+                    for (Potion item: this.inventory) {
+                        System.out.println("Count: " + "[" + (count + 1) + "]" + item);
+                        count += 1;
+                    }
+                    
+                    boolean potionChosen = false;
+                    
+                    while (!potionChosen) {
+                        
+                        System.out.println("Please select potion using corresponding #:");
+                        
+                        Integer potionChoice = inputScanner.nextInt();
+                        
+                        if (potionChoice <= count) {
+                            Potion potion = this.inventory.get(potionChoice - 1);
+                            this.inventory.remove(potion);
+                            this.usePotion(potion);
+                            potionChosen = true;
+                        } else {
+                            System.out.println("Please input a valid #.");
+                        }
+                    }
+                    
+                } else {
+                    System.out.println("You have no potions.");
+                }
             }
             else if ("3".equals(chosenOption)) {
                 System.out.println("Thanks for playing");
@@ -194,7 +227,7 @@ public final class Player extends AbstractEntity {
     public void obtainItems(ArrayList<Item> items) throws Exception{
         for (Item item: items){
             if (item.getClass() == Potion.class){
-                this.inventory.add(item);
+                this.inventory.add((Potion) item);
             }
             else if (item.getClass() == Weapon.class){
                 Weapon newWeapon = (Weapon) item;
@@ -222,5 +255,23 @@ public final class Player extends AbstractEntity {
     @Override
     public String getName() {
         return this.name;
+    }
+    
+    private void usePotion(Potion potion) {
+        String type = potion.getType();
+        Integer value = potion.getValue();
+        
+        if ("health".equals(type)) {
+            this.currentHealth += value;
+            System.out.println(this.name + "has healed for " + value + ". Health: " + this.currentHealth);
+        } else {
+            if ((this.currentSuperAttackLevel + value) > this.maxSuperAttackLevel) {
+                this.currentSuperAttackLevel = this.maxSuperAttackLevel;
+                System.out.println("Attack potion has maxed out your super attack bar.");
+            } else {
+                this.currentSuperAttackLevel += value;
+                System.out.println("Attack potion has added " + value + " to " + this.name + "'s super attack bar.");
+            }
+        }
     }
 }

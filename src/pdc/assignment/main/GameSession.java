@@ -27,7 +27,7 @@ public final class GameSession {
         // Initialise game data from json.
         gameData = new GameData();
         this.player = EntityFactory.createEntity("player", this.gameData);
-        this.level = new Level(this.gameData, this.player);
+        this.level = new Level(this.gameData, this.player, this.maxLevel);
 
         // if not new game, create new game.
         // else load a game from save file.

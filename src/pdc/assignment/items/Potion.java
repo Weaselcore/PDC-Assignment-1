@@ -16,12 +16,15 @@ public final class Potion extends AbstractItem{
     private final String name;
     private final Integer value;
     private final String description;
+    private final String type;
     
     // Specific constructor for loading up saves.
     Potion(String name, HashMap info) {
         this.name = name;
-        this.value = (Integer) info.get("value");
-        this.description = (String) info.get("description");
+        
+        this.value = getIntegerData(info, "value");
+        this.description = getStringData(info, "description");
+        this.type = getStringData(info, "type");
     }
 
     @Override
@@ -45,5 +48,39 @@ public final class Potion extends AbstractItem{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
+    public Integer getIntegerData(HashMap map, String key) {
+        HashMap mapNeeded = (HashMap) map.get(this.name);
+        Integer entry = (Integer) mapNeeded.get(key);
+        return entry;
+    }
+    
+    @Override
+    public String getStringData(HashMap map, String key) {
+        HashMap mapNeeded = (HashMap) map.get(this.name);
+        String entry = (String) mapNeeded.get(key);
+        return entry;
+    }
+    
+    @Override
+    public String toString() {
+        return "\nName: " + this.name + "\nDescription: " + this.description;
+    }
+
+    /**
+     * @return the type
+     */
+    public String getType() {
+        return type;
+    }
+
+    /**
+     * @return the value
+     */
+    public Integer getValue() {
+        return value;
+    }
+    
+    
     
 }

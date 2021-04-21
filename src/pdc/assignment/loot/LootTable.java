@@ -36,11 +36,13 @@ public class LootTable {
         
         for (LootEntry entry: this.lootTable) {
             
-            if (entry.getMinRoll() >= roll && entry.getMaxRoll() <= roll) {
+            Integer minEntryRoll = entry.getMinRoll();
+            Integer maxEntryRoll = entry.getMaxRoll();
+            
+            if ((roll >= minEntryRoll) && (roll <= maxEntryRoll)) {
                 return entry.getName();
             }  
         }
         return null;
-    }
-    
+    }    
 }

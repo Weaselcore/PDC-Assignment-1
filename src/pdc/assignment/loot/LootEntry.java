@@ -17,7 +17,7 @@ public class LootEntry {
     
     public LootEntry(String name, Integer chance, Integer maxRoll) {
         this.name = name;
-        this.minRoll = maxRoll;
+        this.minRoll = maxRoll + 1;
         this.maxRoll = maxRoll + chance;
     }
 

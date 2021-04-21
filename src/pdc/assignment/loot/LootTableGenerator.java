@@ -82,8 +82,6 @@ public class LootTableGenerator {
                     newTable.addEntry(name, (Integer) nestedHashMapEntry.getValue());
                 }
             }
-            System.out.println(entry.getKey());
-            System.out.println(entry.getValue());
         }              
         return newTable;
     }

@@ -22,23 +22,18 @@ public final class Level {
     private int currentLevel;
     Entity currentEnemy;
     Entity player;
+    Integer maxLevel;
     GameData gameData;
     LootTableGenerator lootGenerator;
     
     // If it's a new game.
-    public Level(GameData gameData, Entity player) throws Exception {
+    public Level(GameData gameData, Entity player, Integer maxLevel) throws Exception {
         this.gameData = gameData;
         this.currentLevel = 1;
         this.player = player;
         this.lootGenerator = new LootTableGenerator(this.gameData);
+        this.maxLevel = maxLevel;
     }
-    
-    // If it's a loaded game.
-     public Level(GameData gameData, Entity player, int Level) throws Exception {
-        this.currentLevel = 1;
-        this.player = player;
-        this.lootGenerator = new LootTableGenerator(this.gameData);
-    }   
        
     
         /**
@@ -70,11 +65,13 @@ public final class Level {
         }
         
         // After fight, if the player is left standing, create new enemy.
-        if (entityForTurn.getClass() == Player.class ) {  
-            // Player will check if weapon/armour is better, equip.
-            ArrayList<Item> newLoot = this.lootGenerator.generateItem();
-            Player currentPlayer = (Player) this.player;
-            currentPlayer.obtainItems(newLoot);
+        if (entityForTurn.getClass() == Player.class ) {
+            if (this.currentLevel < this.maxLevel) {
+                // Player will check if weapon/armour is better, equip.
+                ArrayList<Item> newLoot = this.lootGenerator.generateItem();
+                Player currentPlayer = (Player) this.player;
+                currentPlayer.obtainItems(newLoot);
+            }
             this.currentLevel += 1;
         }
         else {

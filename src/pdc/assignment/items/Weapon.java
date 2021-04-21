@@ -11,7 +11,7 @@ import java.util.HashMap;
  *
  * @author whackaweasel
  */
-public class Weapon implements Item{
+public final class Weapon implements Item{
 
     private final String name;
     private final Integer value;
@@ -19,8 +19,8 @@ public class Weapon implements Item{
     
     public Weapon(String name, HashMap info){
         this.name = name;
-        this.value = (Integer) info.get("value");
-        this.description = (String) info.get("description");
+        this.value = getIntegerData(info, "value");
+        this.description =  getStringData(info,"description");
     }
     
     @Override
@@ -37,4 +37,17 @@ public class Weapon implements Item{
         return "\n" + this.name + ": " + this.description + "\nAttack damage: " + this.value;
     }
     
+    @Override
+    public Integer getIntegerData(HashMap map, String key) {
+        HashMap mapNeeded = (HashMap) map.get(this.name);
+        Integer entry = (Integer) mapNeeded.get(key);
+        return entry;
+    }
+    
+    @Override
+    public String getStringData(HashMap map, String key) {
+        HashMap mapNeeded = (HashMap) map.get(this.name);
+        String entry = (String) mapNeeded.get(key);
+        return entry;
+    }
 }

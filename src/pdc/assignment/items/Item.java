@@ -5,6 +5,8 @@
  */
 package pdc.assignment.items;
 
+import java.util.HashMap;
+
 /**
  *
  * @author Weaselcore
@@ -12,5 +14,7 @@ package pdc.assignment.items;
 public interface Item {
     
     public void displayInfo();
+    public Integer getIntegerData(HashMap map, String key);
+    public String getStringData(HashMap map, String key);
     
 }
