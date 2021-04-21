@@ -17,12 +17,6 @@ public final class Potion extends AbstractItem{
     private Integer value;
     private String description;
     
-    // Randomiser for loot drop.
-    Potion(HashMap info){
-        // Create loot drop algorithm to generate object.
-        
-    }
-    
     // Specific constructor for loading up saves.
     Potion(String name, HashMap info) {
         this.name = name;
@@ -47,8 +41,9 @@ public final class Potion extends AbstractItem{
     }
 
     @Override
-    public void Create() {
+    public void displayInfo() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
     
 }

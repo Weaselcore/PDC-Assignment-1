@@ -29,7 +29,6 @@ public final class Level {
         this.currentLevel = 1;
         this.player = player;
         this.lootGenerator = new LootTableGenerator(this.gameData);
-        this.lootGenerator.generateLootTable();
     }
     
     // If it's a loaded game.
