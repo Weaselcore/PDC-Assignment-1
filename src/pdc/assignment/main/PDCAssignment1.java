@@ -26,9 +26,9 @@ public class PDCAssignment1 {
         while (isRunning) {
             
             System.out.println("Kingdom Fighters\n");
-            System.out.println("1: New Game");
-            System.out.println("2: Load Game");
-            System.out.println("3: Exit");
+            System.out.println("[1]: New Game");
+            System.out.println("[2]: Load Game");
+            System.out.println("[3]: Exit");
             System.out.print("Input: ");
             
             String result = input.nextLine();
