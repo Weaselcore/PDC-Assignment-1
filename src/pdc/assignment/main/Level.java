@@ -22,12 +22,12 @@ public final class Level {
     private int currentLevel;
     Entity currentEnemy;
     Entity player;
-    Integer maxLevel;
+    int maxLevel;
     GameData gameData;
     LootTableGenerator lootGenerator;
     
     // If it's a new game.
-    public Level(GameData gameData, Entity player, Integer maxLevel) throws Exception {
+    public Level(GameData gameData, Entity player, int maxLevel) throws Exception {
         this.gameData = gameData;
         this.currentLevel = 1;
         this.player = player;

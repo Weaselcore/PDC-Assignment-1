@@ -14,13 +14,13 @@ import java.util.ArrayList;
 public class LootTable {
     
     ArrayList<LootEntry> lootTable;
-    private Integer maxRoll = 0;
+    private int maxRoll = 0;
     
     public LootTable() {
         lootTable = new ArrayList();
     }
     
-    public void addEntry(String name, Integer chance) {
+    public void addEntry(String name, int chance) {
         this.lootTable.add(new LootEntry(name, chance, this.getMaxRoll()));
         maxRoll += chance;      
     }
@@ -28,16 +28,16 @@ public class LootTable {
     /**
      * @return the maxRoll
      */
-    public Integer getMaxRoll() {
+    public int getMaxRoll() {
         return maxRoll;
     }
     
-    public String getName(Integer roll) {
+    public String getName(int roll) {
         
         for (LootEntry entry: this.lootTable) {
             
-            Integer minEntryRoll = entry.getMinRoll();
-            Integer maxEntryRoll = entry.getMaxRoll();
+            int minEntryRoll = entry.getMinRoll();
+            int maxEntryRoll = entry.getMaxRoll();
             
             if ((roll >= minEntryRoll) && (roll <= maxEntryRoll)) {
                 return entry.getName();

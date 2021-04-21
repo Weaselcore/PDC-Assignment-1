@@ -18,12 +18,4 @@ public abstract class AbstractEntity implements Entity{
     double armour;
     double maxHealth;
     
-    abstract void specialAttack();
-    
-    abstract void openingLine();
-    
-    abstract void defeatLine();
-    
-    abstract void victoryLine();
-    
 }

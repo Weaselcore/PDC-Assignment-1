@@ -13,7 +13,7 @@ import java.util.HashMap;
  */
 public interface Item {
     
-    public Integer getIntegerData(HashMap map, String key);
+    public int getIntegerData(HashMap map, String key);
     public String getStringData(HashMap map, String key);
     
 }

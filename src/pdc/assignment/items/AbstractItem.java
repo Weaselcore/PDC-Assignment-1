@@ -12,7 +12,7 @@ package pdc.assignment.items;
 public abstract class AbstractItem implements Item{
 
     String name;
-    Integer value;
+    int value;
     String description;
     
 }

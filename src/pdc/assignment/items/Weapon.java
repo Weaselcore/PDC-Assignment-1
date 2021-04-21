@@ -31,7 +31,7 @@ public final class Weapon extends AbstractItem implements Item{
     @Override
     public int getIntegerData(HashMap map, String key) {
         HashMap mapNeeded = (HashMap) map.get(this.name);
-        Integer entry = (Integer) mapNeeded.get(key);
+        int entry = (int) mapNeeded.get(key);
         return entry;
     }
     
