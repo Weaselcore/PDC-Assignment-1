@@ -17,13 +17,13 @@ public class ItemFactory {
         switch (itemType) {
             case "weapon":
                 System.out.println("You have recieved a weapon.");
+                return new Weapon(name, gameData.getWeaponData());
             case "armour":
                 System.out.println("You have recieved a armour.");
+                return new Armour(name, gameData.getArmourData());
             case "potion":
                 System.out.println("You have recieved a potion.");
-            case "starter":
                 return new Potion(name, gameData.getPotionData());
-                
             default:
                 throw new Exception("Invalid item type.");
         }

@@ -9,7 +9,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import pdc.assignment.items.Armour;
 import pdc.assignment.items.Item;
+import pdc.assignment.items.ItemFactory;
+import pdc.assignment.items.Potion;
 import pdc.assignment.items.Weapon;
+import pdc.assignment.loot.LootTableGenerator;
+import pdc.assignment.utilities.GameData;
 
 /**
  *
@@ -153,7 +157,8 @@ public final class Player extends AbstractEntity {
                 System.out.println("Items are not implemented.");
             }
             else if ("3".equals(chosenOption)) {
-                System.out.println("Running away is not implemented.");
+                System.out.println("Thanks for playing");
+                System.exit(0);
             }
             else {
                 System.out.println("Please input a proper input!");
@@ -174,6 +179,44 @@ public final class Player extends AbstractEntity {
         }
         System.out.println(stringbuilder.toString());
         System.out.println("");
+    }
+    
+    public double getDamage(){
+        double combinedDamage = this.damage;
+        
+        if (currentWeapon != null){
+            combinedDamage += currentWeapon.getValue();
+        }
+        
+        return combinedDamage;
+    }
+    
+    public void obtainItems(ArrayList<Item> items) throws Exception{
+        for (Item item: items){
+            if (item.getClass() == Potion.class){
+                this.inventory.add(item);
+            }
+            else if (item.getClass() == Weapon.class){
+                Weapon newWeapon = (Weapon) item;
+                if (this.currentWeapon == null || this.currentWeapon.getValue() < newWeapon.getValue() ){
+                    this.currentWeapon = newWeapon;
+                    System.out.println("You have aquired a better weapon." + newWeapon.toString());
+                }
+                else{
+                    System.out.println("Your current weapon is better.");
+                }
+            }
+            else if (item.getClass() == Armour.class){
+                Armour newArmour = (Armour) item;
+                if (this.currentArmour == null || this.currentWeapon.getValue() < newArmour.getValue() ){
+                    this.currentArmour = newArmour;
+                    System.out.println("You have aquired a better set of armour." + newArmour.toString());
+                }
+                else{
+                    System.out.println("Your current armour is better.");
+                }
+            }
+        }
     }
 
     @Override

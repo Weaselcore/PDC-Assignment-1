@@ -5,10 +5,12 @@
  */
 package pdc.assignment.main;
 
+import java.util.ArrayList;
 import pdc.assignment.loot.LootTableGenerator;
 import pdc.assignment.entities.Entity;
 import pdc.assignment.entities.EntityFactory;
 import pdc.assignment.entities.Player;
+import pdc.assignment.items.Item;
 import pdc.assignment.utilities.GameData;
 
 /**
@@ -70,6 +72,9 @@ public final class Level {
         // After fight, if the player is left standing, create new enemy.
         if (entityForTurn.getClass() == Player.class ) {  
             // Player will check if weapon/armour is better, equip.
+            ArrayList<Item> newLoot = this.lootGenerator.generateItem();
+            Player currentPlayer = (Player) this.player;
+            currentPlayer.obtainItems(newLoot);
             this.currentLevel += 1;
         }
         else {

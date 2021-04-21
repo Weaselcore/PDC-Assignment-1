@@ -13,9 +13,9 @@ import java.util.HashMap;
  */
 public final class Potion extends AbstractItem{
      
-    private String name;
-    private Integer value;
-    private String description;
+    private final String name;
+    private final Integer value;
+    private final String description;
     
     // Specific constructor for loading up saves.
     Potion(String name, HashMap info) {

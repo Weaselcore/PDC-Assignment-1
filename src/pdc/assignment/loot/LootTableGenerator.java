@@ -41,7 +41,7 @@ public class LootTableGenerator {
         armourLootTable = this.generateLootTable(armours);
     }
     
-    public ArrayList<Item> generateItem(HashMap map) throws Exception {
+    public ArrayList<Item> generateItem() throws Exception {
         
         ArrayList<Item> itemsToReturn = new ArrayList();
         
