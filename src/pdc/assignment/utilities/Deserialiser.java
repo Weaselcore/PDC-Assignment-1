@@ -11,6 +11,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Deserialisation should be done using the Jackson library.
@@ -19,11 +20,9 @@ import java.util.HashMap;
  */
 public class Deserialiser {
     
-    public static void readSave(Integer number) throws JsonGenerationException, JsonMappingException, IOException{
-        String string = "save.json";
-        ObjectMapper mapper = new ObjectMapper();
-        string = number.toString() + string;
-        System.out.println(mapper.readValue(new File(string), SaveData.class));
+    public static Map readSave(File file) throws JsonGenerationException, JsonMappingException, IOException{
+        HashMap<String, Object> map = new ObjectMapper().readValue(file, HashMap.class);
+        return map;
     }
     
     public static HashMap jsonDataToHashmap(String string) throws JsonGenerationException, JsonMappingException, IOException{

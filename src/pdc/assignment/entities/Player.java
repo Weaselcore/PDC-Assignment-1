@@ -7,11 +7,16 @@ package pdc.assignment.entities;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.logging.Logger;
 import pdc.assignment.items.Armour;
 import pdc.assignment.items.Item;
+import pdc.assignment.items.ItemFactory;
 import pdc.assignment.items.Potion;
 import pdc.assignment.items.Weapon;
+import pdc.assignment.main.GameSession;
+import pdc.assignment.utilities.GameData;
 
 /**
  *
@@ -32,15 +37,48 @@ public final class Player extends AbstractEntity {
         this.create();
         this.currentHealth = 10;
         this.maxHealth = 10;
-        this.damage = 20;
+        this.damage = 50;
+        this.armour = 0;
         this.setMaxSuperAttackLevel(4);
         this.setCurrentSuperAttackLevel(0);
     };
 
-    // Import save game file here.
-    // public Player() {
-    //  Retrieve data from file and assign name, health and damage.
-    // };
+    public Player(Map loadData, GameData gameData) throws Exception {
+        this.name = (String) loadData.get("name");
+        // Set health
+        this.setCurrentHealth((int) loadData.get("health"));
+        this.maxHealth = 10;
+        this.damage = 50;
+        this.armour = 0;
+        // Set currentSuperAttack
+        this.setCurrentSuperAttackLevel((int) loadData.get("superAttack"));
+        this.setMaxSuperAttackLevel(4);
+        
+        // Set potions
+        if (!((ArrayList)loadData.get("potions")).isEmpty()) {
+            ((ArrayList)loadData.get("potions")).forEach(potionString -> {
+                Potion potion;
+                try {
+                    potion = (Potion) ItemFactory.createItem("potion", (String) potionString, gameData);
+                    this.setInventory("add", potion);
+                } catch (Exception ex) {
+                    Logger.getLogger(GameSession.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                }
+
+            });
+        }
+        // Set weapons
+        if (!(loadData.get("weapon") == null)) {
+            Weapon weapon = (Weapon) ItemFactory.createItem("weapon", (String) loadData.get("weapon"), gameData);
+            this.setCurrentWeapon(weapon);
+        }
+        // Set armour
+        if (!(loadData.get("armour") == null)) {
+            Armour armour = (Armour) ItemFactory.createItem("armour", (String) loadData.get("armour"), gameData);
+            this.setCurrentArmour(armour);
+        }
+        System.out.println("\n" + this.name + " has appeared to fight for another day!");
+    }
     
     @Override
     public void displayInfo() {
@@ -110,7 +148,7 @@ public final class Player extends AbstractEntity {
     public void displaySuperAttack() {
         StringBuilder stringbuilder = new StringBuilder();
         stringbuilder.append("\nSuper Attack  : ");
-        for (int i = 0; i < getMaxSuperAttackLevel(); i++) {
+        for (int i = 0; i < this.getMaxSuperAttackLevel(); i++) {
             if (i >= this.getCurrentSuperAttackLevel()) {
                 stringbuilder.append("[ ]");
             } else {
@@ -261,7 +299,11 @@ public final class Player extends AbstractEntity {
         this.currentWeapon = currentWeapon;
     }
     
-    public double getCurrentHealth(){
+    public int getCurrentHealth(){
         return this.currentHealth;
+    }
+    
+    public void setCurrentHealth(int health){
+        this.currentHealth = health;
     }
 }

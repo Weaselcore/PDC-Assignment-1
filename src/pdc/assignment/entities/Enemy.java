@@ -30,11 +30,11 @@ public final class Enemy extends AbstractEntity{
     public void create() {
         this.name = randomisedEnemy();
         HashMap enemyDetails = (HashMap) this.enemyData.get(this.name);
-        this.currentHealth =  (double) enemyDetails.get("health");
-        this.maxHealth = (double) enemyDetails.get("health");
+        this.currentHealth =  (int) enemyDetails.get("health");
+        this.maxHealth = (int) enemyDetails.get("health");
         this.description = (String) enemyDetails.get("description");
-        this.armour = (double) enemyDetails.get("armour");
-        this.damage = (double) enemyDetails.get("attack");
+        this.armour = (int) enemyDetails.get("armour");
+        this.damage = (int) enemyDetails.get("attack");
         
         System.out.println("A " + this.name + " has appeared!");
     }

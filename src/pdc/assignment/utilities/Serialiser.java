@@ -36,8 +36,11 @@ public class Serialiser {
         String name = playerEntity.getName();
         map.put("name", name);
         // Health
-        double health = player.getCurrentHealth();
+        int health = (int) player.getCurrentHealth();
         map.put("health", health);
+        // Super Attack
+        int superAttack = player.getCurrentSuperAttackLevel();
+        map.put("superAttack", superAttack);
         // Level
         int currentLevel = level.getCurrentLevel();
         map.put("level", currentLevel);

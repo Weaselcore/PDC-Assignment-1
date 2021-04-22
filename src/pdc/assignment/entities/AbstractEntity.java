@@ -13,9 +13,9 @@ public abstract class AbstractEntity implements Entity{
     
     String name;
     String description;
-    double currentHealth;
-    double damage;
-    double armour;
-    double maxHealth;
+    int currentHealth;
+    int damage;
+    int armour;
+    int maxHealth;
     
 }

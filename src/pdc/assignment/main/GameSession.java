@@ -5,8 +5,11 @@
  */
 package pdc.assignment.main;
 
+import java.io.File;
+import java.util.Map;
 import pdc.assignment.entities.EntityFactory;
 import pdc.assignment.entities.Entity;
+import pdc.assignment.utilities.Deserialiser;
 import pdc.assignment.utilities.GameData;
 
 /**
@@ -21,16 +24,22 @@ public final class GameSession {
     GameData gameData;
     private Level level;
 
-    GameSession(boolean isNewGame) throws Exception {
-
-        this.isNewGame = isNewGame;
+    // Constructor for a new game.
+    GameSession() throws Exception {
         // Initialise game data from json.
-        gameData = new GameData();
-        this.player = EntityFactory.createEntity("player", this.gameData);
+        this.gameData = new GameData();
+        this.player = EntityFactory.createNewEntity("player", this.gameData);
         this.level = new Level(this.gameData, this.getPlayer(), this.maxLevel);
-
-        // if not new game, create new game.
-        // else load a game from save file.
+        this.gameSessionLoop();
+    }
+    
+    // Constructor to load game from save file.
+    GameSession(File file) throws Exception {
+        this.gameData = new GameData();
+        Map loadData = Deserialiser.readSave(file);
+        // Create new player.
+        this.player = EntityFactory.createOldEntity("old player", loadData, this.gameData);
+        this.level = new Level(this.gameData, this.player, maxLevel);
         this.gameSessionLoop();
     }
 
@@ -48,7 +57,7 @@ public final class GameSession {
             if (currentLevel > maxLevel) {
                 System.out.println("\nYou have beaten the game!\n");
                 System.exit(0);
-            } else if (currentLevel == -1) {
+            } else if (currentLevel == 0) {
                 System.out.println("\nYou have been defeated!\n");
                 System.exit(0);
             }
@@ -68,8 +77,4 @@ public final class GameSession {
     public Level getLevel() {
         return level;
     }
-
-    
-
-
 }

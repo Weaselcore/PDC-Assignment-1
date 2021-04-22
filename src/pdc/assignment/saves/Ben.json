@@ -1,8 +1,9 @@
 {
   "name" : "Ben",
-  "health" : 10.0,
-  "level" : 1,
-  "weapon" : null,
-  "armour" : null,
-  "potions" : null
+  "health" : 10,
+  "superAttack" : 1,
+  "level" : 2,
+  "weapon" : "Stone Sword",
+  "armour" : "Leather Armour",
+  "potions" : [ "Medium Super Attack Potion" ]
 }

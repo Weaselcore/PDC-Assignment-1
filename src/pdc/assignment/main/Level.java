@@ -61,7 +61,7 @@ public final class Level {
             boolean targetHasDied = false;
             if (entityForTurn instanceof Player){
                 // Player
-                targetHasDied = this.turn(entityWaiting); 
+                targetHasDied = this.playerTurn(entityWaiting); 
             } else if (entityForTurn instanceof Enemy) {
                 // Enemy
                 targetHasDied = ((Enemy) entityForTurn).turn(entityWaiting);
@@ -77,7 +77,7 @@ public final class Level {
         }
         
         // After fight, if the player is left standing, create new enemy.
-        if (entityForTurn.getClass() == Player.class ) {
+        if (entityForTurn instanceof Player ) {
             if (this.currentLevel < this.maxLevel) {
                 // Player will check if weapon/armour is better, equip.
                 ArrayList<Item> newLoot = this.lootGenerator.generateItem();
@@ -87,12 +87,13 @@ public final class Level {
             this.currentLevel += 1;
         }
         else {
-            this.currentLevel = -1;
+            // 0 will be finished game.
+            this.currentLevel = 0;
         }
         return this.currentLevel;
     }
     
-    public boolean turn(Entity currentEnemy) throws IOException {
+    public boolean playerTurn(Entity currentEnemy) throws IOException {
         
         Scanner inputScanner = new Scanner(System.in);
 
@@ -104,7 +105,7 @@ public final class Level {
             currentPlayer.displaySuperAttack();
             
             System.out.println(
-                "[#1]. Attack [#2]. Use Potions [#3]. Save and Exit [#4]. Run Away");
+                "[#1. Attack] [#2. Use Potions] [#3. Save and Exit] [#4. Run Away]");
             System.out.println("Option (#): ");
 
             String chosenOption = inputScanner.nextLine();
@@ -126,7 +127,7 @@ public final class Level {
                     Integer count = 0;
                     
                     for (Potion item: currentPlayer.getInventory()) {
-                        System.out.println("Count: " + "[#" + (count + 1) + "]" + item);
+                        System.out.println("Count: " + "[#]" + (count + 1) + item);
                         count += 1;
                     }
                     
@@ -206,7 +207,7 @@ public final class Level {
     }
     
     private void generateEnemy() throws Exception {
-        this.currentEnemy = EntityFactory.createEntity("enemy", this.gameData);
+        this.currentEnemy = EntityFactory.createNewEntity("enemy", this.gameData);
     }
 
     public Entity getPlayer() {
