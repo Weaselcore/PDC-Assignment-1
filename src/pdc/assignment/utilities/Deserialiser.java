@@ -14,8 +14,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Deserialisation should be done using the Jackson library.
- *
+ * Deserialisation is done using the Jackson library.
+ * This class uses static methods to read data from save files,
+ * and to read game data from JSON file for enemy and item files.
  * @author whackaweasel
  */
 public class Deserialiser {

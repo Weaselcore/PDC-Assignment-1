@@ -37,9 +37,10 @@ public final class GameSession {
     GameSession(File file) throws Exception {
         this.gameData = new GameData();
         Map loadData = Deserialiser.readSave(file);
-        // Create new player.
+        // Create player passing old data.
         this.player = EntityFactory.createOldEntity("old player", loadData, this.gameData);
-        this.level = new Level(this.gameData, this.player, maxLevel);
+        // Passes in the old level value from save.
+        this.level = new Level(this.gameData, this.player, maxLevel, (int) loadData.get("level"));
         this.gameSessionLoop();
     }
 
@@ -48,15 +49,18 @@ public final class GameSession {
         int currentLevel;
         
         while (true) {
+            // This will only clear when run in a terminal.
             this.getLevel().clearScreen();
+            // Every level will display the level progress at the start.
             this.getLevel().displayLevel(this.maxLevel);
             
             currentLevel = this.getLevel().run();
             
-            
+            // If the current level is higher than max level, it'll end the game.
             if (currentLevel > maxLevel) {
                 System.out.println("\nYou have beaten the game!\n");
                 System.exit(0);
+            // 0 is the result for a defeat.
             } else if (currentLevel == 0) {
                 System.out.println("\nYou have been defeated!\n");
                 System.exit(0);

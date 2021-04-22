@@ -9,7 +9,7 @@ import java.util.Map;
 import pdc.assignment.utilities.GameData;
 
 /**
- *
+ * Returns the appropriate entity using factory pattern to improve scalability.
  * @author whackaweasel
  */
 public class EntityFactory {

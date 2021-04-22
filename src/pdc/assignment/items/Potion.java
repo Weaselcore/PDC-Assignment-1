@@ -24,13 +24,15 @@ public final class Potion extends AbstractItem{
         this.type = getStringData(info, "type");
     }
 
+    // Returns data from game data that will return as an int.
     @Override
     public int getIntegerData(HashMap map, String key) {
         HashMap mapNeeded = (HashMap) map.get(this.name);
         int entry = (int) mapNeeded.get(key);
         return entry;
     }
-    
+
+    // Returns data from game data that will return as an String.
     @Override
     public String getStringData(HashMap map, String key) {
         HashMap mapNeeded = (HashMap) map.get(this.name);

@@ -1,9 +1,0 @@
-{
-  "name" : "Zak",
-  "health" : 13,
-  "superAttack" : 2,
-  "level" : 3,
-  "weapon" : "Stone Sword",
-  "armour" : "Copper Armour",
-  "potions" : [ "Medium Health Potion" ]
-}

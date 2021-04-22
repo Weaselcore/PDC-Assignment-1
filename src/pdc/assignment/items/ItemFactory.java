@@ -8,11 +8,11 @@ package pdc.assignment.items;
 import pdc.assignment.utilities.GameData;
 
 /**
- *
+ * Returns the appropriate item using factory pattern to improve scalability.
  * @author Weaselcore
  */
 public class ItemFactory {
-
+    
     public static Item createItem(String itemType, String name, GameData gameData) throws Exception {
         switch (itemType) {
             case "weapon":

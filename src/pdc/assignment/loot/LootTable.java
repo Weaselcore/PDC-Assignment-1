@@ -8,7 +8,8 @@ package pdc.assignment.loot;
 import java.util.ArrayList;
 
 /**
- *
+ * A loot table compiles all entries and keeps track of max roll to be used
+ * when generating random loot.
  * @author whackaweasel
  */
 public class LootTable {

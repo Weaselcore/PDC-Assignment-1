@@ -10,7 +10,9 @@ import java.io.IOException;
 import java.util.HashMap;
 
 /**
- *
+ * This class reads and stores information for enemies and items.
+ * This object is used to pass information to other classes that require data
+ * to construct objects.
  * @author whackaweasel
  */
 public class GameData {

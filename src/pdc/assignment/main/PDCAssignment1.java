@@ -55,8 +55,6 @@ public class PDCAssignment1 {
                         } else {
                             System.out.println("File failed to be deleted.");
                         }
-                    } else {
-                        throw new Exception("Please input a valid save number");
                     }
                 }   catch(Exception e) {
                         System.out.println(e);
@@ -70,7 +68,8 @@ public class PDCAssignment1 {
         } 
     } 
     
-    public static File getSaveFile(File saveFolder) {
+    // Used to retrieve list of saves for loading and deletion of files.
+    public static File getSaveFile(File saveFolder) throws Exception {
 
         boolean hasSave;
 
@@ -88,23 +87,24 @@ public class PDCAssignment1 {
         }
 
         while (hasSave) {
-            int count = 1;
+            int count = 0;
 
             for (File file : listOfSaves) {
                 if (file.isFile()){
-                    System.out.println("[#" + count +": " + file.getName() + "]");
+                    System.out.println("[#" + (count + 1) +": " + file.getName() + "]");
                     saveFileList.add(file);
                     count += 1;
                 }
             }
 
             int saveChoice = scanner.nextInt();
-
+            
             if (saveChoice <= count) {
                 return (File) saveFileList.get(saveChoice - 1);
             } else {
-                return null;
+                throw new Exception("Please input a valid number.");
             }
+
         }
         return null;
     }

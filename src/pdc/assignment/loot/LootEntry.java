@@ -6,7 +6,7 @@
 package pdc.assignment.loot;
 
 /**
- *
+ * An item that resides in the loot table, will keep track of weighting.
  * @author whackaweasel
  */
 public class LootEntry {

@@ -18,7 +18,8 @@ import pdc.assignment.entities.Player;
 import pdc.assignment.main.Level;
 
 /**
- *
+ * This class turns player and level object information into a link hashmap,
+ * to be stored into a JSON file using the Jackson library.
  * @author whackaweasel
  */
 public class Serialiser {
@@ -30,6 +31,7 @@ public class Serialiser {
         String filePath = "src/pdc/assignment/saves/";
         
         Entity playerEntity =  level.getPlayer();
+        // Player must be casted from entity to get player information.
         Player player = (Player) playerEntity;
         
         // Player name

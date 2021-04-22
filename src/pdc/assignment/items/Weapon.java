@@ -28,6 +28,7 @@ public final class Weapon extends AbstractItem implements Item{
         return "\n[" + this.name + "]: " + this.description + "\n[Attack damage]: " + this.value;
     }
     
+    // Returns data from game data that will return as an int.    
     @Override
     public int getIntegerData(HashMap map, String key) {
         HashMap mapNeeded = (HashMap) map.get(this.name);
@@ -35,6 +36,7 @@ public final class Weapon extends AbstractItem implements Item{
         return entry;
     }
     
+    // Returns data from game data that will return as an String.
     @Override
     public String getStringData(HashMap map, String key) {
         HashMap mapNeeded = (HashMap) map.get(this.name);

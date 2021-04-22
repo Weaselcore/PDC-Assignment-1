@@ -1,0 +1,9 @@
+{
+  "name" : "Ben",
+  "health" : 10,
+  "superAttack" : 2,
+  "level" : 3,
+  "weapon" : "Diamond Mace",
+  "armour" : "Diamond Armour",
+  "potions" : [ "Small Super Attack Potion", "Small Health Potion" ]
+}

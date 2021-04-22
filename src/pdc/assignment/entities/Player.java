@@ -30,8 +30,7 @@ public final class Player extends AbstractEntity {
     private Armour currentArmour = null;
     private Weapon currentWeapon = null;
 
-    // TODO Create two constructors for new and old players.
-    // New player.
+    // Initialises player from scratch.
     public Player() throws Exception {
         this.create();
         this.currentHealth = 10;
@@ -42,12 +41,13 @@ public final class Player extends AbstractEntity {
         this.setCurrentSuperAttackLevel(0);
     }
 
-    ;
-
+    // Initialises player using old saved data.
     public Player(Map loadData, GameData gameData) throws Exception {
+        // Set name
         this.name = (String) loadData.get("name");
         // Set health
         this.setCurrentHealth((int) loadData.get("health"));
+        // Set default values
         this.maxHealth = 10;
         this.damage = 50;
         this.armour = 0;
@@ -112,7 +112,8 @@ public final class Player extends AbstractEntity {
             }
         }
     }
-
+    
+    // Calculates the damage by subtracting the armour value as a flat amount.
     @Override
     public void takeDamage(double damage) {
         if (this.getCurrentArmour() != null) {
@@ -123,22 +124,32 @@ public final class Player extends AbstractEntity {
         }
     }
 
+    // Will check if the player is dead.
     @Override
     public boolean isDead() {
         return this.currentHealth <= 0;
     }
+    
+    @Override
+    public String getName() {
+        return this.name;
+    }
 
+    // Executes an attack or super attack if available.
     @Override
     public void attack(Entity currentEnemy) {
 
         double damageToDeal = this.getDamage();
         String attackString = this.name + " has attacked " + currentEnemy.getName() + " with " + damageToDeal + ".";
 
+        // Check if the super attack bar is full and will double damage if so.
         if (this.getCurrentSuperAttackLevel() == this.getMaxSuperAttackLevel()) {
             damageToDeal = damageToDeal * 2;
             attackString = this.name + " has CRIT " + currentEnemy.getName() + " with " + damageToDeal + ".";
+            // Resets the superAttackLevel back to 0
             this.setCurrentSuperAttackLevel(0);
         } else {
+            // If bar isn't full, it'll increment by 1.
             this.setCurrentSuperAttackLevel(this.getCurrentSuperAttackLevel() + 1);
         }
 
@@ -146,6 +157,7 @@ public final class Player extends AbstractEntity {
         System.out.println(attackString);
     }
 
+    // Builds a string depending on maxSuperAttack value and currentSuperAttack value.
     public void displaySuperAttack() {
         StringBuilder stringbuilder = new StringBuilder();
         stringbuilder.append("\nSuper Attack  : ");
@@ -159,7 +171,8 @@ public final class Player extends AbstractEntity {
         System.out.println(stringbuilder.toString());
         System.out.println("");
     }
-
+    
+    // Calculates damage using base damage value and currentWeapon value.
     public double getDamage() {
         double combinedDamage = this.damage;
 
@@ -170,8 +183,11 @@ public final class Player extends AbstractEntity {
         return combinedDamage;
     }
 
+    // Adds potions to the inventory.
+    // Checks if currentWeapon and currentArmour is better, if so replaces the
+    // current equipment.
     public void obtainItems(ArrayList<Item> items) throws Exception {
-        for (Item item : items) {
+        items.forEach(item -> {
             if (item.getClass() == Potion.class) {
                 this.setInventory("add", (Potion) item);
             } else if (item.getClass() == Weapon.class) {
@@ -191,14 +207,10 @@ public final class Player extends AbstractEntity {
                     System.out.println("Your current armour is better, so you've left the loot.");
                 }
             }
-        }
+        });
     }
 
-    @Override
-    public String getName() {
-        return this.name;
-    }
-
+    // Checks potion type and sets the corresponding value.
     public void usePotion(Potion potion) {
         String type = potion.getType();
         Integer value = potion.getValue();
@@ -207,6 +219,8 @@ public final class Player extends AbstractEntity {
             this.currentHealth += value;
             System.out.println(this.name + "has healed for " + value + ". Health: " + this.currentHealth);
         } else {
+            // The currentSuperAttackLevel cannot go above maxSuperAttaclLevel.
+            // If the Super Attack potion is not used efficiently, it'll be wasted.
             if ((this.getCurrentSuperAttackLevel() + value) > this.getMaxSuperAttackLevel()) {
                 this.setCurrentSuperAttackLevel(this.getMaxSuperAttackLevel());
                 System.out.println("Attack potion has maxed out your super attack bar.");
@@ -294,10 +308,18 @@ public final class Player extends AbstractEntity {
         this.currentWeapon = currentWeapon;
     }
 
+    /**
+     *
+     * @return the currentHealth
+     */
     public int getCurrentHealth() {
         return this.currentHealth;
     }
-
+    
+    /**
+     *
+     * @param health the currentHealth to set
+     */
     public void setCurrentHealth(int health) {
         this.currentHealth = health;
     }

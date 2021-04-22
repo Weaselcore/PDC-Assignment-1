@@ -38,10 +38,18 @@ public final class Level {
         this.player = player;
         this.lootGenerator = new LootTableGenerator(this.gameData);
         this.maxLevel = maxLevel;
-    }
-       
+    }  
     
-        /**
+    // If loading from an old save.
+    public Level(GameData gameData, Entity player, int maxLevel, int currentLevel) throws Exception {
+        this.gameData = gameData;
+        this.currentLevel = currentLevel;
+        this.player = player;
+        this.lootGenerator = new LootTableGenerator(this.gameData);
+        this.maxLevel = maxLevel;
+    }  
+    
+    /**
      * Creates a loops to handle the turns which is uses the Entity interface
      * and type to handle both Player and Enemy.
      * @return current level.
@@ -81,6 +89,7 @@ public final class Level {
         if (entityForTurn instanceof Player ) {
             if (this.currentLevel < this.maxLevel) {
                 // Player will check if weapon/armour is better, equip.
+                System.out.println("The enemy has dropped some loot.");
                 ArrayList<Item> newLoot = this.lootGenerator.generateItem();
                 Player currentPlayer = (Player) this.player;
                 currentPlayer.obtainItems(newLoot);
@@ -94,6 +103,7 @@ public final class Level {
         return this.currentLevel;
     }
     
+    // Level object is responsible for taking in player input.
     public boolean playerTurn(Entity currentEnemy) throws IOException {
         
         Scanner inputScanner = new Scanner(System.in);
@@ -128,7 +138,7 @@ public final class Level {
                     Integer count = 0;
                     
                     for (Potion item: currentPlayer.getInventory()) {
-                        System.out.println("Count: " + "[#]" + (count + 1) + item);
+                        System.out.println("Count: " + "[#" + (count + 1) + "] " + item);
                         count += 1;
                     }
                     
