@@ -36,8 +36,7 @@ public final class Player extends AbstractEntity {
         this.currentHealth = 20;
         this.maxHealth = 20;
         this.damage = 6;
-        this.armour = 0;
-        this.setMaxSuperAttackLevel(4);
+        this.setMaxSuperAttackLevel(5);
         this.setCurrentSuperAttackLevel(0);
     }
 
@@ -50,10 +49,9 @@ public final class Player extends AbstractEntity {
         // Set default values
         this.maxHealth = 20;
         this.damage = 6;
-        this.armour = 0;
         // Set currentSuperAttack
         this.setCurrentSuperAttackLevel((int) loadData.get("superAttack"));
-        this.setMaxSuperAttackLevel(4);
+        this.setMaxSuperAttackLevel(5);
 
         // Set potions
         if (!((ArrayList) loadData.get("potions")).isEmpty()) {
@@ -117,8 +115,14 @@ public final class Player extends AbstractEntity {
     @Override
     public void takeDamage(double damage) {
         if (this.getCurrentArmour() != null) {
-            this.currentHealth -= (damage - this.armour);
-            System.out.println(this.name + "'s armour has reduced damage by " + this.armour);
+            // Prevents damage from healing player when armour is higher than incoming damage.
+            double result = damage - this.getCurrentArmour().getValue();
+            if (result < 0) {
+                System.out.println("Armour has negated all incoming damage!");
+            } else {
+                this.currentHealth -= result;
+                System.out.println(this.name + "'s armour has reduced damage by " + this.getCurrentArmour().getValue());
+            }
         } else {
             this.currentHealth -= damage;
         }
@@ -182,6 +186,7 @@ public final class Player extends AbstractEntity {
 
         return combinedDamage;
     }
+    
 
     // Adds potions to the inventory.
     // Checks if currentWeapon and currentArmour is better, if so replaces the

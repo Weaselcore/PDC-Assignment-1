@@ -19,7 +19,7 @@ import pdc.assignment.utilities.GameData;
 public final class GameSession {
 
     boolean isNewGame;
-    final int maxLevel = 5;
+    final int maxLevel = 8;
     private Entity player;
     GameData gameData;
     private Level level;

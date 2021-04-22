@@ -36,7 +36,7 @@ public final class Enemy extends AbstractEntity{
         this.armour = (int) enemyDetails.get("armour");
         this.damage = (int) enemyDetails.get("attack");
         
-        System.out.println(" ~ A " + this.name + " has appeared! ~ ");
+        System.out.println("\n ~ A " + this.name + " has appeared! ~ ");
     }
     
     // Displays all information for the enemy.
