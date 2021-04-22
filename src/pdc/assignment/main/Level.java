@@ -147,7 +147,11 @@ public final class Level {
                     
                     while (!potionChosen) {
                         
-                        System.out.println("Please select potion using corresponding #:");
+                        System.out.println("");
+                        this.player.displayInfo();
+                        ((Player) this.player).displaySuperAttack();
+                        
+                        System.out.println("Please select potion using corresponding # or any input to exit:");
                         Integer potionChoice = potionScanner.nextInt();
                         
                         if (potionChoice <= count) {
@@ -156,10 +160,11 @@ public final class Level {
                             currentPlayer.setInventory("remove", potion);
                             potionChosen = true;
                         } else {
+                            // Goes back to main options for turn.
                             System.out.println("Please input a valid #.");
+                            break;
                         }
-                    }
-                    
+                    } 
                 } else {
                     System.out.println("You have no potions.");
                 }

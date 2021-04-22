@@ -214,10 +214,16 @@ public final class Player extends AbstractEntity {
     public void usePotion(Potion potion) {
         String type = potion.getType();
         Integer value = potion.getValue();
-
+        // The currentHealth cannot go above maxHealth.
+        // If the health potion is not used efficiently, it'll be wasted.
         if ("health".equals(type)) {
-            this.currentHealth += value;
-            System.out.println(this.name + "has healed for " + value + ". Health: " + this.currentHealth);
+            if ((this.getCurrentHealth() + value) > this.getMaxHealth()){
+                this.setCurrentHealth(this.getMaxHealth());
+                System.out.println("Health potion has maxed out your health bar.");               
+            } else {
+                this.currentHealth += value;
+                System.out.println(this.name + " has healed for " + value + ". Health: " + this.currentHealth);
+            }
         } else {
             // The currentSuperAttackLevel cannot go above maxSuperAttaclLevel.
             // If the Super Attack potion is not used efficiently, it'll be wasted.
@@ -322,5 +328,9 @@ public final class Player extends AbstractEntity {
      */
     public void setCurrentHealth(int health) {
         this.currentHealth = health;
+    }
+    
+    public int getMaxHealth() {
+        return this.maxHealth;
     }
 }
