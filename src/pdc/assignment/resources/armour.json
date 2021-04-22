@@ -1,22 +1,22 @@
 {
   "Leather Armour":{
     "description": "Not the best armour, but it'll take a hit or two.",
-    "value": 3,
+    "value": 1,
     "chance": 8
   },
   "Copper Armour":{
     "description": "The armour is a bit green from oxidation but it's solid.",
-    "value": 5,
+    "value": 2,
     "chance": 6
   },
   "Iron Armour":{
     "description": "A solid all rounder set of armour.",
-    "value": 7,
+    "value": 3,
     "chance": 4
   },
   "Diamond Armour":{
     "description": "You can see your reflection, best armour you've encountered.",
-    "value": 9,
+    "value": 5,
     "chance": 2
   }
 }

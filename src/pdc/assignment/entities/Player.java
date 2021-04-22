@@ -35,7 +35,7 @@ public final class Player extends AbstractEntity {
         this.create();
         this.currentHealth = 20;
         this.maxHealth = 20;
-        this.damage = 6;
+        this.damage = 5;
         this.setMaxSuperAttackLevel(5);
         this.setCurrentSuperAttackLevel(0);
     }
@@ -48,7 +48,7 @@ public final class Player extends AbstractEntity {
         this.setCurrentHealth((int) loadData.get("health"));
         // Set default values
         this.maxHealth = 20;
-        this.damage = 6;
+        this.damage = 5;
         // Set currentSuperAttack
         this.setCurrentSuperAttackLevel((int) loadData.get("superAttack"));
         this.setMaxSuperAttackLevel(5);

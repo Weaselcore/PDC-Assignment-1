@@ -6,17 +6,17 @@
   },
   "Copper Axe":{
     "description": "A hefty cutting tool for slashing.",
-    "value": 3,
+    "value": 2,
     "chance": 6
   },
   "Iron Spear":{
     "description": "A good weapon to toast marshmallows.",
-    "value": 5,
+    "value": 3,
     "chance": 4
   },
   "Diamond Mace":{
     "description": "You cannot break this tool by hitting something.",
-    "value": 7,
+    "value": 5,
     "chance": 2
   }
 }
