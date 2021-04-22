@@ -1,1 +1,8 @@
-{"weapon":null,"level":1,"potions":null,"name":"Ben","health":10.0,"armour":null}
+{
+  "name" : "Ben",
+  "health" : 10.0,
+  "level" : 1,
+  "weapon" : null,
+  "armour" : null,
+  "potions" : null
+}
