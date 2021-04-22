@@ -143,17 +143,19 @@ public final class Player extends AbstractEntity {
                     Integer count = 0;
                     
                     for (Potion item: this.inventory) {
-                        System.out.println("Count: " + "[" + (count + 1) + "]" + item);
+                        System.out.println("Count: " + "[#" + (count + 1) + "]" + item);
                         count += 1;
                     }
                     
                     boolean potionChosen = false;
+                    Scanner potionScanner = new Scanner(System.in);
                     
                     while (!potionChosen) {
                         
                         System.out.println("Please select potion using corresponding #:");
                         
-                        Integer potionChoice = inputScanner.nextInt();
+                        
+                        Integer potionChoice = potionScanner.nextInt();
                         
                         if (potionChoice <= count) {
                             Potion potion = this.inventory.get(potionChoice - 1);
