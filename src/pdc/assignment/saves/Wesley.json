@@ -1,9 +1,0 @@
-{
-  "name" : "Wesley",
-  "health" : 10,
-  "superAttack" : 3,
-  "level" : 4,
-  "weapon" : "Copper Axe",
-  "armour" : "Copper Armour",
-  "potions" : [ "Large Health Potion", "Small Health Potion", "Large Super Attack Potion" ]
-}

@@ -45,6 +45,7 @@ public final class Level {
      * Creates a loops to handle the turns which is uses the Entity interface
      * and type to handle both Player and Enemy.
      * @return current level.
+     * @throws java.lang.Exception
      */
     public int run() throws Exception { 
         

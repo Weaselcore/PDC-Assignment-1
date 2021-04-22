@@ -70,7 +70,6 @@ public class Serialiser {
         } else {
             map.put("potions", null);
         }
-
        
         // Save to file
         writer.writeValue(Paths.get(filePath + name + ".json").toFile(), map);

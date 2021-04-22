@@ -31,7 +31,8 @@ public class PDCAssignment1 {
             System.out.println("KINGDOM FIGHTERS\n");
             System.out.println("[#1: New Game]");
             System.out.println("[#2: Load Game]");
-            System.out.println("[#3: Exit]");
+            System.out.println("[#3: Delete Save File]");           
+            System.out.println("[#4: Exit]");
             System.out.print("Input: ");
             
             String result = input.nextLine();
@@ -41,47 +42,71 @@ public class PDCAssignment1 {
                 break;
             } else if ("2".equals(result)) {
                 
-                boolean hasSave;
-                
-                Scanner scanner = new Scanner(System.in);
-                
-                LinkedList saveFileList = new LinkedList();
-                
-                File[] listOfSaves = saveFolder.listFiles();
-                
-                if (listOfSaves.length == 0) {
-                    System.out.println("There are no save files to show.");
-                    hasSave = false;
-                } else {
-                    hasSave = true;
-                }
-                
-                while (hasSave) {
-                    int count = 1;
+                File fileResult = getSaveFile(saveFolder);
+                GameSession gameSession = new GameSession(fileResult);
 
-                    for (File file : listOfSaves) {
-                        if (file.isFile()){
-                            System.out.println("[#" + count +": " + file.getName() + "]");
-                            saveFileList.add(file);
-                            count += 1;
-                        }
-                    }
-
-                    int saveChoice = scanner.nextInt();
-
-                    if (saveChoice <= count) {
-                        GameSession gameSession = new GameSession((File) saveFileList.get(saveChoice - 1));
-                    } else {
-                        System.out.println("Please input a valid save number");
-                    }
-                }
             } else if ("3".equals(result)){
-                System.out.println("Thanks for playing!\n");
-                System.exit(0);
                 
+                try {
+                    File fileResult = getSaveFile(saveFolder);
+                    if (!(fileResult == null)) {
+                        if (fileResult.delete()) {
+                            System.out.println("File has been deleted.");
+                        } else {
+                            System.out.println("File failed to be deleted.");
+                        }
+                    } else {
+                        throw new Exception("Please input a valid save number");
+                    }
+                }   catch(Exception e) {
+                        System.out.println(e);
+                }
+            } else if ("4".equals(result)){
+                System.out.println("Thanks for playing!\n");
+                System.exit(0);    
             } else {
                 System.out.println("Please input a proper option!");
             }
-        }    
+        } 
+    } 
+    
+    public static File getSaveFile(File saveFolder) {
+
+        boolean hasSave;
+
+        Scanner scanner = new Scanner(System.in);
+
+        LinkedList saveFileList = new LinkedList();
+
+        File[] listOfSaves = saveFolder.listFiles();
+
+        if (listOfSaves.length == 0) {
+            System.out.println("There are no save files to show.");
+            hasSave = false;
+        } else {
+            hasSave = true;
+        }
+
+        while (hasSave) {
+            int count = 1;
+
+            for (File file : listOfSaves) {
+                if (file.isFile()){
+                    System.out.println("[#" + count +": " + file.getName() + "]");
+                    saveFileList.add(file);
+                    count += 1;
+                }
+            }
+
+            int saveChoice = scanner.nextInt();
+
+            if (saveChoice <= count) {
+                return (File) saveFileList.get(saveChoice - 1);
+            } else {
+                return null;
+            }
+        }
+        return null;
     }
+   
 }
