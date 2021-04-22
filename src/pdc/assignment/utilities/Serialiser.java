@@ -5,10 +5,12 @@
  */
 package pdc.assignment.utilities;
 
+import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
 import java.io.IOException;
 import java.nio.file.Paths;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.Map;
 import pdc.assignment.entities.Entity;
@@ -23,7 +25,9 @@ public class Serialiser {
     
     public static void saveToFile(Level level) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
-        Map<String, Object> map = new HashMap();
+        ObjectWriter writer = mapper.writer(new DefaultPrettyPrinter());
+        Map<String, Object> map = new LinkedHashMap();
+        String filePath = "src/pdc/assignment/saves/";
         
         Entity playerEntity =  level.getPlayer();
         Player player = (Player) playerEntity;
@@ -66,6 +70,6 @@ public class Serialiser {
 
        
         // Save to file
-        mapper.writeValue(Paths.get(name + ".json").toFile(), map);
+        writer.writeValue(Paths.get(filePath + name + ".json").toFile(), map);
     }  
 }
