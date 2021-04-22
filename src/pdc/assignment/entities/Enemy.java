@@ -36,15 +36,15 @@ public final class Enemy extends AbstractEntity{
         this.armour = (int) enemyDetails.get("armour");
         this.damage = (int) enemyDetails.get("attack");
         
-        System.out.println("A " + this.name + " has appeared!");
+        System.out.println(" ~ A " + this.name + " has appeared! ~ ");
     }
     
     // Displays all information for the enemy.
     @Override
     public void displayInfo() {
-        System.out.println(this.name + ": | Health: " 
+        System.out.println("| " + this.name + ": | Health: " 
                 + this.currentHealth + "/" + this.maxHealth + " | Damage: " 
-                + this.damage);
+                + this.damage + " |");
     }
 
     // Calculates the damage by subtracting the armour value as a flat amount.
@@ -64,7 +64,7 @@ public final class Enemy extends AbstractEntity{
     @Override
     public void attack(Entity player) {
         player.takeDamage(this.damage);
-        System.out.println(this.name + " has attacked you with " + this.damage + ".");
+        System.out.println(" ~ " + this.name + " has attacked you with " + this.damage + ".");
     }
     
     // Returns the name.
@@ -78,7 +78,7 @@ public final class Enemy extends AbstractEntity{
         this.attack(player);
         boolean targetDead = player.isDead();
         if (targetDead) {
-            System.out.println(this.getName() + " has slain " + player.getName() + "!");
+            System.out.println(" ~~~ " + this.getName() + " has slain " + player.getName() + "!");
             return true;
         }
         else {
@@ -89,7 +89,7 @@ public final class Enemy extends AbstractEntity{
     // Pass in target entity to reduce their health.
     public void attack(Player player) {
         player.takeDamage(this.damage);
-        System.out.println(this.name + " has attacked " + this.name + " with " + this.damage + ".");
+        System.out.println(" ~ " + this.name + " has attacked " + this.name + " with " + this.damage + ".");
     }
     
     // Generator that will return a name of a random enemy.

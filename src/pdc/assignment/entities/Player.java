@@ -33,9 +33,9 @@ public final class Player extends AbstractEntity {
     // Initialises player from scratch.
     public Player() throws Exception {
         this.create();
-        this.currentHealth = 10;
-        this.maxHealth = 10;
-        this.damage = 50;
+        this.currentHealth = 20;
+        this.maxHealth = 20;
+        this.damage = 6;
         this.armour = 0;
         this.setMaxSuperAttackLevel(4);
         this.setCurrentSuperAttackLevel(0);
@@ -48,8 +48,8 @@ public final class Player extends AbstractEntity {
         // Set health
         this.setCurrentHealth((int) loadData.get("health"));
         // Set default values
-        this.maxHealth = 10;
-        this.damage = 50;
+        this.maxHealth = 20;
+        this.damage = 6;
         this.armour = 0;
         // Set currentSuperAttack
         this.setCurrentSuperAttackLevel((int) loadData.get("superAttack"));
@@ -83,8 +83,8 @@ public final class Player extends AbstractEntity {
 
     @Override
     public void displayInfo() {
-        System.out.println(this.name + ": | Health: " + this.currentHealth
-                + "/" + this.maxHealth + " | Damage: " + this.damage);
+        System.out.println("| " + this.name + ": | Health: " + this.currentHealth
+                + "/" + this.maxHealth + " | Damage: " + this.damage + " |");
     }
 
     // When new player is being initialised, it will prompt for a name.
@@ -140,12 +140,12 @@ public final class Player extends AbstractEntity {
     public void attack(Entity currentEnemy) {
 
         double damageToDeal = this.getDamage();
-        String attackString = this.name + " has attacked " + currentEnemy.getName() + " with " + damageToDeal + ".";
+        String attackString = " ~ " + this.name + " has attacked " + currentEnemy.getName() + " with " + damageToDeal + ".";
 
         // Check if the super attack bar is full and will double damage if so.
         if (this.getCurrentSuperAttackLevel() == this.getMaxSuperAttackLevel()) {
             damageToDeal = damageToDeal * 2;
-            attackString = this.name + " has CRIT " + currentEnemy.getName() + " with " + damageToDeal + ".";
+            attackString = " !!! " + this.name + " has CRIT " + currentEnemy.getName() + " with " + damageToDeal + " !!!";
             // Resets the superAttackLevel back to 0
             this.setCurrentSuperAttackLevel(0);
         } else {

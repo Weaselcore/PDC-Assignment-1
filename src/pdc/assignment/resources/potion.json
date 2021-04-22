@@ -1,19 +1,19 @@
 {
   "Small Health Potion": {
-    "description": "Heals 3 Health Points.",
-    "value": 3,
+    "description": "Heals 5 Health Points.",
+    "value": 5,
     "type": "health",
     "chance": 7
   },
     "Medium Health Potion": {
-    "description": "Heals 5 Health Points.",
-    "value": 5,
+    "description": "Heals 10 Health Points.",
+    "value": 10,
     "type": "health",
     "chance": 5
   },
     "Large Health Potion": {
-    "description": "Heals 7 Health Points.",
-    "value": 7,
+    "description": "Heals 15 Health Points.",
+    "value": 15,
     "type": "health",
     "chance": 3
   },

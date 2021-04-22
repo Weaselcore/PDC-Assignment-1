@@ -1,26 +1,26 @@
 {
   "Orc": {
     "description": "A green creature wielding anything it can swing around.",
-    "health": 25,
-    "armour": 1,
-    "attack": 1
+    "health": 15,
+    "armour": 3,
+    "attack": 3
   },
   "Wolf": {
     "description": "A big hostile canine. Has large fangs that can pierce through weak armour.",
-    "health": 23,
+    "health": 18,
     "armour": 1,
-    "attack": 1
+    "attack": 3
   },
   "Thief": {
     "description": "Another human trying to steal and kill anyone else.",
-    "health": 20,
-    "armour": 1,
-    "attack": 1
+    "health": 12,
+    "armour": 2,
+    "attack": 2
   },
   "Korg": {
     "description": "A large rock-like creature.",
     "health": 10,
-    "armour": 1,
-    "attack": 1
+    "armour": 4,
+    "attack": 4
   }
 }
