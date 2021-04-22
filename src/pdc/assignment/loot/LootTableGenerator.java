@@ -87,9 +87,12 @@ public class LootTableGenerator {
     }
     
     public Item rollItem(LootTable lootTable, String type) throws Exception {
-            
-        Random randomiser = new Random();
-        int roll = randomiser.nextInt(lootTable.getMaxRoll());
+        
+        int lowerBound = 1;
+        int upperBound = lootTable.getMaxRoll();
+        
+        // LowerBound prevents the roll to be 0 as minRoll for entries start at 1.
+        int roll = (int) Math.floor(Math.random() * (upperBound - lowerBound + 1) + lowerBound);
         
         String itemName = lootTable.getName(roll);
         

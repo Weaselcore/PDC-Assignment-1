@@ -19,11 +19,11 @@ import pdc.assignment.items.Weapon;
  */
 public final class Player extends AbstractEntity {
     
-    public LinkedList<Potion> inventory;
-    public int currentSuperAttackLevel;
-    public final int maxSuperAttackLevel;
-    public Armour currentArmour = null;
-    public Weapon currentWeapon = null;
+    private LinkedList<Potion> inventory = new LinkedList<>();
+    private int currentSuperAttackLevel;
+    private int maxSuperAttackLevel;
+    private Armour currentArmour = null;
+    private Weapon currentWeapon = null;
     
     // TODO Create two constructors for new and old players.
     
@@ -33,9 +33,8 @@ public final class Player extends AbstractEntity {
         this.currentHealth = 10;
         this.maxHealth = 10;
         this.damage = 20;
-        this.maxSuperAttackLevel = 4;
-        this.currentSuperAttackLevel = 0;
-        this.inventory = new LinkedList<>();
+        this.setMaxSuperAttackLevel(4);
+        this.setCurrentSuperAttackLevel(0);
     };
 
     // Import save game file here.
@@ -77,7 +76,7 @@ public final class Player extends AbstractEntity {
 
     @Override
     public void takeDamage(double damage) {
-        if (this.currentArmour != null) {
+        if (this.getCurrentArmour() != null) {
             this.currentHealth -= (damage-this.armour);
             System.out.println(this.name + "'s armour has reduced damage by " + this.armour);
         } else {
@@ -96,12 +95,12 @@ public final class Player extends AbstractEntity {
         double damageToDeal = this.getDamage();
         String attackString = this.name +" has attacked " + currentEnemy.getName() + " with " + damageToDeal + ".";
         
-        if (this.currentSuperAttackLevel == this.maxSuperAttackLevel) {
+        if (this.getCurrentSuperAttackLevel() == this.getMaxSuperAttackLevel()) {
             damageToDeal = damageToDeal * 2;
             attackString = this.name + " has CRIT " + currentEnemy.getName() + " with " + damageToDeal + ".";
-            this.currentSuperAttackLevel = 0;
+            this.setCurrentSuperAttackLevel(0);
         } else {
-            this.currentSuperAttackLevel += 1;
+            this.setCurrentSuperAttackLevel(this.getCurrentSuperAttackLevel() + 1);
         }
        
         currentEnemy.takeDamage(damageToDeal);
@@ -142,7 +141,7 @@ public final class Player extends AbstractEntity {
                 if (!this.inventory.isEmpty()) {
                     Integer count = 0;
                     
-                    for (Potion item: this.inventory) {
+                    for (Potion item: this.getInventory()) {
                         System.out.println("Count: " + "[#" + (count + 1) + "]" + item);
                         count += 1;
                     }
@@ -153,14 +152,12 @@ public final class Player extends AbstractEntity {
                     while (!potionChosen) {
                         
                         System.out.println("Please select potion using corresponding #:");
-                        
-                        
                         Integer potionChoice = potionScanner.nextInt();
                         
                         if (potionChoice <= count) {
-                            Potion potion = this.inventory.get(potionChoice - 1);
-                            this.inventory.remove(potion);
+                            Potion potion = this.getInventory().get(potionChoice - 1);
                             this.usePotion(potion);
+                            this.setInventory("remove", potion);
                             potionChosen = true;
                         } else {
                             System.out.println("Please input a valid #.");
@@ -185,8 +182,8 @@ public final class Player extends AbstractEntity {
     public void displaySuperAttack() {
         StringBuilder stringbuilder = new StringBuilder();
         stringbuilder.append("\nSuper Attack  : ");
-        for (int i = 0; i < maxSuperAttackLevel; i++) {
-            if (i >= this.currentSuperAttackLevel) {
+        for (int i = 0; i < getMaxSuperAttackLevel(); i++) {
+            if (i >= this.getCurrentSuperAttackLevel()) {
                 stringbuilder.append("[ ]");
             } else {
                 stringbuilder.append("[*]");
@@ -199,8 +196,8 @@ public final class Player extends AbstractEntity {
     public double getDamage(){
         double combinedDamage = this.damage;
         
-        if (currentWeapon != null){
-            combinedDamage += currentWeapon.getValue();
+        if (getCurrentWeapon() != null){
+            combinedDamage += getCurrentWeapon().getValue();
         }
         
         return combinedDamage;
@@ -209,12 +206,12 @@ public final class Player extends AbstractEntity {
     public void obtainItems(ArrayList<Item> items) throws Exception{
         for (Item item: items){
             if (item.getClass() == Potion.class){
-                this.inventory.add((Potion) item);
+                this.setInventory("add", (Potion) item);
             }
             else if (item.getClass() == Weapon.class){
                 Weapon newWeapon = (Weapon) item;
-                if (this.currentWeapon == null || this.currentWeapon.getValue() < newWeapon.getValue() ){
-                    this.currentWeapon = newWeapon;
+                if (this.getCurrentWeapon() == null || this.getCurrentWeapon().getValue() < newWeapon.getValue() ){
+                    this.setCurrentWeapon(newWeapon);
                     System.out.println("You have aquired a better weapon." + newWeapon.toString());
                 }
                 else{
@@ -223,8 +220,8 @@ public final class Player extends AbstractEntity {
             }
             else if (item.getClass() == Armour.class){
                 Armour newArmour = (Armour) item;
-                if (this.currentArmour == null || this.currentWeapon.getValue() < newArmour.getValue() ){
-                    this.currentArmour = newArmour;
+                if (this.getCurrentArmour() == null || this.getCurrentWeapon().getValue() < newArmour.getValue() ){
+                    this.setCurrentArmour(newArmour);
                     System.out.println("You have aquired a better set of armour." + newArmour.toString());
                 }
                 else{
@@ -247,13 +244,92 @@ public final class Player extends AbstractEntity {
             this.currentHealth += value;
             System.out.println(this.name + "has healed for " + value + ". Health: " + this.currentHealth);
         } else {
-            if ((this.currentSuperAttackLevel + value) > this.maxSuperAttackLevel) {
-                this.currentSuperAttackLevel = this.maxSuperAttackLevel;
+            if ((this.getCurrentSuperAttackLevel() + value) > this.getMaxSuperAttackLevel()) {
+                this.setCurrentSuperAttackLevel(this.getMaxSuperAttackLevel());
                 System.out.println("Attack potion has maxed out your super attack bar.");
             } else {
-                this.currentSuperAttackLevel += value;
+                this.setCurrentSuperAttackLevel(this.getCurrentSuperAttackLevel() + value);
                 System.out.println("Attack potion has added " + value + " to " + this.name + "'s super attack bar.");
             }
         }
+    }
+
+    /**
+     * @return the inventory
+     */
+    public LinkedList<Potion> getInventory() {
+        return inventory;
+    }
+
+    /**
+     * @param operation
+     * @param potion
+     */
+    public void setInventory(String operation, Potion potion) {
+        if (operation.equals("remove")) {
+            this.inventory.remove(potion);
+        } 
+        else if (operation.equals("add")) {
+            this.inventory.add(potion);
+        }
+        else {
+            System.out.println("Error: You have used a wrong operation in setInventory.");
+        }
+    }
+
+    /**
+     * @return the currentSuperAttackLevel
+     */
+    public int getCurrentSuperAttackLevel() {
+        return currentSuperAttackLevel;
+    }
+
+    /**
+     * @param currentSuperAttackLevel the currentSuperAttackLevel to set
+     */
+    public void setCurrentSuperAttackLevel(int currentSuperAttackLevel) {
+        this.currentSuperAttackLevel = currentSuperAttackLevel;
+    }
+
+    /**
+     * @return the maxSuperAttackLevel
+     */
+    public int getMaxSuperAttackLevel() {
+        return maxSuperAttackLevel;
+    }
+
+    /**
+     * @param maxSuperAttackLevel the maxSuperAttackLevel to set
+     */
+    public void setMaxSuperAttackLevel(int maxSuperAttackLevel) {
+        this.maxSuperAttackLevel = maxSuperAttackLevel;
+    }
+
+    /**
+     * @return the currentArmour
+     */
+    public Armour getCurrentArmour() {
+        return currentArmour;
+    }
+
+    /**
+     * @param currentArmour the currentArmour to set
+     */
+    public void setCurrentArmour(Armour currentArmour) {
+        this.currentArmour = currentArmour;
+    }
+
+    /**
+     * @return the currentWeapon
+     */
+    public Weapon getCurrentWeapon() {
+        return currentWeapon;
+    }
+
+    /**
+     * @param currentWeapon the currentWeapon to set
+     */
+    public void setCurrentWeapon(Weapon currentWeapon) {
+        this.currentWeapon = currentWeapon;
     }
 }
