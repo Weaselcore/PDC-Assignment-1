@@ -5,6 +5,7 @@
  */
 package pdc.assignment.main;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import pdc.assignment.entities.Enemy;
@@ -15,6 +16,7 @@ import pdc.assignment.entities.Player;
 import pdc.assignment.items.Item;
 import pdc.assignment.items.Potion;
 import pdc.assignment.utilities.GameData;
+import pdc.assignment.utilities.Serialiser;
 
 /**
  *
@@ -90,7 +92,7 @@ public final class Level {
         return this.currentLevel;
     }
     
-    public boolean turn(Entity currentEnemy) {
+    public boolean turn(Entity currentEnemy) throws IOException {
         
         Scanner inputScanner = new Scanner(System.in);
 
@@ -98,17 +100,17 @@ public final class Level {
         boolean isDead = false;
 
         while (!chosen) {
-            Player player = ((Player) this.player);
-            player.displaySuperAttack();
+            Player currentPlayer = ((Player) this.player);
+            currentPlayer.displaySuperAttack();
             
             System.out.println(
-                "[#1]. Attack [#2]. Use Potions [#3]. Save Game [#4]. Run Away");
+                "[#1]. Attack [#2]. Use Potions [#3]. Save and Exit [#4]. Run Away");
             System.out.println("Option (#): ");
 
             String chosenOption = inputScanner.nextLine();
 
             if ("1".equals(chosenOption)) {
-                player.attack(currentEnemy);
+                currentPlayer.attack(currentEnemy);
                 boolean targetDead = currentEnemy.isDead();
                 if (targetDead) {
                     System.out.println("\n" + this.player.getName() + " has slain " + currentEnemy.getName() + "!\n");
@@ -120,10 +122,10 @@ public final class Level {
                 chosen = true;
             }
             else if ("2".equals(chosenOption)) {
-                if (!player.getInventory().isEmpty()) {
+                if (!currentPlayer.getInventory().isEmpty()) {
                     Integer count = 0;
                     
-                    for (Potion item: player.getInventory()) {
+                    for (Potion item: currentPlayer.getInventory()) {
                         System.out.println("Count: " + "[#" + (count + 1) + "]" + item);
                         count += 1;
                     }
@@ -137,9 +139,9 @@ public final class Level {
                         Integer potionChoice = potionScanner.nextInt();
                         
                         if (potionChoice <= count) {
-                            Potion potion = player.getInventory().get(potionChoice - 1);
-                            player.usePotion(potion);
-                            player.setInventory("remove", potion);
+                            Potion potion = currentPlayer.getInventory().get(potionChoice - 1);
+                            currentPlayer.usePotion(potion);
+                            currentPlayer.setInventory("remove", potion);
                             potionChosen = true;
                         } else {
                             System.out.println("Please input a valid #.");
@@ -151,6 +153,9 @@ public final class Level {
                 }
             }
             else if ("3".equals(chosenOption)) {
+                Serialiser.saveToFile(this);
+                System.out.println("Your game has been saved to " + this.player.getName() + ".json");
+                System.exit(0);                
             }
             else if ("4".equals(chosenOption)) {
                 System.out.println("Thanks for playing");
@@ -202,6 +207,10 @@ public final class Level {
     
     private void generateEnemy() throws Exception {
         this.currentEnemy = EntityFactory.createEntity("enemy", this.gameData);
+    }
+
+    public Entity getPlayer() {
+        return this.player;
     }
     
     

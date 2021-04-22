@@ -13,8 +13,7 @@ import java.util.LinkedList;
 import java.util.Map;
 import pdc.assignment.entities.Entity;
 import pdc.assignment.entities.Player;
-import pdc.assignment.items.Potion;
-import pdc.assignment.main.GameSession;
+import pdc.assignment.main.Level;
 
 /**
  *
@@ -22,11 +21,11 @@ import pdc.assignment.main.GameSession;
  */
 public class Serialiser {
     
-    public static void saveToFile(GameSession gameSession) throws IOException {
+    public static void saveToFile(Level level) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         Map<String, Object> map = new HashMap();
         
-        Entity playerEntity =  gameSession.getPlayer();
+        Entity playerEntity =  level.getPlayer();
         Player player = (Player) playerEntity;
         
         // Player name
@@ -36,23 +35,36 @@ public class Serialiser {
         double health = player.getCurrentHealth();
         map.put("health", health);
         // Level
-        int level = gameSession.getLevel().getCurrentLevel();
-        map.put("level", level);
+        int currentLevel = level.getCurrentLevel();
+        map.put("level", currentLevel);
         // Weapon
-        String weapon = player.getCurrentWeapon().getName();
-        map.put("weapon", weapon);
+        if (player.getCurrentWeapon() != null) {         
+            String weapon = player.getCurrentWeapon().getName();
+            map.put("weapon", weapon);
+        } else {
+            map.put("weapon", null);
+        }
         // Armour
-        String armour = player.getCurrentArmour().getName();
-        map.put("armour", armour);
+        if (player.getCurrentArmour() != null) {         
+            String armour = player.getCurrentArmour().getName();
+            map.put("armour", armour);
+        } else {
+            map.put("armour", null);
+        }
         // Potions
-        LinkedList<String> potionList = new LinkedList();
+        if (!player.getInventory().isEmpty()) {
+            LinkedList<String> potionList = new LinkedList();
+
+            player.getInventory().forEach(potion -> {
+                potionList.add(potion.getName());
+            });
         
-        player.getInventory().forEach(potion -> {
-            potionList.add(potion.getName());
-        });
-        
-        map.put("potions", potionList);
-        
+            map.put("potions", potionList);
+        } else {
+            map.put("potions", null);
+        }
+
+       
         // Save to file
         mapper.writeValue(Paths.get(name + ".json").toFile(), map);
     }  
