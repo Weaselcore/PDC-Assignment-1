@@ -6,11 +6,14 @@
 package pdc.assignment.main;
 
 import java.util.ArrayList;
+import java.util.Scanner;
+import pdc.assignment.entities.Enemy;
 import pdc.assignment.loot.LootTableGenerator;
 import pdc.assignment.entities.Entity;
 import pdc.assignment.entities.EntityFactory;
 import pdc.assignment.entities.Player;
 import pdc.assignment.items.Item;
+import pdc.assignment.items.Potion;
 import pdc.assignment.utilities.GameData;
 
 /**
@@ -53,7 +56,14 @@ public final class Level {
         Entity temp;
 
         while (levelInProgress) {
-            boolean targetHasDied = entityForTurn.turn(entityWaiting);
+            boolean targetHasDied = false;
+            if (entityForTurn instanceof Player){
+                // Player
+                targetHasDied = this.turn(entityWaiting); 
+            } else if (entityForTurn instanceof Enemy) {
+                // Enemy
+                targetHasDied = ((Enemy) entityForTurn).turn(entityWaiting);
+            }
             if (targetHasDied) {
                 levelInProgress = false;
             } else {
@@ -78,6 +88,79 @@ public final class Level {
             this.currentLevel = -1;
         }
         return this.currentLevel;
+    }
+    
+    public boolean turn(Entity currentEnemy) {
+        
+        Scanner inputScanner = new Scanner(System.in);
+
+        boolean chosen = false;
+        boolean isDead = false;
+
+        while (!chosen) {
+            Player player = ((Player) this.player);
+            player.displaySuperAttack();
+            
+            System.out.println(
+                "[#1]. Attack [#2]. Use Potions [#3]. Save Game [#4]. Run Away");
+            System.out.println("Option (#): ");
+
+            String chosenOption = inputScanner.nextLine();
+
+            if ("1".equals(chosenOption)) {
+                player.attack(currentEnemy);
+                boolean targetDead = currentEnemy.isDead();
+                if (targetDead) {
+                    System.out.println("\n" + this.player.getName() + " has slain " + currentEnemy.getName() + "!\n");
+                    isDead = true;
+                }
+                else {
+                    isDead = false;
+                }
+                chosen = true;
+            }
+            else if ("2".equals(chosenOption)) {
+                if (!player.getInventory().isEmpty()) {
+                    Integer count = 0;
+                    
+                    for (Potion item: player.getInventory()) {
+                        System.out.println("Count: " + "[#" + (count + 1) + "]" + item);
+                        count += 1;
+                    }
+                    
+                    boolean potionChosen = false;
+                    Scanner potionScanner = new Scanner(System.in);
+                    
+                    while (!potionChosen) {
+                        
+                        System.out.println("Please select potion using corresponding #:");
+                        Integer potionChoice = potionScanner.nextInt();
+                        
+                        if (potionChoice <= count) {
+                            Potion potion = player.getInventory().get(potionChoice - 1);
+                            player.usePotion(potion);
+                            player.setInventory("remove", potion);
+                            potionChosen = true;
+                        } else {
+                            System.out.println("Please input a valid #.");
+                        }
+                    }
+                    
+                } else {
+                    System.out.println("You have no potions.");
+                }
+            }
+            else if ("3".equals(chosenOption)) {
+            }
+            else if ("4".equals(chosenOption)) {
+                System.out.println("Thanks for playing");
+                System.exit(0);
+            }
+            else {
+                System.out.println("Please input a proper input!");
+            }
+        } 
+        return isDead;
     }
     
         /**

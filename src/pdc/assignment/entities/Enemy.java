@@ -76,7 +76,6 @@ public final class Enemy extends AbstractEntity{
         System.out.println(this.name + " has attacked you with " + this.damage + ".");
     }
 
-    @Override
     public boolean turn(Entity player) {
         this.attack(player);
         boolean targetDead = player.isDead();

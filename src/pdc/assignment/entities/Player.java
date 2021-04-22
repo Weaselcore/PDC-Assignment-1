@@ -106,78 +106,6 @@ public final class Player extends AbstractEntity {
         currentEnemy.takeDamage(damageToDeal);
         System.out.println(attackString);
     }
-
-    @Override
-    public boolean turn(Entity currentEnemy) {
-        
-        Scanner inputScanner = new Scanner(System.in);
-
-        boolean chosen = false;
-        boolean toReturn = false;
-
-        while (!chosen) {
-                    
-            this.displaySuperAttack();
-            
-            System.out.println(
-                "[#1]. Attack [#2]. Use Potions [#3]. Run Away");
-            System.out.println("Option (#): ");
-
-            String chosenOption = inputScanner.nextLine();
-
-            if ("1".equals(chosenOption)) {
-                this.attack(currentEnemy);
-                boolean targetDead = currentEnemy.isDead();
-                if (targetDead) {
-                    System.out.println("\n" + this.getName() + " has slain " + currentEnemy.getName() + "!\n");
-                    toReturn = true;
-                }
-                else {
-                    toReturn = false;
-                }
-                chosen = true;
-            }
-            else if ("2".equals(chosenOption)) {
-                if (!this.inventory.isEmpty()) {
-                    Integer count = 0;
-                    
-                    for (Potion item: this.getInventory()) {
-                        System.out.println("Count: " + "[#" + (count + 1) + "]" + item);
-                        count += 1;
-                    }
-                    
-                    boolean potionChosen = false;
-                    Scanner potionScanner = new Scanner(System.in);
-                    
-                    while (!potionChosen) {
-                        
-                        System.out.println("Please select potion using corresponding #:");
-                        Integer potionChoice = potionScanner.nextInt();
-                        
-                        if (potionChoice <= count) {
-                            Potion potion = this.getInventory().get(potionChoice - 1);
-                            this.usePotion(potion);
-                            this.setInventory("remove", potion);
-                            potionChosen = true;
-                        } else {
-                            System.out.println("Please input a valid #.");
-                        }
-                    }
-                    
-                } else {
-                    System.out.println("You have no potions.");
-                }
-            }
-            else if ("3".equals(chosenOption)) {
-                System.out.println("Thanks for playing");
-                System.exit(0);
-            }
-            else {
-                System.out.println("Please input a proper input!");
-            }
-        } 
-        return toReturn;
-    }
     
     public void displaySuperAttack() {
         StringBuilder stringbuilder = new StringBuilder();
@@ -212,20 +140,20 @@ public final class Player extends AbstractEntity {
                 Weapon newWeapon = (Weapon) item;
                 if (this.getCurrentWeapon() == null || this.getCurrentWeapon().getValue() < newWeapon.getValue() ){
                     this.setCurrentWeapon(newWeapon);
-                    System.out.println("You have aquired a better weapon." + newWeapon.toString());
+                    System.out.println("You have acquired and equipped a better weapon." + newWeapon.toString());
                 }
                 else{
-                    System.out.println("Your current weapon is better.");
+                    System.out.println("Your current weapon is better, so you've left the loot.");
                 }
             }
             else if (item.getClass() == Armour.class){
                 Armour newArmour = (Armour) item;
                 if (this.getCurrentArmour() == null || this.getCurrentWeapon().getValue() < newArmour.getValue() ){
                     this.setCurrentArmour(newArmour);
-                    System.out.println("You have aquired a better set of armour." + newArmour.toString());
+                    System.out.println("You have acquired and equipped a better set of armour." + newArmour.toString());
                 }
                 else{
-                    System.out.println("Your current armour is better.");
+                    System.out.println("Your current armour is better, so you've left the loot.");
                 }
             }
         }
@@ -236,7 +164,7 @@ public final class Player extends AbstractEntity {
         return this.name;
     }
     
-    private void usePotion(Potion potion) {
+    public void usePotion(Potion potion) {
         String type = potion.getType();
         Integer value = potion.getValue();
         
@@ -331,5 +259,9 @@ public final class Player extends AbstractEntity {
      */
     public void setCurrentWeapon(Weapon currentWeapon) {
         this.currentWeapon = currentWeapon;
+    }
+    
+    public double getCurrentHealth(){
+        return this.currentHealth;
     }
 }

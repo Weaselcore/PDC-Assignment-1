@@ -25,7 +25,7 @@ public final class Armour extends AbstractItem implements Item{
     
     @Override
     public String toString(){
-        return "\n" + this.name + ": " + this.description + "\nDamage Reduction: " + this.value;
+        return "\n[" + this.name + "]: " + this.description + "\n[Damage Reduction]: " + this.value;
     }
 
     @Override
@@ -42,4 +42,7 @@ public final class Armour extends AbstractItem implements Item{
         return entry;
     }
   
+        public String getName() {
+        return this.name;
+    }
 }

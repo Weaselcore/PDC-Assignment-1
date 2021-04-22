@@ -43,10 +43,13 @@ public class PDCAssignment1 {
                 // Display save files in resource package.
                 // Create menu for 3 saves.
                 // Retrieve data and create old player object from file.
-            } else {
+            } else if ("3".equals(result)){
                 System.out.println("Thanks for playing!\n");
                 System.exit(0);
-            }       
+                
+            } else {
+                System.out.println("Please input a proper option!");
+            }
         }    
     }
 }

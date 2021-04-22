@@ -21,8 +21,6 @@ public interface Entity {
 
     public void takeDamage(double damage);
     
-    public boolean turn(Entity entity);
-    
     public String getName();
     
 }

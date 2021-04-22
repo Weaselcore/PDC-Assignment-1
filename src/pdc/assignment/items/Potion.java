@@ -57,4 +57,8 @@ public final class Potion extends AbstractItem{
         return value;
     }
     
+    public String getName() {
+        return this.name;
+    }
+    
 }

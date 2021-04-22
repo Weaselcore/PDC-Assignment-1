@@ -16,10 +16,10 @@ import pdc.assignment.utilities.GameData;
 public final class GameSession {
 
     boolean isNewGame;
-    final int maxLevel = 2;
-    Entity player;
+    final int maxLevel = 5;
+    private Entity player;
     GameData gameData;
-    Level level;
+    private Level level;
 
     GameSession(boolean isNewGame) throws Exception {
 
@@ -27,7 +27,7 @@ public final class GameSession {
         // Initialise game data from json.
         gameData = new GameData();
         this.player = EntityFactory.createEntity("player", this.gameData);
-        this.level = new Level(this.gameData, this.player, this.maxLevel);
+        this.level = new Level(this.gameData, this.getPlayer(), this.maxLevel);
 
         // if not new game, create new game.
         // else load a game from save file.
@@ -39,9 +39,12 @@ public final class GameSession {
         int currentLevel;
         
         while (true) {
-            this.level.clearScreen();
-            this.level.displayLevel(this.maxLevel);
-            currentLevel = this.level.run();
+            this.getLevel().clearScreen();
+            this.getLevel().displayLevel(this.maxLevel);
+            
+            currentLevel = this.getLevel().run();
+            
+            
             if (currentLevel > maxLevel) {
                 System.out.println("\nYou have beaten the game!\n");
                 System.exit(0);
@@ -52,6 +55,21 @@ public final class GameSession {
         }
     }
 
+    /**
+     * @return the player
+     */
+    public Entity getPlayer() {
+        return player;
+    }
+
+    /**
+     * @return the level
+     */
+    public Level getLevel() {
+        return level;
+    }
+
+    
 
 
 }

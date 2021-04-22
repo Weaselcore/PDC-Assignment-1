@@ -25,7 +25,7 @@ public final class Weapon extends AbstractItem implements Item{
     
     @Override
     public String toString(){
-        return "\n" + this.name + ": " + this.description + "\nAttack damage: " + this.value;
+        return "\n[" + this.name + "]: " + this.description + "\n[Attack damage]: " + this.value;
     }
     
     @Override
@@ -40,6 +40,10 @@ public final class Weapon extends AbstractItem implements Item{
         HashMap mapNeeded = (HashMap) map.get(this.name);
         String entry = (String) mapNeeded.get(key);
         return entry;
+    }
+    
+    public String getName() {
+        return this.name;
     }
     
 }
