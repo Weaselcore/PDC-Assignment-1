@@ -17,11 +17,12 @@ public class PDCAssignment1 {
 
     /**
      * Entry point to start a game.
+     * @param args
+     * @throws java.lang.Exception
      */
     public static void main(String[] args) throws Exception {
         
         Boolean isRunning = true;
-        GameSession gameSession;
         Scanner input = new Scanner(System.in);
         File saveFolder = new File("src/pdc/assignment/saves/");
         
@@ -36,7 +37,7 @@ public class PDCAssignment1 {
             String result = input.nextLine();
             
             if ("1".equals(result)) {             
-                gameSession = new GameSession();
+                GameSession gameSession = new GameSession();
                 break;
             } else if ("2".equals(result)) {
                 
@@ -69,7 +70,7 @@ public class PDCAssignment1 {
                     int saveChoice = scanner.nextInt();
 
                     if (saveChoice <= count) {
-                        gameSession = new GameSession((File) saveFileList.get(saveChoice - 1));
+                        GameSession gameSession = new GameSession((File) saveFileList.get(saveChoice - 1));
                     } else {
                         System.out.println("Please input a valid save number");
                     }
