@@ -7,14 +7,14 @@
   },
   "Wolf": {
     "description": "A big hostile canine. Has large fangs that can pierce through weak armour.",
-    "health": 18,
+    "health": 15,
     "armour": 1,
     "attack": 3
   },
   "Thief": {
     "description": "Another human trying to steal and kill anyone else.",
-    "health": 12,
-    "armour": 2,
+    "health": 10,
+    "armour": 1,
     "attack": 2
   },
   "Korg": {
