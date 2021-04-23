@@ -30,11 +30,12 @@ public class PDCAssignment1 {
 
         while (isRunning) {
 
-            System.out.println("KINGDOM FIGHTERS\n");
+            System.out.println("\nKINGDOM FIGHTERS\n");
             System.out.println("[#1: New Game]");
             System.out.println("[#2: Load Game]");
-            System.out.println("[#3: Delete Save File]");
-            System.out.println("[#4: Exit]");
+            System.out.println("[#3: Rules]");
+            System.out.println("[#4: Delete Save File]");
+            System.out.println("[#5: Exit]");
             System.out.print("Input: ");
 
             String result = input.nextLine();
@@ -50,9 +51,9 @@ public class PDCAssignment1 {
                 } else {
                     System.out.println("Please input a valid file number.");
                 }
-
             } else if ("3".equals(result)) {
-
+                System.out.println(getRules());
+            } else if ("4".equals(result)) {
                 try {
                     File fileResult = getSaveFile(saveFolder);
                     if (null != fileResult) {
@@ -67,7 +68,7 @@ public class PDCAssignment1 {
                 } catch (Exception e) {
                     System.out.println(e);
                 }
-            } else if ("4".equals(result)) {
+            } else if ("5".equals(result)) {
                 System.out.println("Thanks for playing!\n");
                 System.exit(0);
             } else {
@@ -77,7 +78,7 @@ public class PDCAssignment1 {
     }
 
     // Used to retrieve list of saves for loading and deletion of files.
-    public static File getSaveFile(File saveFolder) throws Exception {
+    private static File getSaveFile(File saveFolder) throws Exception {
 
         boolean hasSave;
 
@@ -114,5 +115,23 @@ public class PDCAssignment1 {
             }
         }
         return null;
+    }
+
+    // Last minute function to return some rules to improve user experience.
+    private static String getRules() {
+
+        String rules = "\n* This is a level based game that has you fight monsters."
+                + "\n* There is a level bar that shows up every new level."
+                + "\n* Each monster is randomly generated with different stats."
+                + "\n* You must defeat them in order to move on."
+                + "\n* When defeated, monsters will drop loot that will boost stats."
+                + "\n* Potions will go into your inventory' armour/weapons will auto-equip if better."
+                + "\n* Each turn will charge up a super attack bar."
+                + "\n* When maxed out, your next attack will deal double damage."
+                + "\n* You cannot use a potion to go over max health/super attack."
+                + "\n* Enjoy!";
+
+        return rules;
+
     }
 }
