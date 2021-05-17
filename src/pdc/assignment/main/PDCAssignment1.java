@@ -129,6 +129,7 @@ public class PDCAssignment1 {
                 + "\n* Each turn will charge up a super attack bar."
                 + "\n* When maxed out, your next attack will deal double damage."
                 + "\n* You cannot use a potion to go over max health/super attack."
+                + "\n* You can use as many potions before attacking."
                 + "\n* Enjoy!";
 
         return rules;
