@@ -8,6 +8,7 @@ package pdc.assignment.main;
 import java.io.File;
 import java.util.LinkedList;
 import java.util.Scanner;
+import pdc.assignment.gui.MainGui;
 
 /**
  *
@@ -28,6 +29,8 @@ public class PDCAssignment1 {
         String saveFolderString = "src/pdc/assignment/saves/";
         File saveFolder = new File(saveFolderString);
 
+        MainGui gui = new MainGui();
+        
         while (isRunning) {
 
             System.out.println("\nKINGDOM FIGHTERS\n");
