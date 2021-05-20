@@ -10,6 +10,10 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -33,31 +37,62 @@ public class Wrapper {
         }
     }
     
+    // Grabs data from the local database and returns them as a HashMap.
+    // The game takes the HashMap to store it into memory and to 
     public static void load(String type) {
-        
-        if 
-        
-    }
-    
-    public static void savePlayerData() {
-        
-    }
-    
-    public static void loadPlayerData() {
-        
-    }
-    
-    private ResultSet query(String sql) {
-        Connection connection = Wrapper.dbConnection;
-        Statement statement = null;
-        ResultSet resultSet = null;
-        
-        try {
-            statement = connection.createStatement();
-            resultSet = statement.executeQuery(sql);
-        } catch (SQLException e){
-            System.err.println(e);
+        switch (type) {
+            case "weapon":
+                String statement = "SELECT * FROM WEAPON";
+                ArrayList columnNames = new ArrayList(Arrays.asList("name", "value", "description"));
+                break;
+            case "armour":
+                break;
+            case "potion":
+                break;
+            case "player":
+                break;
+            case "enemy":
+                break;
+            default:
+                break;
         }
-        return resultSet;
     }
+    
+    // The GameData is converted from HashMap to an entry in the database.
+    public static void save(String type) {
+
+    }
+
+//    private HashMap query(String sql, ArrayList columnName) {
+//        Connection connection = Wrapper.dbConnection;
+//        Statement statement = null;
+//        ResultSet resultSet = null;
+//        String column;
+//        HashMap completeHashMap = new HashMap<>();
+//        
+//        try {
+//            statement = connection.createStatement();
+//            resultSet = statement.executeQuery(sql);
+//            int count = -1;
+//            while(resultSet.next()) {
+//                // This is the name of the object.
+//                if (count == 0) {
+//                    completeHashMap.put(resultSet.get, column)
+//                } else if (count > 0) {
+//                    column = (String) columnName.get(count);
+//                    hashmap.put(sql, column)
+//                    
+//                }
+//                count++;
+//            }
+//            
+//        } catch (SQLException e){
+//            System.err.println(e);
+//        }
+//        return completeHashMap;
+//    }
+//    
+//    private void addToHashmap(Map hashmap) {
+//        
+//    }
 }
