@@ -15,8 +15,8 @@ import pdc.assignment.entities.EntityFactory;
 import pdc.assignment.entities.Player;
 import pdc.assignment.items.Item;
 import pdc.assignment.items.Potion;
-import pdc.assignment.utilities.GameData;
-import pdc.assignment.utilities.Serialiser;
+import pdc.assignment.database.GameData;
+import pdc.assignment.database.Serialiser;
 
 /**
  *

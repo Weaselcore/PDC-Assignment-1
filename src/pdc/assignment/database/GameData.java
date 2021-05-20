@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pdc.assignment.utilities;
+package pdc.assignment.database;
 
 import com.fasterxml.jackson.databind.JsonMappingException;
 import java.io.IOException;

@@ -9,8 +9,8 @@ import java.io.File;
 import java.util.Map;
 import pdc.assignment.entities.EntityFactory;
 import pdc.assignment.entities.Entity;
-import pdc.assignment.utilities.Deserialiser;
-import pdc.assignment.utilities.GameData;
+import pdc.assignment.database.Deserialiser;
+import pdc.assignment.database.GameData;
 
 /**
  *

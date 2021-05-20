@@ -13,15 +13,6 @@
   },
   "Thief": {
     "description": "Another human trying to steal and kill anyone else.",
-    "health": 20,
-    "armour": 1,
-    "attack": 5,
-    "health": 15,
-    "armour": 1,
-    "attack": 3
-  },
-  "Thief": {
-    "description": "Another human trying to steal and kill anyone else.",
     "health": 10,
     "armour": 1,
     "attack": 2

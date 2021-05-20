@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Random;
-import pdc.assignment.utilities.GameData;
+import pdc.assignment.database.GameData;
 
 /**
  *

@@ -6,7 +6,7 @@
 package pdc.assignment.entities;
 
 import java.util.Map;
-import pdc.assignment.utilities.GameData;
+import pdc.assignment.database.GameData;
 
 /**
  * Returns the appropriate entity using factory pattern to improve scalability.
