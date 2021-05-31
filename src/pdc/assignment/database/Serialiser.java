@@ -15,7 +15,7 @@ import java.util.LinkedList;
 import java.util.Map;
 import pdc.assignment.entities.Entity;
 import pdc.assignment.entities.Player;
-import pdc.assignment.main.Level;
+import pdc.assignment.gameclasses.Level;
 
 /**
  * This class turns player and level object information into a link hashmap,

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pdc.assignment.main;
+package pdc.assignment.gameclasses;
 
 import java.io.IOException;
 import java.util.ArrayList;

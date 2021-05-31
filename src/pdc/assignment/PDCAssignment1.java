@@ -3,14 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pdc.assignment.main;
+package pdc.assignment;
 
+import pdc.assignment.gameclasses.GameSession;
 import java.io.File;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Scanner;
-import pdc.assignment.database.Wrapper;
-import pdc.assignment.gui.MainGui;
+import pdc.assignment.gui.controller.GameController;
+import pdc.assignment.gui.model.GameModel;
+import pdc.assignment.gui.view.GameView;
 
 /**
  *
@@ -31,7 +32,10 @@ public class PDCAssignment1 {
         String saveFolderString = "src/pdc/assignment/saves/";
         File saveFolder = new File(saveFolderString);
 
-        //MainGui gui = new MainGui();
+        GameView menuView = new GameView();
+        GameModel menuModel = new GameModel();
+        GameController menuController = new GameController(menuModel, menuView);
+        menuView.addController(menuController);
         
         while (isRunning) {
 

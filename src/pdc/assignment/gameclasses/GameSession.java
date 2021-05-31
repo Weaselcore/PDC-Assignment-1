@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pdc.assignment.main;
+package pdc.assignment.gameclasses;
 
 import java.io.File;
 import java.util.Map;
@@ -25,8 +25,8 @@ public final class GameSession {
     private Level level;
 
     // Constructor for a new game.
-    GameSession() throws Exception {
-        // Initialise game data from json.
+    public GameSession() throws Exception {
+        // Initialise game data from database.
         this.gameData = new GameData();
         this.player = EntityFactory.createNewEntity("player", this.gameData);
         this.level = new Level(this.gameData, this.getPlayer(), this.maxLevel);
@@ -34,7 +34,7 @@ public final class GameSession {
     }
     
     // Constructor to load game from save file.
-    GameSession(File file) throws Exception {
+    public GameSession(File file) throws Exception {
         this.gameData = new GameData();
         Map loadData = Deserialiser.readSave(file);
         // Create player passing old data.
