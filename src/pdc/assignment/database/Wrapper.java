@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.Map;
 
 /**
  *
@@ -23,16 +22,16 @@ import java.util.Map;
 public class Wrapper {
     
     public static Connection dbConnection;
-    final static private String connUrl = "jdbc:derby://localhost:1527/gamesave";
-    final static private String user = "team";
-    final static private String pass = "123";
+    final static private String CONNECTION_URL = "jdbc:derby://localhost:1527/gamesave";
+    final static private String USERNAME = "team";
+    final static private String PASSWORD = "123";
     
 
     // Create instance of the connection object to access the database.
     public static void connect() throws SQLException {
         try {
-            Wrapper.dbConnection = DriverManager.getConnection(connUrl, user, pass);
-            System.out.println("A connection has been established with " + connUrl);
+            Wrapper.dbConnection = DriverManager.getConnection(CONNECTION_URL, USERNAME, PASSWORD);
+            System.out.println("A connection has been established with " + CONNECTION_URL);
         } catch(SQLException e) {
             System.err.println(e);
         }
@@ -137,7 +136,6 @@ public class Wrapper {
         }
         
         hashMap.put(rs.getString(columnNameArray.get(0)), innerLinkedHashMap);
-
         return hashMap;
     }
     
