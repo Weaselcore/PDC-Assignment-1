@@ -5,8 +5,7 @@
  */
 package pdc.assignment.database;
 
-import com.fasterxml.jackson.databind.JsonMappingException;
-import java.io.IOException;
+import java.sql.SQLException;
 import java.util.HashMap;
 
 /**
@@ -17,21 +16,28 @@ import java.util.HashMap;
  */
 public class GameData {
     
-    static String armourPath = "src/pdc/assignment/resources/armour.json";
-    static String potionPath = "src/pdc/assignment/resources/potion.json";
-    static String weaponPath = "src/pdc/assignment/resources/weapon.json";
-    static String enemyPath = "src/pdc/assignment/resources/enemy.json";
+//    static String armourPath = "src/pdc/assignment/resources/armour.json";
+//    static String potionPath = "src/pdc/assignment/resources/potion.json";
+//    static String weaponPath = "src/pdc/assignment/resources/weapon.json";
+//    static String enemyPath = "src/pdc/assignment/resources/enemy.json";
     
     private HashMap armourData;
     private HashMap potionData;
     private HashMap weaponData;
     private HashMap enemyData;
     
-    public GameData() throws JsonMappingException, IOException {
-        this.armourData = Deserialiser.jsonDataToHashmap(GameData.armourPath);
-        this.potionData = Deserialiser.jsonDataToHashmap(GameData.potionPath);
-        this.weaponData = Deserialiser.jsonDataToHashmap(GameData.weaponPath);
-        this.enemyData = Deserialiser.jsonDataToHashmap(GameData.enemyPath);
+    public GameData() throws SQLException {
+//        this.armourData = Deserialiser.jsonDataToHashmap(GameData.armourPath);
+//        this.potionData = Deserialiser.jsonDataToHashmap(GameData.potionPath);
+//        this.weaponData = Deserialiser.jsonDataToHashmap(GameData.weaponPath);
+//        this.enemyData = Deserialiser.jsonDataToHashmap(GameData.enemyPath);
+
+        Wrapper.connect();
+        this.armourData = Wrapper.load("armour");
+        this.potionData = Wrapper.load("potion");
+        this.weaponData = Wrapper.load("weapon");
+        this.enemyData = Wrapper.load("enemy");
+        Wrapper.close();
     }  
 
     public HashMap getArmourData() {
