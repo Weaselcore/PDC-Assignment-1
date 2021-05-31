@@ -16,22 +16,12 @@ import java.util.HashMap;
  */
 public class GameData {
     
-//    static String armourPath = "src/pdc/assignment/resources/armour.json";
-//    static String potionPath = "src/pdc/assignment/resources/potion.json";
-//    static String weaponPath = "src/pdc/assignment/resources/weapon.json";
-//    static String enemyPath = "src/pdc/assignment/resources/enemy.json";
-    
-    private HashMap armourData;
-    private HashMap potionData;
-    private HashMap weaponData;
-    private HashMap enemyData;
+    private final HashMap armourData;
+    private final HashMap potionData;
+    private final HashMap weaponData;
+    private final HashMap enemyData;
     
     public GameData() throws SQLException {
-//        this.armourData = Deserialiser.jsonDataToHashmap(GameData.armourPath);
-//        this.potionData = Deserialiser.jsonDataToHashmap(GameData.potionPath);
-//        this.weaponData = Deserialiser.jsonDataToHashmap(GameData.weaponPath);
-//        this.enemyData = Deserialiser.jsonDataToHashmap(GameData.enemyPath);
-
         Wrapper.connect();
         this.armourData = Wrapper.load("armour");
         this.potionData = Wrapper.load("potion");
