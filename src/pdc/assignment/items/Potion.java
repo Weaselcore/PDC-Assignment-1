@@ -5,6 +5,7 @@
  */
 package pdc.assignment.items;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
 /**

@@ -5,11 +5,13 @@
  */
 package pdc.assignment.items;
 
+import java.io.Serializable;
+
 /**
  *
  * @author ieuan
  */
-public abstract class AbstractItem implements Item{
+public abstract class AbstractItem implements Item, Serializable{
 
     String name;
     int value;

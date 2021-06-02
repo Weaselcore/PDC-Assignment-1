@@ -5,6 +5,7 @@
  */
 package pdc.assignment.database;
 
+import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.HashMap;
 
@@ -14,7 +15,7 @@ import java.util.HashMap;
  * to construct objects.
  * @author whackaweasel
  */
-public class GameData {
+public class GameData implements Serializable{
     
     private final HashMap armourData;
     private final HashMap potionData;

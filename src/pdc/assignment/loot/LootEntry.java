@@ -5,11 +5,13 @@
  */
 package pdc.assignment.loot;
 
+import java.io.Serializable;
+
 /**
  * An item that resides in the loot table, will keep track of weighting.
  * @author whackaweasel
  */
-public class LootEntry {
+public class LootEntry implements Serializable{
     
     private String name;
     private int minRoll;

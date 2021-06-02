@@ -5,6 +5,7 @@
  */
 package pdc.assignment.entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Map;
@@ -22,7 +23,7 @@ import pdc.assignment.database.GameData;
  *
  * @author whackaweasel
  */
-public final class Player extends AbstractEntity {
+public final class Player extends AbstractEntity{
 
     private LinkedList<Potion> inventory = new LinkedList<>();
     private int currentSuperAttackLevel;

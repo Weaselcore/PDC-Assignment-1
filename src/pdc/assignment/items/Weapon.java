@@ -11,7 +11,7 @@ import java.util.HashMap;
  *
  * @author whackaweasel
  */
-public final class Weapon extends AbstractItem implements Item{
+public final class Weapon extends AbstractItem implements Item {
     
     public Weapon(String name, HashMap info){
         this.name = name;

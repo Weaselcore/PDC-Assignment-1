@@ -5,6 +5,7 @@
  */
 package pdc.assignment.loot;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -22,7 +23,7 @@ import pdc.assignment.database.GameData;
  *
  * @author whackaweasel
  */
-public class LootTableGenerator {
+public class LootTableGenerator implements Serializable{
 
     GameData gameData;
     private final LootTable potionLootTable;

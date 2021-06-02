@@ -5,6 +5,7 @@
  */
 package pdc.assignment.loot;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -12,7 +13,7 @@ import java.util.ArrayList;
  * when generating random loot.
  * @author whackaweasel
  */
-public class LootTable {
+public class LootTable implements Serializable{
     
     ArrayList<LootEntry> lootTable;
     private int maxRoll = 0;

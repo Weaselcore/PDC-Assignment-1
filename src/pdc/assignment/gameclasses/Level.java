@@ -6,6 +6,8 @@
 package pdc.assignment.gameclasses;
 
 import java.io.IOException;
+import java.io.Serializable;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import pdc.assignment.entities.Enemy;
@@ -22,7 +24,7 @@ import pdc.assignment.database.Serialiser;
  *
  * @author whackaweasel
  */
-public final class Level {
+public final class Level implements Serializable{
     
     private int currentLevel;
     Entity currentEnemy;
@@ -104,7 +106,7 @@ public final class Level {
     }
     
     // Level object is responsible for taking in player input.
-    public boolean playerTurn(Entity currentEnemy) throws IOException {
+    public boolean playerTurn(Entity currentEnemy) throws IOException, SQLException {
         
         Scanner inputScanner = new Scanner(System.in);
 

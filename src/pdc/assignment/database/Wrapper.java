@@ -5,15 +5,25 @@
  */
 package pdc.assignment.database;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import javax.sql.rowset.serial.SerialBlob;
+import pdc.assignment.gameclasses.Level;
 
 /**
  *
@@ -139,41 +149,30 @@ public class Wrapper {
         return hashMap;
     }
     
-    // The GameData is converted from HashMap to an entry in the database.
-    public static void save(String type) {
-
+    // The GameData is converted from HashMap into an db entry.
+    public static void saveGame(Level level) throws IOException, SQLException {
+        
+        Wrapper.connect();
+        
+        ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
+        ObjectOutputStream objStream = new ObjectOutputStream(byteStream);
+        objStream.writeObject(level);
+        
+        //Prepare variables to be inserted.
+        java.sql.Timestamp now = new java.sql.Timestamp(System.currentTimeMillis());
+        String playerName = level.getPlayer().getName();
+        Blob blobOject = new SerialBlob(byteStream.toByteArray());        
+        
+        String statement = "INSERT INTO PLAYERDATA(TIMESTAMP, NAME, PLAYERDATA) VALUES (?, ?, ?)";
+        PreparedStatement prepStatement = Wrapper.dbConnection.prepareStatement(statement, PreparedStatement.RETURN_GENERATED_KEYS);
+        //Setting values using the variables prepared.
+        prepStatement.setTimestamp(1, now);
+        prepStatement.setString(2, playerName);
+        prepStatement.setBlob(3, blobOject);
+        prepStatement.getGeneratedKeys();
+        prepStatement.execute();
+        
+        Wrapper.close();
     }
-
-//    private HashMap query(String sql, ArrayList columnName) {
-//        Connection connection = Wrapper.dbConnection;
-//        Statement statement = null;
-//        ResultSet resultSet = null;
-//        String column;
-//        HashMap completeHashMap = new HashMap<>();
-//        
-//        try {
-//            statement = connection.createStatement();
-//            resultSet = statement.executeQuery(sql);
-//            int count = -1;
-//            while(resultSet.next()) {
-//                // This is the name of the object.
-//                if (count == 0) {
-//                    completeHashMap.put(resultSet.get, column)
-//                } else if (count > 0) {
-//                    column = (String) columnName.get(count);
-//                    hashmap.put(sql, column)
-//                    
-//                }
-//                count++;
-//            }
-//            
-//        } catch (SQLException e){
-//            System.err.println(e);
-//        }
-//        return completeHashMap;
-//    }
-//    
-//    private void addToHashmap(Map hashmap) {
-//        
-//    }
+    
 }

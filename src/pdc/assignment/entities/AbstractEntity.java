@@ -5,11 +5,13 @@
  */
 package pdc.assignment.entities;
 
+import java.io.Serializable;
+
 /**
  *
  * @author ieuan
  */
-public abstract class AbstractEntity implements Entity{
+public abstract class AbstractEntity implements Entity, Serializable{
     
     String name;
     String description;

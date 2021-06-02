@@ -5,6 +5,7 @@
  */
 package pdc.assignment.entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -15,7 +16,7 @@ import pdc.assignment.database.GameData;
  *
  * @author whackaweasel
  */
-public final class Enemy extends AbstractEntity{
+public final class Enemy extends AbstractEntity {
     
     HashMap enemyData;
     
