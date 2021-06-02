@@ -11,9 +11,9 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Scanner;
 import pdc.assignment.database.Wrapper;
-import pdc.assignment.gui.controller.GameController;
-import pdc.assignment.gui.model.GameModel;
-import pdc.assignment.gui.view.GameView;
+import pdc.assignment.gui.controller.MenuController;
+import pdc.assignment.gui.model.MenuModel;
+import pdc.assignment.gui.view.MenuView;
 
 /**
  *
@@ -34,9 +34,9 @@ public class PDCAssignment1 {
         String saveFolderString = "src/pdc/assignment/saves/";
         File saveFolder = new File(saveFolderString);
 
-        GameView menuView = new GameView();
-        GameModel menuModel = new GameModel();
-        GameController menuController = new GameController(menuModel, menuView);
+        MenuView menuView = new MenuView();
+        MenuModel menuModel = new MenuModel();
+        MenuController menuController = new MenuController(menuModel, menuView);
         menuView.addController(menuController);
         
         while (isRunning) {

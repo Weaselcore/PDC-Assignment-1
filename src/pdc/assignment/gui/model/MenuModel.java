@@ -12,7 +12,7 @@ import pdc.assignment.gameclasses.GameSession;
  *
  * @author wease
  */
-public class GameModel extends Observable{
+public class MenuModel extends Observable{
     
     private GameSession gameSession;
     private String playerName = null;

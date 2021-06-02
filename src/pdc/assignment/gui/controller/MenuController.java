@@ -7,8 +7,8 @@ package pdc.assignment.gui.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import pdc.assignment.gui.model.GameModel;
-import pdc.assignment.gui.view.GameView;
+import pdc.assignment.gui.model.MenuModel;
+import pdc.assignment.gui.view.MenuView;
 
 
 /**
@@ -21,12 +21,12 @@ import pdc.assignment.gui.view.GameView;
  *
  * @author wease
  */
-public class GameController implements ActionListener{
+public class MenuController implements ActionListener{
     
-    GameModel menuModel;
-    GameView menuView;
+    MenuModel menuModel;
+    MenuView menuView;
     
-    public GameController(GameModel menuModel, GameView menuView) {
+    public MenuController(MenuModel menuModel, MenuView menuView) {
         this.menuModel = menuModel;
         this.menuView = menuView;
     }
@@ -36,9 +36,17 @@ public class GameController implements ActionListener{
         Object source = e.getSource();
         if (source == menuView.getNewGameButton()){
             System.out.println("New game button has been pressed.");
-            menuView.showNewGameField();
+            menuView.showNewGamePanel();
         }
-        if (source == menuView.getExitButton()) {
+        else if (source == menuView.getNewGameConfirmButton()) {
+            menuModel.setPlayerName(menuView.getNewGameNameTextField());
+            System.out.println(menuModel.getPlayerName());
+        }        
+        else if (source == menuView.getNewGameCancelButton()) {
+            menuView.showButtonPanel();
+            System.out.println("New game cancel button has been pressed.");
+        }
+        else if (source == menuView.getExitButton()) {
             System.out.println("Exit button has been pressed.");
             System.exit(0);
         }
