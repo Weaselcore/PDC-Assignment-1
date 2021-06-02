@@ -12,3 +12,9 @@ os.arch=amd64
 os.version=10.0
 derby.system.home=C:\Users\wease\Documents\GitHub\PDC-Assignment-1\src\pdc\assignment\saves
 Database Class Loader started - derby.database.classpath=''
+----------------------------------------------------------------
+Thu Jun 03 01:06:57 NZST 2021: Shutting down Derby engine
+----------------------------------------------------------------
+Thu Jun 03 01:06:57 NZST 2021:
+Shutting down instance a816c00e-0179-cb25-30cf-ffff9c7298b4 on database directory C:\Users\wease\Documents\GitHub\PDC-Assignment-1\src\pdc\assignment\saves\gamesave with class loader sun.misc.Launcher$AppClassLoader@1d44bcfa 
+----------------------------------------------------------------

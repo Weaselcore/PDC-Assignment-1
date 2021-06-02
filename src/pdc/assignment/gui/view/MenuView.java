@@ -15,7 +15,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import pdc.assignment.gui.component.RuleViewer;
 import pdc.assignment.gui.controller.MenuController;
+import pdc.assignment.gui.model.MenuModel;
 
 /**
  *
@@ -100,8 +102,10 @@ public final class MenuView extends Observable {
         this.deleteSavePanel = new JPanel();
         
         // Menu Image setup.
-        MenuViewImage menuImage = new MenuViewImage();
-        upperPanel.add(menuImage);
+        RuleViewer ruleViewer = new RuleViewer();
+        upperPanel.add(ruleViewer);
+        //MenuViewImage menuImage = new MenuViewImage();
+        //upperPanel.add(menuImage);
         
         // Adding panel to the frame.
         mainFrame.add(upperPanel, BorderLayout.NORTH);
@@ -139,15 +143,8 @@ public final class MenuView extends Observable {
         getNewGameCancelButton().addActionListener(menuController);
     }
     
-    // Should implement some sort of error checking.
     public String getNewGameNameTextField() {
-        String text = null;
-        if (!this.newGameTextField.getText().isEmpty()) {
-            text = newGameTextField.getText();
-        } else {
-            text = "Bob";
-        }
-        return text;
+        return newGameTextField.getText();
     }
     
     // These are all the button getters for registration.
