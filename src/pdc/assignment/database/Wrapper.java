@@ -5,8 +5,10 @@
  */
 package pdc.assignment.database;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.sql.Blob;
 import java.sql.Connection;
@@ -15,15 +17,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import javax.sql.rowset.serial.SerialBlob;
-import pdc.assignment.gameclasses.Level;
 
 /**
  *
@@ -158,10 +156,10 @@ public class Wrapper {
         
         //Prepare variables to be inserted.
         java.sql.Timestamp now = new java.sql.Timestamp(System.currentTimeMillis());
-        
         String playerName = (String) level.get("name");
         Blob blobOject = new SerialBlob(byteStream.toByteArray());        
-                Wrapper.connect();
+        
+        Wrapper.connect();
         String statement = "INSERT INTO PLAYERDATA(TIMESTAMP, NAME, PLAYERDATA) VALUES (?, ?, ?)";
         PreparedStatement prepStatement = Wrapper.dbConnection.prepareStatement(statement, PreparedStatement.RETURN_GENERATED_KEYS);
         //Setting values using the variables prepared.
@@ -172,6 +170,28 @@ public class Wrapper {
         prepStatement.execute();
         
         Wrapper.close();
+    }
+    
+    public static HashMap loadGame(int id) throws SQLException, IOException, ClassNotFoundException {
+        
+        // Retrieve result set from the id.
+        Wrapper.connect();
+        String statement = "SELECT PLAYERDATA FROM PLAYERDATA WHERE ID=?";
+        PreparedStatement prepStatement = Wrapper.dbConnection.prepareStatement(statement);
+        prepStatement.setInt(1, id);
+        ResultSet result = prepStatement.executeQuery();
+        HashMap playerDataHashMap = null;
+        
+        // executeQuery places the cursor before the data.
+        if (result.next()){
+            Blob playerDataBlob = result.getBlob(1);
+            byte[] byteArray = playerDataBlob.getBytes(1, (int) playerDataBlob.length());
+            ByteArrayInputStream in = new ByteArrayInputStream(byteArray);
+            ObjectInputStream is = new ObjectInputStream(in);
+            playerDataHashMap = (HashMap) is.readObject();
+        }
+        
+        return playerDataHashMap;
     }
     
 }

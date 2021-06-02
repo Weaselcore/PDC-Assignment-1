@@ -6,6 +6,8 @@
 package pdc.assignment.gameclasses;
 
 import java.io.File;
+import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.Map;
 import pdc.assignment.entities.EntityFactory;
 import pdc.assignment.entities.Entity;
@@ -37,6 +39,15 @@ public final class GameSession {
     public GameSession(File file) throws Exception {
         this.gameData = new GameData();
         Map loadData = Deserialiser.readSave(file);
+        // Create player passing old data.
+        this.player = EntityFactory.createOldEntity("old player", loadData, this.gameData);
+        // Passes in the old level value from save.
+        this.level = new Level(this.gameData, this.player, maxLevel, (int) loadData.get("level"));
+        this.gameSessionLoop();
+    }
+
+    public GameSession(HashMap loadData) throws SQLException, Exception {
+        this.gameData = new GameData();
         // Create player passing old data.
         this.player = EntityFactory.createOldEntity("old player", loadData, this.gameData);
         // Passes in the old level value from save.

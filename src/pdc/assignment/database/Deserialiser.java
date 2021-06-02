@@ -24,12 +24,5 @@ public class Deserialiser {
     public static Map readSave(File file) throws JsonGenerationException, JsonMappingException, IOException{
         HashMap<String, Object> map = new ObjectMapper().readValue(file, HashMap.class);
         return map;
-    }
-    
-    public static HashMap jsonDataToHashmap(String string) throws JsonGenerationException, JsonMappingException, IOException{
-        HashMap<String, Object> map = new ObjectMapper().readValue(new File(string), HashMap.class);
-        System.out.println("Data loaded from " + string);
-        return map;
-    } 
-    
+    }    
 }

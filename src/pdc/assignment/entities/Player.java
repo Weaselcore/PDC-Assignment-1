@@ -55,8 +55,8 @@ public final class Player extends AbstractEntity{
         this.setMaxSuperAttackLevel(5);
 
         // Set potions
-        if (!((ArrayList) loadData.get("potions")).isEmpty()) {
-            ((ArrayList) loadData.get("potions")).forEach(potionString -> {
+        if (!((LinkedList) loadData.get("potions")).isEmpty()) {
+            ((LinkedList) loadData.get("potions")).forEach(potionString -> {
                 Potion potion;
                 try {
                     potion = (Potion) ItemFactory.createItem("potion", (String) potionString, gameData);

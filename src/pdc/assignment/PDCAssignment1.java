@@ -7,8 +7,10 @@ package pdc.assignment;
 
 import pdc.assignment.gameclasses.GameSession;
 import java.io.File;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Scanner;
+import pdc.assignment.database.Wrapper;
 import pdc.assignment.gui.controller.GameController;
 import pdc.assignment.gui.model.GameModel;
 import pdc.assignment.gui.view.GameView;
@@ -53,13 +55,16 @@ public class PDCAssignment1 {
                 GameSession gameSession = new GameSession();
                 break;
             } else if ("2".equals(result)) {
+                
+                HashMap playerData = Wrapper.loadGame(4);
+                GameSession gameSession = new GameSession(playerData);
 
-                File fileResult = getSaveFile(saveFolder);
-                if (null != fileResult) {
-                    GameSession gameSession = new GameSession(fileResult);
-                } else {
-                    System.out.println("Please input a valid file number.");
-                }
+//                File fileResult = getSaveFile(saveFolder);
+//                if (null != fileResult) {
+//                    GameSession gameSession = new GameSession(fileResult);
+//                } else {
+//                    System.out.println("Please input a valid file number.");
+//                }
             } else if ("3".equals(result)) {
                 System.out.println(getRules());
             } else if ("4".equals(result)) {
