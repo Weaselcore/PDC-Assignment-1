@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pdc.assignment.gui.component;
+package pdc.assignment.gui.components.menucomponent;
 
 import java.awt.Dimension;
 import java.awt.GridLayout;

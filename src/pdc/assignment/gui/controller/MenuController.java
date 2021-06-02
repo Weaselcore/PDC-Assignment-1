@@ -34,19 +34,20 @@ public class MenuController implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e){
         Object source = e.getSource();
-        if (source == menuView.getNewGameButton()){
+        // Lower panel buttons events.
+        if (source == menuView.lowerPanel.getNewGameButton()){
             System.out.println("New game button has been pressed.");
             menuView.showNewGamePanel();
         }
-        else if (source == menuView.getNewGameConfirmButton()) {
+        else if (source == menuView.lowerPanel.getNewGameConfirmButton()) {
             menuModel.setPlayerName(menuView.getNewGameNameTextField());
             System.out.println(menuModel.getPlayerName());
         }        
-        else if (source == menuView.getNewGameCancelButton()) {
+        else if (source == menuView.lowerPanel.getNewGameCancelButton()) {
             menuView.showButtonPanel();
             System.out.println("New game cancel button has been pressed.");
         }
-        else if (source == menuView.getExitButton()) {
+        else if (source == menuView.lowerPanel.getExitButton()) {
             System.out.println("Exit button has been pressed.");
             System.exit(0);
         }
