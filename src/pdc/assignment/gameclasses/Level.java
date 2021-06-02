@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Scanner;
 import pdc.assignment.entities.Enemy;
 import pdc.assignment.loot.LootTableGenerator;
@@ -18,7 +20,7 @@ import pdc.assignment.entities.Player;
 import pdc.assignment.items.Item;
 import pdc.assignment.items.Potion;
 import pdc.assignment.database.GameData;
-import pdc.assignment.database.Serialiser;
+import pdc.assignment.database.Wrapper;
 
 /**
  *
@@ -172,7 +174,7 @@ public final class Level implements Serializable{
                 }
             }
             else if ("3".equals(chosenOption)) {
-                Serialiser.saveToFile(this);
+                Wrapper.saveGame(this.saveToHashMap());
                 System.out.println("Your game has been saved to " + this.player.getName() + ".json");
                 System.exit(0);                
             }
@@ -230,6 +232,52 @@ public final class Level implements Serializable{
 
     public Entity getPlayer() {
         return this.player;
+    }
+    
+    public HashMap saveToHashMap() {
+        
+        HashMap map = new HashMap(); 
+        Player playerCasted = (Player) this.player;
+        
+        // Player name
+        String name = player.getName();
+        map.put("name", name);
+        // Health
+        int health = (int) playerCasted.getCurrentHealth();
+        map.put("health", health);
+        // Super Attack
+        int superAttack = playerCasted.getCurrentSuperAttackLevel();
+        map.put("superAttack", superAttack);
+        // Level
+        int currentLevelToSave = this.getCurrentLevel();
+        map.put("level", currentLevelToSave);
+        // Weapon
+        if (playerCasted.getCurrentWeapon() != null) {         
+            String weapon = playerCasted.getCurrentWeapon().getName();
+            map.put("weapon", weapon);
+        } else {
+            map.put("weapon", null);
+        }
+        // Armour
+        if (playerCasted.getCurrentArmour() != null) {         
+            String armour = playerCasted.getCurrentArmour().getName();
+            map.put("armour", armour);
+        } else {
+            map.put("armour", null);
+        }
+        // Potions
+        if (!playerCasted.getInventory().isEmpty()) {
+            LinkedList<String> potionList = new LinkedList();
+
+            playerCasted.getInventory().forEach(potion -> {
+                potionList.add(potion.getName());
+            });
+        
+            map.put("potions", potionList);
+        } else {
+            map.put("potions", null);
+        }
+        return map;
     }
     
     

@@ -150,9 +150,7 @@ public class Wrapper {
     }
     
     // The GameData is converted from HashMap into an db entry.
-    public static void saveGame(Level level) throws IOException, SQLException {
-        
-        Wrapper.connect();
+    public static void saveGame(HashMap level) throws IOException, SQLException {
         
         ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
         ObjectOutputStream objStream = new ObjectOutputStream(byteStream);
@@ -160,9 +158,10 @@ public class Wrapper {
         
         //Prepare variables to be inserted.
         java.sql.Timestamp now = new java.sql.Timestamp(System.currentTimeMillis());
-        String playerName = level.getPlayer().getName();
-        Blob blobOject = new SerialBlob(byteStream.toByteArray());        
         
+        String playerName = (String) level.get("name");
+        Blob blobOject = new SerialBlob(byteStream.toByteArray());        
+                Wrapper.connect();
         String statement = "INSERT INTO PLAYERDATA(TIMESTAMP, NAME, PLAYERDATA) VALUES (?, ?, ?)";
         PreparedStatement prepStatement = Wrapper.dbConnection.prepareStatement(statement, PreparedStatement.RETURN_GENERATED_KEYS);
         //Setting values using the variables prepared.
