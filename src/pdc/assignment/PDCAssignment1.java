@@ -39,6 +39,8 @@ public class PDCAssignment1 {
         MenuController menuController = new MenuController(menuModel, menuView);
         menuView.addController(menuController);
         
+        menuModel.getListOfSaves();
+        
         while (isRunning) {
 
             System.out.println("\nKINGDOM FIGHTERS\n");

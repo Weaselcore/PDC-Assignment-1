@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import javax.sql.rowset.serial.SerialBlob;
 
 /**
@@ -192,6 +193,19 @@ public class Wrapper {
         }
         
         return playerDataHashMap;
+    }
+    
+    public static LinkedHashMap retrieveSaveList() throws SQLException {
+        Wrapper.connect();
+        LinkedHashMap linkedHashMapOfSaves = new LinkedHashMap();
+        String statement = "SELECT * FROM PLAYERDATA";
+        PreparedStatement prepStatement = Wrapper.dbConnection.prepareStatement(statement);
+        ResultSet result = prepStatement.executeQuery();
+        while (result.next()) {
+            linkedHashMapOfSaves.put(result.getString("ID"), result.getString("TIMESTAMP") + " " + result.getString("NAME"));
+        }
+        Wrapper.close();
+        return linkedHashMapOfSaves;
     }
     
 }

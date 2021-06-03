@@ -11,9 +11,9 @@ import java.util.Observable;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import pdc.assignment.gui.components.menucomponent.LowerPanel;
 import pdc.assignment.gui.components.menucomponent.MenuViewImage;
+import pdc.assignment.gui.components.menucomponent.RightPanel;
 import pdc.assignment.gui.controller.MenuController;
 
 /**
@@ -25,6 +25,7 @@ public final class MenuView extends Observable {
     public JFrame mainFrame;
     public JPanel upperPanel;
     public LowerPanel lowerPanel;
+    public RightPanel rightPanel;
 
     private JPanel jPanelToShow;
     
@@ -46,6 +47,8 @@ public final class MenuView extends Observable {
         mainFrame.add(upperPanel, BorderLayout.NORTH);
         lowerPanel = new LowerPanel();
         mainFrame.add(lowerPanel, BorderLayout.SOUTH);
+        rightPanel = new RightPanel();
+        mainFrame.add(rightPanel, BorderLayout.EAST);
         // Setting default panel.
         jPanelToShow = this.lowerPanel.getButtonPanel();
         this.showButtonPanel();

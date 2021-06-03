@@ -42,13 +42,13 @@ public final class LowerPanel extends JPanel{
     
     private final JTextField newGameTextField;
     
-    private ArrayList buttonList = new ArrayList();
+    private final ArrayList buttonList = new ArrayList();
     
     public LowerPanel() {
         // This is the lower panel that will hold all the other panels as cards.
         this.cardLayout = new CardLayout();
         this.setLayout(cardLayout);
-        this.setPreferredSize(new Dimension(250,150));
+
         
         // This is the default panel.
         this.buttonPanel = new JPanel();
@@ -70,7 +70,7 @@ public final class LowerPanel extends JPanel{
         // Adding button panel to the card manager panel.
         this.add(BUTTON_PANEL, buttonPanel);
         
-        //Setup for alternate panels on the starting JFrame.
+        //Setup for new game panel.
         this.newGamePanel = new JPanel();
         this.newGamePanel.add(new JLabel("Adventurer's Name:"));
         this.newGameTextField = new JTextField("", 20);
@@ -81,6 +81,11 @@ public final class LowerPanel extends JPanel{
         this.newGamePanel.add(this.newGameCancelButton);
         this.add(NEW_GAME_PANEL, newGamePanel);
         
+        this.loadGamePanel = new JPanel();
+        this.ruleGamePanel = new JPanel();
+        this.deleteSavePanel = new JPanel();
+        
+        // Add all buttons to an arraylist to make it easier to register in view.
         this.buttonList.add(this.newGameButton);
         this.buttonList.add(this.loadGameButton);
         this.buttonList.add(this.rulesButton);
@@ -88,10 +93,6 @@ public final class LowerPanel extends JPanel{
         this.buttonList.add(this.exitButton);
         this.buttonList.add(this.newGameConfirmButton);
         this.buttonList.add(this.newGameCancelButton);
-        
-        this.loadGamePanel = new JPanel();
-        this.ruleGamePanel = new JPanel();
-        this.deleteSavePanel = new JPanel();
     }
     
         /**

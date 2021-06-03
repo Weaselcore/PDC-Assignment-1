@@ -18,7 +18,7 @@ import javax.swing.JComponent;
 public class MenuViewImage extends JComponent {
     
     private Image image;
-    private final int compWidth = 500;
+    private final int compWidth = 700;
     private final int compHeight = 500;
 
     @Override

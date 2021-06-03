@@ -7,6 +7,7 @@ package pdc.assignment.gui.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import pdc.assignment.gui.model.MenuModel;
 import pdc.assignment.gui.view.MenuView;
 
@@ -26,8 +27,9 @@ public class MenuController implements ActionListener{
     MenuModel menuModel;
     MenuView menuView;
     
-    public MenuController(MenuModel menuModel, MenuView menuView) {
+    public MenuController(MenuModel menuModel, MenuView menuView) throws SQLException {
         this.menuModel = menuModel;
+        this.menuModel.getListOfSaves();
         this.menuView = menuView;
     }
     
