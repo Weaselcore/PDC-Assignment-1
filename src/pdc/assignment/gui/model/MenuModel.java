@@ -22,7 +22,7 @@ public class MenuModel extends Observable{
     private String playerName = null;
     private LinkedHashMap saveList;
 
-    public void getListOfSaves() throws SQLException {
+    public void fetchListOfSaves() throws SQLException {
         LinkedHashMap linkedHashMapOfSaves = Wrapper.retrieveSaveList();
         this.saveList = linkedHashMapOfSaves;
         Set<String> keys = linkedHashMapOfSaves.keySet();
@@ -43,14 +43,16 @@ public class MenuModel extends Observable{
         }
     }
     
-//    public GameSession getGameSessionFromSave() {
-//        this.gameSession = new GameSession("Something");
-//        return gameSession
-//    };
-    
     public GameSession newGameSession() throws Exception {
         this.gameSession = new GameSession();
         return gameSession;
     };
-       
+
+    /**
+     * @return the saveList
+     */
+    public LinkedHashMap getSaveList() {
+        return saveList;
+    }
+
 }

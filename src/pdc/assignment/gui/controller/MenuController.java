@@ -29,8 +29,9 @@ public class MenuController implements ActionListener{
     
     public MenuController(MenuModel menuModel, MenuView menuView) throws SQLException {
         this.menuModel = menuModel;
-        this.menuModel.getListOfSaves();
+        this.menuModel.fetchListOfSaves();
         this.menuView = menuView;
+        this.menuView.rightPanel.populateSaveList(menuModel.getSaveList());
     }
     
     @Override
@@ -48,6 +49,10 @@ public class MenuController implements ActionListener{
         else if (source == menuView.lowerPanel.getNewGameCancelButton()) {
             menuView.showButtonPanel();
             System.out.println("New game cancel button has been pressed.");
+        }
+        else if (source == menuView.lowerPanel.getRulesButton()) {
+            menuView.showRulesPanel();
+            System.out.println("New rules button has been pressed.");
         }
         else if (source == menuView.lowerPanel.getExitButton()) {
             System.out.println("Exit button has been pressed.");

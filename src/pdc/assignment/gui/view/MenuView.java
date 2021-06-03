@@ -12,8 +12,9 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import pdc.assignment.gui.components.menucomponent.LowerPanel;
-import pdc.assignment.gui.components.menucomponent.MenuViewImage;
+import pdc.assignment.gui.components.menucomponent.MenuImage;
 import pdc.assignment.gui.components.menucomponent.RightPanel;
+import pdc.assignment.gui.components.menucomponent.UpperPanel;
 import pdc.assignment.gui.controller.MenuController;
 
 /**
@@ -23,41 +24,38 @@ import pdc.assignment.gui.controller.MenuController;
 public final class MenuView extends Observable {
     
     public JFrame mainFrame;
-    public JPanel upperPanel;
+    public UpperPanel upperPanel;
     public LowerPanel lowerPanel;
     public RightPanel rightPanel;
 
     private JPanel bottomJPanelToShow;
     private JPanel rightJPanelToShow;
+    private JPanel upperJPanelToShow;
+    
+    public MenuImage menuImage;
     
     public MenuView(){
         
         this.mainFrame = new JFrame("Kingdom Fighters - Main Menu");
         this.mainFrame.setDefaultCloseOperation(3);
-        
-        // Setup for the panels that are in the main menu screen.
-        this.upperPanel = new JPanel();
-        
-        // Menu Image setup.
-        //RuleViewer ruleViewer = new RuleViewer();
-        //upperPanel.add(ruleViewer);
-        MenuViewImage menuImage = new MenuViewImage();
-        upperPanel.add(menuImage);
-        
+
         // Adding panel to the frame.
-        mainFrame.add(upperPanel, BorderLayout.NORTH);
-        lowerPanel = new LowerPanel();
-        mainFrame.add(lowerPanel, BorderLayout.SOUTH);
-        rightPanel = new RightPanel();
-        mainFrame.add(rightPanel, BorderLayout.EAST);
+        this.upperPanel = new UpperPanel();
+        this.mainFrame.add(upperPanel, BorderLayout.CENTER);
+        this.lowerPanel = new LowerPanel();
+        this.mainFrame.add(lowerPanel, BorderLayout.SOUTH);
+        this.rightPanel = new RightPanel();
+        this. mainFrame.add(rightPanel, BorderLayout.EAST);
         // Setting default panel.
-        bottomJPanelToShow = this.lowerPanel.getButtonPanel();
-        rightJPanelToShow = this.rightPanel.getSaveListPanel();
+        this.upperJPanelToShow = this.upperPanel.getMenuImage();
+        this.bottomJPanelToShow = this.lowerPanel.getButtonPanel();
+        this.rightJPanelToShow = this.rightPanel.getSaveListPanel();
         this.showButtonPanel();
+        this.showMenuImagePanel();
         
-        mainFrame.setSize(500, 700);
-        mainFrame.pack();
-        mainFrame.setVisible(true);
+        this.mainFrame.setSize(700, 900);
+        this.mainFrame.pack();
+        this.mainFrame.setVisible(true);
     }
     
     public void showButtonPanel() {
@@ -73,11 +71,26 @@ public final class MenuView extends Observable {
             bottomJPanelToShow = lowerPanel.getNewGamePanel();
         }
     }
+    
+    public void showRulesPanel() {
+        if (upperJPanelToShow != this.upperPanel.getRulesViewer()) {
+            upperPanel.cardLayout.show(upperPanel, upperPanel.RULES_VIEWER);
+            upperJPanelToShow = upperPanel.getRulesViewer();
+        }
+    }
+    
+    public void showMenuImagePanel() {
+        if (upperJPanelToShow != this.upperPanel.getMenuImage()) {
+            upperPanel.cardLayout.show(upperPanel, upperPanel.MENU_IMAGE);
+            upperJPanelToShow = upperPanel.getMenuImage();
+        }
+    }
   
     public void addController(MenuController menuController) {
         
         ArrayList<JButton> allButtonsArray = new ArrayList();
         allButtonsArray.addAll(lowerPanel.getButtonList());
+        allButtonsArray.addAll(rightPanel.getButtonList());
         
         allButtonsArray.forEach(button -> {
             button.addActionListener(menuController);
@@ -87,4 +100,5 @@ public final class MenuView extends Observable {
     public String getNewGameNameTextField() {
         return this.lowerPanel.getNewGameTextField().getText();
     }
+
 }

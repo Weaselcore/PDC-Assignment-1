@@ -6,7 +6,6 @@
 package pdc.assignment.gui.components.menucomponent;
 
 import java.awt.CardLayout;
-import java.awt.Dimension;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -25,8 +24,6 @@ public final class LowerPanel extends JPanel{
     private final JPanel buttonPanel;
     public final String NEW_GAME_PANEL = "new game panel";
     private final JPanel newGamePanel;
-    public final String RULES_PANEL = "rules panel";
-    private final JPanel ruleGamePanel;
     
     private final JButton newGameButton;
     private final JButton rulesButton;
@@ -69,8 +66,6 @@ public final class LowerPanel extends JPanel{
         this.newGameCancelButton = new JButton("Cancel");
         this.newGamePanel.add(this.newGameCancelButton);
         this.add(NEW_GAME_PANEL, newGamePanel);
-        
-        this.ruleGamePanel = new JPanel();
         
         // Add all buttons to an arraylist to make it easier to register in view.
         this.buttonList.add(this.newGameButton);
@@ -127,13 +122,6 @@ public final class LowerPanel extends JPanel{
      */
     public JPanel getNewGamePanel() {
         return newGamePanel;
-    }
-
-    /**
-     * @return the ruleGamePanel
-     */
-    public JPanel getRuleGamePanel() {
-        return ruleGamePanel;
     }
 
     /**

@@ -5,14 +5,17 @@
  */
 package pdc.assignment.gui.components.menucomponent;
 
-import java.awt.BorderLayout;
 import java.awt.CardLayout;
-import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import javax.swing.DefaultListCellRenderer;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.ListSelectionModel;
 
 /**
  *
@@ -27,6 +30,9 @@ public final class RightPanel extends JPanel{
     public final String SAVES_LIST_PANEL = "save list panel";
     private final JPanel saveListPanel;
     private final JPanel lowerSaveListPanel;
+    
+    private DefaultListModel<String> saveListToAdd = null;
+    private JList savesJList = new JList();
     
     private final JButton loadButton;
     private final JButton deleteButton;
@@ -48,17 +54,22 @@ public final class RightPanel extends JPanel{
         this.saveListPanel = new JPanel();
         this.saveListPanel.setLayout(new GridLayout(2, 1));
         this.lowerSaveListPanel = new JPanel();
+
+        this.saveListToAdd = new DefaultListModel();
+        
         this.historyPanel.add(this.historyScrollPane);
-        this.saveListPanel.add(this.saveListScrollPane);
         this.saveListPanel.add(this.lowerSaveListPanel);
         
         this.deleteButton = new JButton("DELETE"); 
         this.loadButton = new JButton("LOAD");
         
+        this.lowerSaveListPanel.add(loadButton);       
         this.lowerSaveListPanel.add(deleteButton);
-        this.lowerSaveListPanel.add(loadButton);
         
         this.add(SAVES_LIST_PANEL, saveListPanel);
+        
+        this.buttonList.add(this.deleteButton);
+        this.buttonList.add(this.loadButton);
     }
 
     /**
@@ -82,5 +93,24 @@ public final class RightPanel extends JPanel{
         return saveListPanel;
     }
     
+    public void populateSaveList(LinkedHashMap saveList) {
+        this.saveListToAdd = new DefaultListModel();
+        for (Object key : saveList.keySet()) {
+            this.saveListToAdd.addElement(key + " " + saveList.get(key));          
+        }
+        
+        this.savesJList.setModel(this.saveListToAdd);
+        this.savesJList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        this.savesJList.setCellRenderer(new DefaultListCellRenderer());
+        this.savesJList.setLayout(null);
+        this.savesJList.setVisibleRowCount(1);
+        this.savesJList.setVisible(true);
+        this.saveListScrollPane.add(this.savesJList);
+        this.saveListScrollPane.setViewportView(savesJList);
+        this.saveListPanel.add(this.saveListScrollPane);
+        this.revalidate();
+        this.repaint();
+
+    }
     
 }
