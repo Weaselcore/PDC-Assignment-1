@@ -29,5 +29,5 @@ public class PDCAssignment1 {
         menuView.addController(menuController);
         
         menuModel.fetchListOfSaves();
-
+    }
 }

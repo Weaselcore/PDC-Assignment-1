@@ -32,7 +32,7 @@ public final class RightPanel extends JPanel{
     private final JPanel lowerSaveListPanel;
     
     private DefaultListModel<String> saveListToAdd = null;
-    private JList savesJList = new JList();
+    private final JList savesJList = new JList();
     
     private final JButton loadButton;
     private final JButton deleteButton;
@@ -95,9 +95,9 @@ public final class RightPanel extends JPanel{
     
     public void populateSaveList(LinkedHashMap saveList) {
         this.saveListToAdd = new DefaultListModel();
-        for (Object key : saveList.keySet()) {
-            this.saveListToAdd.addElement(key + " " + saveList.get(key));          
-        }
+        saveList.keySet().forEach(key -> {
+            this.saveListToAdd.addElement(key + " " + saveList.get(key));
+        });
         
         this.savesJList.setModel(this.saveListToAdd);
         this.savesJList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
