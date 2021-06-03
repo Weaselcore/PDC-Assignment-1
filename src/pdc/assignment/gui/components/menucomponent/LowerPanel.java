@@ -25,17 +25,11 @@ public final class LowerPanel extends JPanel{
     private final JPanel buttonPanel;
     public final String NEW_GAME_PANEL = "new game panel";
     private final JPanel newGamePanel;
-    public final String LOAD_GAME_PANEL = "load game panel";
-    private final JPanel loadGamePanel;
     public final String RULES_PANEL = "rules panel";
     private final JPanel ruleGamePanel;
-    public final String DELETE_SAVE_PANEL = "delete save panel";
-    private JPanel deleteSavePanel;
     
     private final JButton newGameButton;
-    private final JButton loadGameButton;
     private final JButton rulesButton;
-    private final JButton deleteSavesButton;
     private final JButton exitButton;
     private final JButton newGameConfirmButton;
     private final JButton newGameCancelButton;
@@ -48,23 +42,18 @@ public final class LowerPanel extends JPanel{
         // This is the lower panel that will hold all the other panels as cards.
         this.cardLayout = new CardLayout();
         this.setLayout(cardLayout);
-
         
         // This is the default panel.
         this.buttonPanel = new JPanel();
 
         // Button initialisation.
         this.newGameButton = new JButton("NEW GAME");
-        this.loadGameButton = new JButton("LOAD GAME");
         this.rulesButton = new JButton("RULES");
-        this.deleteSavesButton = new JButton("DELETE SAVE");
         this.exitButton = new JButton("EXIT");
         
         // Adding buttons to the buttons panel.
         this.buttonPanel.add(newGameButton);
-        this.buttonPanel.add(loadGameButton);
         this.buttonPanel.add(rulesButton);
-        this.buttonPanel.add(deleteSavesButton);
         this.buttonPanel.add(exitButton);
         
         // Adding button panel to the card manager panel.
@@ -81,21 +70,17 @@ public final class LowerPanel extends JPanel{
         this.newGamePanel.add(this.newGameCancelButton);
         this.add(NEW_GAME_PANEL, newGamePanel);
         
-        this.loadGamePanel = new JPanel();
         this.ruleGamePanel = new JPanel();
-        this.deleteSavePanel = new JPanel();
         
         // Add all buttons to an arraylist to make it easier to register in view.
         this.buttonList.add(this.newGameButton);
-        this.buttonList.add(this.loadGameButton);
         this.buttonList.add(this.rulesButton);
-        this.buttonList.add(this.deleteSavesButton);
         this.buttonList.add(this.exitButton);
         this.buttonList.add(this.newGameConfirmButton);
         this.buttonList.add(this.newGameCancelButton);
     }
     
-        /**
+    /**
      * @return the newGameButton
      */
     public JButton getNewGameButton() {
@@ -103,24 +88,10 @@ public final class LowerPanel extends JPanel{
     }
 
     /**
-     * @return the loadGameButton
-     */
-    public JButton getLoadGameButton() {
-        return loadGameButton;
-    }
-
-    /**
      * @return the rulesButton
      */
     public JButton getRulesButton() {
         return rulesButton;
-    }
-
-    /**
-     * @return the deleteSavesButton
-     */
-    public JButton getDeleteSavesButton() {
-        return deleteSavesButton;
     }
 
     /**
@@ -159,24 +130,10 @@ public final class LowerPanel extends JPanel{
     }
 
     /**
-     * @return the loadGamePanel
-     */
-    public JPanel getLoadGamePanel() {
-        return loadGamePanel;
-    }
-
-    /**
      * @return the ruleGamePanel
      */
     public JPanel getRuleGamePanel() {
         return ruleGamePanel;
-    }
-
-    /**
-     * @return the deleteSavePanel
-     */
-    public JPanel getDeleteSavePanel() {
-        return deleteSavePanel;
     }
 
     /**

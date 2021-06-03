@@ -27,7 +27,8 @@ public final class MenuView extends Observable {
     public LowerPanel lowerPanel;
     public RightPanel rightPanel;
 
-    private JPanel jPanelToShow;
+    private JPanel bottomJPanelToShow;
+    private JPanel rightJPanelToShow;
     
     public MenuView(){
         
@@ -50,7 +51,8 @@ public final class MenuView extends Observable {
         rightPanel = new RightPanel();
         mainFrame.add(rightPanel, BorderLayout.EAST);
         // Setting default panel.
-        jPanelToShow = this.lowerPanel.getButtonPanel();
+        bottomJPanelToShow = this.lowerPanel.getButtonPanel();
+        rightJPanelToShow = this.rightPanel.getSaveListPanel();
         this.showButtonPanel();
         
         mainFrame.setSize(500, 700);
@@ -59,16 +61,16 @@ public final class MenuView extends Observable {
     }
     
     public void showButtonPanel() {
-        if (jPanelToShow != this.lowerPanel.getButtonPanel()) {
+        if (bottomJPanelToShow != this.lowerPanel.getButtonPanel()) {
             lowerPanel.cardLayout.show(lowerPanel, lowerPanel.BUTTON_PANEL);
-            jPanelToShow = lowerPanel.getButtonPanel();
+            bottomJPanelToShow = lowerPanel.getButtonPanel();
         }
     }
     
     public void showNewGamePanel() {
-        if (jPanelToShow != this.lowerPanel.getNewGamePanel()) {
+        if (bottomJPanelToShow != this.lowerPanel.getNewGamePanel()) {
             lowerPanel.cardLayout.show(lowerPanel, lowerPanel.NEW_GAME_PANEL);
-            jPanelToShow = lowerPanel.getNewGamePanel();
+            bottomJPanelToShow = lowerPanel.getNewGamePanel();
         }
     }
   

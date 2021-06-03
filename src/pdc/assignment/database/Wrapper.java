@@ -169,7 +169,6 @@ public class Wrapper {
         prepStatement.setBlob(3, blobOject);
         prepStatement.getGeneratedKeys();
         prepStatement.execute();
-        
         Wrapper.close();
     }
     
