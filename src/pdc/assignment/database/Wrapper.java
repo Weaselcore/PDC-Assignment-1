@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.LinkedList;
 import javax.sql.rowset.serial.SerialBlob;
 
 /**
@@ -192,6 +191,15 @@ public class Wrapper {
         }
         
         return playerDataHashMap;
+    }
+    
+    public static void deleteGame(int id) throws SQLException {
+        Wrapper.connect();
+        String statement = "DELETE FROM PLAYERDATA WHERE ID = ?";
+        PreparedStatement prepStatement = Wrapper.dbConnection.prepareStatement(statement);
+        prepStatement.setInt(1, id);
+        ResultSet result = prepStatement.executeQuery();
+        Wrapper.close();
     }
     
     public static LinkedHashMap retrieveSaveList() throws SQLException {

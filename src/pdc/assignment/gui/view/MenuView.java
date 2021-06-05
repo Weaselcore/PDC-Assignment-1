@@ -21,7 +21,7 @@ import pdc.assignment.gui.controller.MenuController;
  *
  * @author ieuan
  */
-public final class MenuView extends Observable {
+public final class MenuView extends Observable{
     
     public JFrame mainFrame;
     public UpperPanel upperPanel;

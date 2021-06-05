@@ -58,5 +58,13 @@ public class MenuController implements ActionListener{
             System.out.println("Exit button has been pressed.");
             System.exit(0);
         }
+        else if (source == menuView.rightPanel.getLoadButton()) {
+            System.out.println("Load button has been pressed.");
+            // Wrapper database logic.
+        }
+        else if (source == menuView.rightPanel.getDeleteButton()) {
+            System.out.println("Delete button has been pressed.");
+            // Wrapper database logic.
+        }
     }
 }

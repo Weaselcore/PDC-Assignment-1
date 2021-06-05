@@ -112,5 +112,19 @@ public final class RightPanel extends JPanel{
         this.repaint();
 
     }
-    
+
+    /**
+     * @return the loadButton
+     */
+    public JButton getLoadButton() {
+        return loadButton;
+    }
+
+    /**
+     * @return the deleteButton
+     */
+    public JButton getDeleteButton() {
+        return deleteButton;
+    }
+
 }
