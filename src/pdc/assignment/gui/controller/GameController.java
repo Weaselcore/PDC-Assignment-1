@@ -18,63 +18,64 @@ import pdc.assignment.gui.view.GameView;
  */
 public class GameController implements ActionListener{
     
-    GameModel menuModel;
-    GameView menuView;
+    GameModel gameModel;
+    GameView gameView;
     
     public GameController(GameModel menuModel, GameView menuView) throws SQLException {
-        this.menuModel = menuModel;
-        this.menuModel.fetchListOfSaves();
-        this.menuView = menuView;
-        this.menuView.rightPanel.getSavesJList().populateSaveList(menuModel.getSaveList());
+        this.gameModel = menuModel;
+        this.gameModel.fetchListOfSaves();
+        this.gameView = menuView;
+        this.gameView.rightPanel.getSavesJList().populateSaveList(menuModel.getSaveList());
     }
     
     @Override
     public void actionPerformed(ActionEvent e){
         Object source = e.getSource();
         // Lower panel buttons events.
-        if (source == menuView.lowerPanel.getNewGameButton()){
+        if (source == gameView.lowerPanel.getNewGameButton()){
             System.out.println("New game button has been pressed.");
-            menuView.showNewGamePanel();
-            menuView.showMenuImagePanel();
+            gameView.showNewGamePanel();
+            gameView.showMenuImagePanel();
         }
-        else if (source == menuView.lowerPanel.getNewGameConfirmButton()) {
-            menuModel.setPlayerName(menuView.getNewGameNameTextField());
-            System.out.println(menuModel.getPlayerName());
+        else if (source == gameView.lowerPanel.getNewGameConfirmButton()) {
+            gameModel.setPlayerName(gameView.getNewGameNameTextField());
+            System.out.println(gameModel.getPlayerName());
             try {
-                menuModel.newGameSession();
+                gameModel.newGameSession();
             } catch (Exception ex) {
                 Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
             }
+            gameView.showGameButtonPanel();
         }        
-        else if (source == menuView.lowerPanel.getNewGameCancelButton()) {
-            menuView.showButtonPanel();
+        else if (source == gameView.lowerPanel.getNewGameCancelButton()) {
+            gameView.showButtonPanel();
             System.out.println("New game cancel button has been pressed.");
         }
-        else if (source == menuView.lowerPanel.getRulesButton()) {
-            menuView.showRulesPanel();
+        else if (source == gameView.lowerPanel.getRulesButton()) {
+            gameView.showRulesPanel();
             System.out.println("New rules button has been pressed.");
         }
-        else if (source == menuView.lowerPanel.getExitButton()) {
+        else if (source == gameView.lowerPanel.getExitButton()) {
             System.out.println("Exit button has been pressed.");
             System.exit(0);
         }
-        else if (source == menuView.rightPanel.getLoadButton()) {
+        else if (source == gameView.rightPanel.getLoadButton()) {
             System.out.println("Load button has been pressed.");
-            int indexLoad = menuView.rightPanel.getSavesJList().getSelectedOption();
+            int indexLoad = gameView.rightPanel.getSavesJList().getSelectedOption();
             if (indexLoad != -1) {
-                int id = menuModel.getSaveId(indexLoad);
+                int id = gameModel.getSaveId(indexLoad);
                 System.out.println(id);
             }
         }
-        else if (source == menuView.rightPanel.getDeleteButton()) {
+        else if (source == gameView.rightPanel.getDeleteButton()) {
             System.out.println("Delete button has been pressed.");
-            int indexDelete = menuView.rightPanel.getSavesJList().getSelectedOption();
+            int indexDelete = gameView.rightPanel.getSavesJList().getSelectedOption();
             if (indexDelete != -1) {
-                int id = menuModel.getSaveId(indexDelete);
+                int id = gameModel.getSaveId(indexDelete);
                 System.out.println(id);
             }
         }
-        else if (source == menuView.rightPanel.getSavesJList()) {
+        else if (source == gameView.rightPanel.getSavesJList()) {
             System.out.println("JList has been pressed.");
         }
     }

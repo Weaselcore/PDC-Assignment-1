@@ -6,7 +6,6 @@
 package pdc.assignment.gui.view;
 
 import java.awt.BorderLayout;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Observable;
 import javax.swing.JButton;
@@ -29,11 +28,12 @@ public final class GameView extends Observable{
     public LowerPanel lowerPanel;
     public RightPanel rightPanel;
 
-    private JPanel bottomJPanelToShow;
+    private JPanel lowerJPanelToShow;
     private JPanel rightJPanelToShow;
     private JPanel upperJPanelToShow;
     
     public MenuImage menuImage;
+
     
     public GameView(){
         
@@ -49,7 +49,7 @@ public final class GameView extends Observable{
         this. mainFrame.add(rightPanel, BorderLayout.EAST);
         // Setting default panel.
         this.upperJPanelToShow = this.upperPanel.getMenuImage();
-        this.bottomJPanelToShow = this.lowerPanel.getButtonPanel();
+        this.lowerJPanelToShow = this.lowerPanel.getButtonPanel();
         this.rightJPanelToShow = this.rightPanel.getSaveListPanel();
         this.showButtonPanel();
         this.showMenuImagePanel();
@@ -60,16 +60,16 @@ public final class GameView extends Observable{
     }
     
     public void showButtonPanel() {
-        if (getBottomJPanelToShow() != this.lowerPanel.getButtonPanel()) {
+        if (getLowerJPanelToShow() != this.lowerPanel.getButtonPanel()) {
             lowerPanel.cardLayout.show(lowerPanel, lowerPanel.BUTTON_PANEL);
-            bottomJPanelToShow = lowerPanel.getButtonPanel();
+            lowerJPanelToShow = lowerPanel.getButtonPanel();
         }
     }
     
     public void showNewGamePanel() {
-        if (getBottomJPanelToShow() != this.lowerPanel.getNewGamePanel()) {
+        if (getLowerJPanelToShow() != this.lowerPanel.getNewGamePanel()) {
             lowerPanel.cardLayout.show(lowerPanel, lowerPanel.NEW_GAME_PANEL);
-            bottomJPanelToShow = lowerPanel.getNewGamePanel();
+            lowerJPanelToShow = lowerPanel.getNewGamePanel();
         }
     }
     
@@ -84,6 +84,13 @@ public final class GameView extends Observable{
         if (getUpperJPanelToShow() != this.upperPanel.getMenuImage()) {
             upperPanel.cardLayout.show(upperPanel, upperPanel.MENU_IMAGE);
             upperJPanelToShow = upperPanel.getMenuImage();
+        }
+    }
+    
+    public void showGameButtonPanel() {
+        if (getLowerJPanelToShow() != this.lowerPanel.getGameButtonPanel()) {
+            lowerPanel.cardLayout.show(lowerPanel, lowerPanel.GAME_BUTTON_PANEL);
+            lowerJPanelToShow = lowerPanel.getGameButtonPanel();
         }
     }
   
@@ -103,10 +110,10 @@ public final class GameView extends Observable{
     }
 
     /**
-     * @return the bottomJPanelToShow
+     * @return the lowerJPanelToShow
      */
-    public JPanel getBottomJPanelToShow() {
-        return bottomJPanelToShow;
+    public JPanel getLowerJPanelToShow() {
+        return lowerJPanelToShow;
     }
 
     /**

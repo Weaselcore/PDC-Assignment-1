@@ -34,6 +34,7 @@ public final class Level implements Serializable{
     int maxLevel;
     GameData gameData;
     LootTableGenerator lootGenerator;
+    Entity currentEntityTurn;
     
     // If it's a new game.
     public Level(GameData gameData, Entity player, int maxLevel) throws Exception {
@@ -42,16 +43,17 @@ public final class Level implements Serializable{
         this.player = player;
         this.lootGenerator = new LootTableGenerator(this.gameData);
         this.maxLevel = maxLevel;
+        this.currentEntityTurn = player;
     }  
     
     // If loading from an old save.
-    public Level(GameData gameData, Entity player, int maxLevel, int currentLevel) throws Exception {
-        this.gameData = gameData;
-        this.currentLevel = currentLevel;
-        this.player = player;
-        this.lootGenerator = new LootTableGenerator(this.gameData);
-        this.maxLevel = maxLevel;
-    }  
+//    public Level(GameData gameData, Entity player, int maxLevel, int currentLevel) throws Exception {
+//        this.gameData = gameData;
+//        this.currentLevel = currentLevel;
+//        this.player = player;
+//        this.lootGenerator = new LootTableGenerator(this.gameData);
+//        this.maxLevel = maxLevel;
+//    }  
     
     /**
      * Creates a loops to handle the turns which is uses the Entity interface
@@ -109,85 +111,79 @@ public final class Level implements Serializable{
     
     // Level object is responsible for taking in player input.
     public boolean playerTurn(Entity currentEnemy) throws IOException, SQLException {
-        
-        Scanner inputScanner = new Scanner(System.in);
-
-        boolean chosen = false;
-        boolean isDead = false;
-
-        while (!chosen) {
-            Player currentPlayer = ((Player) this.player);
-            currentPlayer.displaySuperAttack();
-            
-            System.out.println(
-                "[#1. Attack] [#2. Use Potions] [#3. Save and Exit] [#4. Run Away]");
-            System.out.println("Option (#): ");
-
-            String chosenOption = inputScanner.nextLine();
-
-            if ("1".equals(chosenOption)) {
-                currentPlayer.attack(currentEnemy);
-                boolean targetDead = currentEnemy.isDead();
-                if (targetDead) {
-                    System.out.println("\n" + this.player.getName() + " has slain " + currentEnemy.getName() + "!\n");
-                    isDead = true;
-                }
-                else {
-                    isDead = false;
-                }
-                chosen = true;
-            }
-            else if ("2".equals(chosenOption)) {
-                if (!currentPlayer.getInventory().isEmpty()) {
-                    Integer count = 0;
-                    
-                    for (Potion item: currentPlayer.getInventory()) {
-                        System.out.println("Count: " + "[#" + (count + 1) + "] " + item);
-                        count += 1;
-                    }
-                    
-                    boolean potionChosen = false;
-                    Scanner potionScanner = new Scanner(System.in);
-                    
-                    while (!potionChosen) {
-                        
-                        System.out.println("");
-                        this.player.displayInfo();
-                        ((Player) this.player).displaySuperAttack();
-                        
-                        System.out.println("Please select potion using corresponding # or any input to exit:");
-                        Integer potionChoice = potionScanner.nextInt();
-                        
-                        if (potionChoice <= count) {
-                            Potion potion = currentPlayer.getInventory().get(potionChoice - 1);
-                            currentPlayer.usePotion(potion);
-                            currentPlayer.setInventory("remove", potion);
-                            potionChosen = true;
-                        } else {
-                            // Goes back to main options for turn.
-                            System.out.println("Please input a valid #.");
-                            break;
-                        }
-                    } 
-                } else {
-                    System.out.println("You have no potions.");
-                }
-            }
-            else if ("3".equals(chosenOption)) {
-                Wrapper.saveGame(this.saveToHashMap());
-                System.out.println("Your game has been saved to " + this.player.getName() + ".json");
-                System.exit(0);                
-            }
-            else if ("4".equals(chosenOption)) {
-                System.out.println("Thanks for playing");
-                System.exit(0);
-            }
-            else {
-                System.out.println("Please input a proper input!");
-            }
-        } 
+//
+//        boolean chosen = false;
+       boolean isDead = false;
+//
+//        while (!chosen) {
+//            Player currentPlayer = ((Player) this.player);
+//            currentPlayer.displaySuperAttack();
+//            
+//
+//            if ("1".equals(chosenOption)) {
+//                currentPlayer.attack(currentEnemy);
+//                boolean targetDead = currentEnemy.isDead();
+//                if (targetDead) {
+//                    System.out.println("\n" + this.player.getName() + " has slain " + currentEnemy.getName() + "!\n");
+//                    isDead = true;
+//                }
+//                else {
+//                    isDead = false;
+//                }
+//                chosen = true;
+//            }
+//            else if ("2".equals(chosenOption)) {
+//                if (!currentPlayer.getInventory().isEmpty()) {
+//                    Integer count = 0;
+//                    
+//                    for (Potion item: currentPlayer.getInventory()) {
+//                        System.out.println("Count: " + "[#" + (count + 1) + "] " + item);
+//                        count += 1;
+//                    }
+//                    
+//                    boolean potionChosen = false;
+//                    Scanner potionScanner = new Scanner(System.in);
+//                    
+//                    while (!potionChosen) {
+//                        
+//                        System.out.println("");
+//                        this.player.displayInfo();
+//                        ((Player) this.player).displaySuperAttack();
+//                        
+//                        System.out.println("Please select potion using corresponding # or any input to exit:");
+//                        Integer potionChoice = potionScanner.nextInt();
+//                        
+//                        if (potionChoice <= count) {
+//                            Potion potion = currentPlayer.getInventory().get(potionChoice - 1);
+//                            currentPlayer.usePotion(potion);
+//                            currentPlayer.setInventory("remove", potion);
+//                            potionChosen = true;
+//                        } else {
+//                            // Goes back to main options for turn.
+//                            System.out.println("Please input a valid #.");
+//                            break;
+//                        }
+//                    } 
+//                } else {
+//                    System.out.println("You have no potions.");
+//                }
+//            }
+//            else if ("3".equals(chosenOption)) {
+//                Wrapper.saveGame(this.saveToHashMap());
+//                System.out.println("Your game has been saved to " + this.player.getName() + ".json");
+//                System.exit(0);                
+//            }
+//            else if ("4".equals(chosenOption)) {
+//                System.out.println("Thanks for playing");
+//                System.exit(0);
+//            }
+//            else {
+//                System.out.println("Please input a proper input!");
+//            }
+//        } 
         return isDead;
     }
+    
     
         /**
      * Displays the current level the Player is currently on, Example: [ ] [*] [
@@ -205,18 +201,6 @@ public final class Level implements Serializable{
             }
         }
         System.out.println(stringbuilder.toString());
-    }
-
-    /**
-     * This is an operating system agnostic way of clearing the terminal. 033[H:
-     * It moves the cursor at the top left corner of the screen or console.
-     * 033[2J: It clears the screen from the cursor to the end of the screen.
-     * System.out.flush() resets cursor position.
-     * ONLY WORKS WHEN RUNNING JAR in terminal/console, not in IDE.
-     */
-    public void clearScreen() {
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
     }
 
     /**

@@ -5,8 +5,6 @@
  */
 package pdc.assignment.gameclasses;
 
-import java.sql.SQLException;
-import java.util.HashMap;
 import pdc.assignment.entities.EntityFactory;
 import pdc.assignment.entities.Entity;
 import pdc.assignment.database.GameData;
@@ -46,35 +44,34 @@ public final class GameSession {
 //        this.gameSessionLoop();
     }
 
-    public GameSession(HashMap loadData) throws SQLException, Exception {
-        this.gameData = new GameData();
-        // Create player passing old data.
-        this.player = EntityFactory.createOldEntity("old player", loadData, this.gameData);
-        // Passes in the old level value from save.
-        this.level = new Level(this.gameData, this.player, maxLevel, (int) loadData.get("level"));
-        this.gameSessionLoop();
-    }
+//    public GameSession(HashMap loadData) throws SQLException, Exception {
+//        this.gameData = new GameData();
+//        // Create player passing old data.
+//        this.player = EntityFactory.createOldEntity("old player", loadData, this.gameData);
+//        // Passes in the old level value from save.
+//        this.level = new Level(this.gameData, this.player, maxLevel, (int) loadData.get("level"));
+//        this.gameSessionLoop();
+//    }
 
     public void gameSessionLoop() throws Exception {
         
         int currentLevel;
-        
-        while (true) {
-            // Every level will display the level progress at the start.
-            this.getLevel().displayLevel(this.maxLevel);
-            
-            currentLevel = this.getLevel().run();
-            
-            // If the current level is higher than max level, it'll end the game.
-            if (currentLevel > maxLevel) {
-                System.out.println("\nYou have beaten the game!\n");
-                System.exit(0);
-            // 0 is the result for a defeat.
-            } else if (currentLevel == 0) {
-                System.out.println("\nYou have been defeated!\n");
-                System.exit(0);
-            }
-        }
+
+        // Every level will display the level progress at the start.
+        this.getLevel().displayLevel(this.maxLevel);
+
+        currentLevel = this.getLevel().run();
+
+//            // If the current level is higher than max level, it'll end the game.
+//            if (currentLevel > maxLevel) {
+//                System.out.println("\nYou have beaten the game!\n");
+//                System.exit(0);
+//            // 0 is the result for a defeat.
+//            } else if (currentLevel == 0) {
+//                System.out.println("\nYou have been defeated!\n");
+//                System.exit(0);
+//            }
+
     }
 
     /**

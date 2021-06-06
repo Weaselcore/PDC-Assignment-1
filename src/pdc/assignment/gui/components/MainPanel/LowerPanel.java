@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import pdc.assignment.gui.components.gamecomponent.GameButtonPanel;
 
 /**
  *
@@ -22,6 +23,8 @@ public final class LowerPanel extends JPanel{
     
     public final String BUTTON_PANEL = "button panel";
     private final JPanel buttonPanel;
+    public final String GAME_BUTTON_PANEL = "game button panel";
+    private final GameButtonPanel gameButtonPanel;
     public final String NEW_GAME_PANEL = "new game panel";
     private final JPanel newGamePanel;
     
@@ -66,6 +69,10 @@ public final class LowerPanel extends JPanel{
         this.newGameCancelButton = new JButton("Cancel");
         this.newGamePanel.add(this.newGameCancelButton);
         this.add(NEW_GAME_PANEL, newGamePanel);
+        
+        //Setup for game button panel.
+        this.gameButtonPanel = new GameButtonPanel();
+        this.add(GAME_BUTTON_PANEL, gameButtonPanel);
         
         // Add all buttons to an arraylist to make it easier to register in view.
         this.buttonList.add(this.newGameButton);
@@ -137,5 +144,13 @@ public final class LowerPanel extends JPanel{
     public ArrayList getButtonList() {
         return buttonList;
     }
+
+    /**
+     * @return the gameButtonPanel
+     */
+    public GameButtonPanel getGameButtonPanel() {
+        return gameButtonPanel;
+    }
+    
     
 }
