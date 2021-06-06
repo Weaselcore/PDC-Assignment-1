@@ -20,7 +20,7 @@ public final class GameButtonPanel extends JPanel{
     private final JButton potionButton;
     private final JButton saveButton;
     private final JButton exitButton;
-    private ArrayList buttonList;
+    private final ArrayList buttonList;
     
     public GameButtonPanel() {
 
@@ -48,5 +48,36 @@ public final class GameButtonPanel extends JPanel{
     public ArrayList getButtonList() {
         return buttonList;
     } 
+
+    /**
+     * @return the attackButton
+     */
+    public JButton getAttackButton() {
+        return attackButton;
+    }
+
+    /**
+     * @return the potionButton
+     */
+    public JButton getPotionButton() {
+        return potionButton;
+    }
+
+    /**
+     * @return the saveButton
+     */
+    public JButton getSaveButton() {
+        return saveButton;
+    }
+
+    /**
+     * @return the exitButton
+     */
+    public JButton getExitButton() {
+        return exitButton;
+    }
+    
+    
+    
     
 }

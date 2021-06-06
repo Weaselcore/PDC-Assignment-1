@@ -93,12 +93,19 @@ public final class GameView extends Observable{
             lowerJPanelToShow = lowerPanel.getGameButtonPanel();
         }
     }
+    
+    public void showHistoryLogPanel() {
+        if (getRightJPanelToShow() != this.rightPanel.getHistoryPanel()) {
+            rightPanel.cardLayout.show(rightPanel, rightPanel.HISTORY_PANEL);
+            rightJPanelToShow = rightPanel.getHistoryPanel();
+        }
+    }
   
     public void addController(GameController menuController) {
         
         ArrayList<JButton> allButtonsArray = new ArrayList();
         allButtonsArray.addAll(lowerPanel.getButtonList());
-        allButtonsArray.addAll(rightPanel.getButtonList());
+        allButtonsArray.addAll(rightPanel.getSaveListPanel().getButtonList());
         
         allButtonsArray.forEach(button -> {
             button.addActionListener(menuController);
@@ -129,6 +136,5 @@ public final class GameView extends Observable{
     public JPanel getUpperJPanelToShow() {
         return upperJPanelToShow;
     }
-
     
 }

@@ -25,7 +25,7 @@ public class GameController implements ActionListener{
         this.gameModel = menuModel;
         this.gameModel.fetchListOfSaves();
         this.gameView = menuView;
-        this.gameView.rightPanel.getSavesJList().populateSaveList(menuModel.getSaveList());
+        this.gameView.rightPanel.getSaveListPanel().getSavesJlist().populateSaveList(menuModel.getSaveList());
     }
     
     @Override
@@ -46,6 +46,7 @@ public class GameController implements ActionListener{
                 Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
             }
             gameView.showGameButtonPanel();
+            gameView.showHistoryLogPanel();
         }        
         else if (source == gameView.lowerPanel.getNewGameCancelButton()) {
             gameView.showButtonPanel();
@@ -55,27 +56,27 @@ public class GameController implements ActionListener{
             gameView.showRulesPanel();
             System.out.println("New rules button has been pressed.");
         }
-        else if (source == gameView.lowerPanel.getExitButton()) {
+        else if ((source == gameView.lowerPanel.getExitButton()) || (source == gameView.lowerPanel.getGameButtonPanel().getExitButton())) {
             System.out.println("Exit button has been pressed.");
             System.exit(0);
         }
-        else if (source == gameView.rightPanel.getLoadButton()) {
+        else if (source == gameView.rightPanel.getSaveListPanel().getLoadButton()) {
             System.out.println("Load button has been pressed.");
-            int indexLoad = gameView.rightPanel.getSavesJList().getSelectedOption();
+            int indexLoad = gameView.rightPanel.getSaveListPanel().getSavesJlist().getSelectedOption();
             if (indexLoad != -1) {
                 int id = gameModel.getSaveId(indexLoad);
                 System.out.println(id);
             }
         }
-        else if (source == gameView.rightPanel.getDeleteButton()) {
+        else if (source == gameView.rightPanel.getSaveListPanel().getDeleteButton()) {
             System.out.println("Delete button has been pressed.");
-            int indexDelete = gameView.rightPanel.getSavesJList().getSelectedOption();
+            int indexDelete = gameView.rightPanel.getSaveListPanel().getSavesJlist().getSelectedOption();
             if (indexDelete != -1) {
                 int id = gameModel.getSaveId(indexDelete);
                 System.out.println(id);
             }
         }
-        else if (source == gameView.rightPanel.getSavesJList()) {
+        else if (source == gameView.rightPanel.getSaveListPanel().getSavesJlist()) {
             System.out.println("JList has been pressed.");
         }
     }

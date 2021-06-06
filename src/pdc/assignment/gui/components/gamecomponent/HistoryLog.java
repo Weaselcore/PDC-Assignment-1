@@ -5,6 +5,7 @@
  */
 package pdc.assignment.gui.components.gamecomponent;
 
+import java.awt.Dimension;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -20,10 +21,12 @@ public final class HistoryLog extends JPanel{
     
     public HistoryLog() {
         this.historyScrollPanel = new JScrollPane();
+        this.historyScrollPanel.setPreferredSize(new Dimension(200,500));
         this.add(this.historyScrollPanel);
-        
         this.historyTextLog = new JTextArea();
         this.add(this.historyTextLog);
+        this.historyScrollPanel.setViewportView(this.historyTextLog);
+        
     }
 
     
