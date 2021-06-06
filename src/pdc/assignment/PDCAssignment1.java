@@ -5,9 +5,9 @@
  */
 package pdc.assignment;
 
-import pdc.assignment.gui.controller.MenuController;
-import pdc.assignment.gui.model.MenuModel;
-import pdc.assignment.gui.view.MenuView;
+import pdc.assignment.gui.controller.GameController;
+import pdc.assignment.gui.model.GameModel;
+import pdc.assignment.gui.view.GameView;
 
 /**
  *
@@ -23,9 +23,9 @@ public class PDCAssignment1 {
      */
     public static void main(String[] args) throws Exception {
 
-        MenuView menuView = new MenuView();
-        MenuModel menuModel = new MenuModel();
-        MenuController menuController = new MenuController(menuModel, menuView);
+        GameView menuView = new GameView();
+        GameModel menuModel = new GameModel();
+        GameController menuController = new GameController(menuModel, menuView);
         menuView.addController(menuController);
         
         menuModel.fetchListOfSaves();

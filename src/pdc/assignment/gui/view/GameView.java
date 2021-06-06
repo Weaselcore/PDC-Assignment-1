@@ -6,22 +6,23 @@
 package pdc.assignment.gui.view;
 
 import java.awt.BorderLayout;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Observable;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import pdc.assignment.gui.components.menucomponent.LowerPanel;
+import pdc.assignment.gui.components.mainpanel.LowerPanel;
 import pdc.assignment.gui.components.menucomponent.MenuImage;
-import pdc.assignment.gui.components.menucomponent.RightPanel;
-import pdc.assignment.gui.components.menucomponent.UpperPanel;
-import pdc.assignment.gui.controller.MenuController;
+import pdc.assignment.gui.components.mainpanel.RightPanel;
+import pdc.assignment.gui.components.mainpanel.UpperPanel;
+import pdc.assignment.gui.controller.GameController;
 
 /**
  *
  * @author ieuan
  */
-public final class MenuView extends Observable{
+public final class GameView extends Observable{
     
     public JFrame mainFrame;
     public UpperPanel upperPanel;
@@ -34,7 +35,7 @@ public final class MenuView extends Observable{
     
     public MenuImage menuImage;
     
-    public MenuView(){
+    public GameView(){
         
         this.mainFrame = new JFrame("Kingdom Fighters - Main Menu");
         this.mainFrame.setDefaultCloseOperation(3);
@@ -59,34 +60,34 @@ public final class MenuView extends Observable{
     }
     
     public void showButtonPanel() {
-        if (bottomJPanelToShow != this.lowerPanel.getButtonPanel()) {
+        if (getBottomJPanelToShow() != this.lowerPanel.getButtonPanel()) {
             lowerPanel.cardLayout.show(lowerPanel, lowerPanel.BUTTON_PANEL);
             bottomJPanelToShow = lowerPanel.getButtonPanel();
         }
     }
     
     public void showNewGamePanel() {
-        if (bottomJPanelToShow != this.lowerPanel.getNewGamePanel()) {
+        if (getBottomJPanelToShow() != this.lowerPanel.getNewGamePanel()) {
             lowerPanel.cardLayout.show(lowerPanel, lowerPanel.NEW_GAME_PANEL);
             bottomJPanelToShow = lowerPanel.getNewGamePanel();
         }
     }
     
     public void showRulesPanel() {
-        if (upperJPanelToShow != this.upperPanel.getRulesViewer()) {
+        if (getUpperJPanelToShow() != this.upperPanel.getRulesViewer()) {
             upperPanel.cardLayout.show(upperPanel, upperPanel.RULES_VIEWER);
             upperJPanelToShow = upperPanel.getRulesViewer();
         }
     }
     
     public void showMenuImagePanel() {
-        if (upperJPanelToShow != this.upperPanel.getMenuImage()) {
+        if (getUpperJPanelToShow() != this.upperPanel.getMenuImage()) {
             upperPanel.cardLayout.show(upperPanel, upperPanel.MENU_IMAGE);
             upperJPanelToShow = upperPanel.getMenuImage();
         }
     }
   
-    public void addController(MenuController menuController) {
+    public void addController(GameController menuController) {
         
         ArrayList<JButton> allButtonsArray = new ArrayList();
         allButtonsArray.addAll(lowerPanel.getButtonList());
@@ -101,4 +102,26 @@ public final class MenuView extends Observable{
         return this.lowerPanel.getNewGameTextField().getText();
     }
 
+    /**
+     * @return the bottomJPanelToShow
+     */
+    public JPanel getBottomJPanelToShow() {
+        return bottomJPanelToShow;
+    }
+
+    /**
+     * @return the rightJPanelToShow
+     */
+    public JPanel getRightJPanelToShow() {
+        return rightJPanelToShow;
+    }
+
+    /**
+     * @return the upperJPanelToShow
+     */
+    public JPanel getUpperJPanelToShow() {
+        return upperJPanelToShow;
+    }
+
+    
 }

@@ -3,10 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pdc.assignment.gui.components.menucomponent;
+package pdc.assignment.gui.components.mainpanel;
 
 import java.awt.CardLayout;
 import javax.swing.JPanel;
+import pdc.assignment.gui.components.menucomponent.MenuImage;
+import pdc.assignment.gui.components.menucomponent.RuleViewer;
 
 /**
  *
@@ -29,8 +31,7 @@ public final class UpperPanel extends JPanel{
         this.menuImage = new MenuImage();
         
         this.add(this.MENU_IMAGE, this.menuImage);       
-        this.add(this.RULES_VIEWER, this.ruleViewer);
-        
+        this.add(this.RULES_VIEWER, this.ruleViewer); 
     }
 
     public JPanel getRulesViewer() {

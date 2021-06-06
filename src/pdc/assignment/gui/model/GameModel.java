@@ -6,6 +6,7 @@
 package pdc.assignment.gui.model;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Observable;
 import java.util.Set;
@@ -16,7 +17,7 @@ import pdc.assignment.gameclasses.GameSession;
  *
  * @author wease
  */
-public class MenuModel extends Observable{
+public class GameModel extends Observable{
     
     private GameSession gameSession;
     private String playerName = null;
@@ -26,9 +27,9 @@ public class MenuModel extends Observable{
         LinkedHashMap linkedHashMapOfSaves = Wrapper.retrieveSaveList();
         this.saveList = linkedHashMapOfSaves;
         Set<String> keys = linkedHashMapOfSaves.keySet();
-        for (String key : keys) {
+        keys.forEach(key -> {
             System.out.println(key + " " + linkedHashMapOfSaves.get(key));
-        }
+        });
     }
     
     public String getPlayerName() {
@@ -53,6 +54,12 @@ public class MenuModel extends Observable{
      */
     public LinkedHashMap getSaveList() {
         return saveList;
+    }
+    
+    public int getSaveId(int index) {
+        ArrayList<String> list = new ArrayList<>(this.saveList.keySet());
+        int id = Integer.parseInt(list.get(index));
+        return id;
     }
 
 }

@@ -8,8 +8,9 @@ package pdc.assignment.gui.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
-import pdc.assignment.gui.model.MenuModel;
-import pdc.assignment.gui.view.MenuView;
+import javax.swing.JList;
+import pdc.assignment.gui.model.GameModel;
+import pdc.assignment.gui.view.GameView;
 
 
 /**
@@ -22,16 +23,16 @@ import pdc.assignment.gui.view.MenuView;
  *
  * @author wease
  */
-public class MenuController implements ActionListener{
+public class GameController implements ActionListener{
     
-    MenuModel menuModel;
-    MenuView menuView;
+    GameModel menuModel;
+    GameView menuView;
     
-    public MenuController(MenuModel menuModel, MenuView menuView) throws SQLException {
+    public GameController(GameModel menuModel, GameView menuView) throws SQLException {
         this.menuModel = menuModel;
         this.menuModel.fetchListOfSaves();
         this.menuView = menuView;
-        this.menuView.rightPanel.populateSaveList(menuModel.getSaveList());
+        this.menuView.rightPanel.getSavesJList().populateSaveList(menuModel.getSaveList());
     }
     
     @Override
@@ -41,6 +42,7 @@ public class MenuController implements ActionListener{
         if (source == menuView.lowerPanel.getNewGameButton()){
             System.out.println("New game button has been pressed.");
             menuView.showNewGamePanel();
+            menuView.showMenuImagePanel();
         }
         else if (source == menuView.lowerPanel.getNewGameConfirmButton()) {
             menuModel.setPlayerName(menuView.getNewGameNameTextField());
@@ -60,11 +62,18 @@ public class MenuController implements ActionListener{
         }
         else if (source == menuView.rightPanel.getLoadButton()) {
             System.out.println("Load button has been pressed.");
-            // Wrapper database logic.
+            int index = menuView.rightPanel.getSavesJList().getSelectedOption();
+            int id = menuModel.getSaveId(index);
+            System.out.println(id);
         }
         else if (source == menuView.rightPanel.getDeleteButton()) {
             System.out.println("Delete button has been pressed.");
-            // Wrapper database logic.
+            int index = menuView.rightPanel.getSavesJList().getSelectedOption();
+            int id = menuModel.getSaveId(index);
+            System.out.println(id);
+        }
+        else if (source == menuView.rightPanel.getSavesJList()) {
+            System.out.println("JList has been pressed.");
         }
     }
 }

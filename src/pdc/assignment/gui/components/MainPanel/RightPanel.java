@@ -3,19 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pdc.assignment.gui.components.menucomponent;
+package pdc.assignment.gui.components.mainpanel;
 
 import java.awt.CardLayout;
 import java.awt.GridLayout;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import javax.swing.DefaultListCellRenderer;
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.ListSelectionModel;
+import pdc.assignment.gui.components.sharedcomponents.CustomJList;
+
 
 /**
  *
@@ -30,15 +28,14 @@ public final class RightPanel extends JPanel{
     public final String SAVES_LIST_PANEL = "save list panel";
     private final JPanel saveListPanel;
     private final JPanel lowerSaveListPanel;
-    
-    private DefaultListModel<String> saveListToAdd = null;
-    private final JList savesJList = new JList();
-    
+ 
     private final JButton loadButton;
     private final JButton deleteButton;
     
     private final JScrollPane historyScrollPane;
     private final JScrollPane saveListScrollPane;
+    
+    private final CustomJList savesJlist;
     
     private final ArrayList buttonList = new ArrayList();
     
@@ -49,15 +46,18 @@ public final class RightPanel extends JPanel{
         
         this.historyScrollPane = new JScrollPane();
         this.saveListScrollPane = new JScrollPane();
+        
+        this.savesJlist = new CustomJList();
+        this.saveListScrollPane.add(this.savesJlist);
+        this.saveListScrollPane.setViewportView(this.savesJlist);
              
         this.historyPanel = new JPanel();
         this.saveListPanel = new JPanel();
         this.saveListPanel.setLayout(new GridLayout(2, 1));
         this.lowerSaveListPanel = new JPanel();
-
-        this.saveListToAdd = new DefaultListModel();
         
         this.historyPanel.add(this.historyScrollPane);
+        this.saveListPanel.add(this.saveListScrollPane);
         this.saveListPanel.add(this.lowerSaveListPanel);
         
         this.deleteButton = new JButton("DELETE"); 
@@ -92,26 +92,6 @@ public final class RightPanel extends JPanel{
     public JPanel getSaveListPanel() {
         return saveListPanel;
     }
-    
-    public void populateSaveList(LinkedHashMap saveList) {
-        this.saveListToAdd = new DefaultListModel();
-        saveList.keySet().forEach(key -> {
-            this.saveListToAdd.addElement(key + " " + saveList.get(key));
-        });
-        
-        this.savesJList.setModel(this.saveListToAdd);
-        this.savesJList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        this.savesJList.setCellRenderer(new DefaultListCellRenderer());
-        this.savesJList.setLayout(null);
-        this.savesJList.setVisibleRowCount(1);
-        this.savesJList.setVisible(true);
-        this.saveListScrollPane.add(this.savesJList);
-        this.saveListScrollPane.setViewportView(savesJList);
-        this.saveListPanel.add(this.saveListScrollPane);
-        this.revalidate();
-        this.repaint();
-
-    }
 
     /**
      * @return the loadButton
@@ -125,6 +105,13 @@ public final class RightPanel extends JPanel{
      */
     public JButton getDeleteButton() {
         return deleteButton;
+    }
+
+    /**
+     * @return the savesJList
+     */
+    public CustomJList getSavesJList() {
+        return savesJlist;
     }
 
 }
