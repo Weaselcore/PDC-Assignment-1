@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import pdc.assignment.gui.components.gamecomponent.HistoryLog;
 import pdc.assignment.gui.components.sharedcomponents.CustomJList;
 
 
@@ -24,7 +25,7 @@ public final class RightPanel extends JPanel{
     public final CardLayout cardLayout;
     
     public final String HISTORY_PANEL = "history panel";
-    private final JPanel historyPanel;
+    private final HistoryLog historyPanel;
     public final String SAVES_LIST_PANEL = "save list panel";
     private final JPanel saveListPanel;
     private final JPanel lowerSaveListPanel;
@@ -32,8 +33,7 @@ public final class RightPanel extends JPanel{
     private final JButton loadButton;
     private final JButton deleteButton;
     
-    private final JScrollPane historyScrollPane;
-    private final JScrollPane saveListScrollPane;
+    private final JScrollPane saveListScrollPanel;
     
     private final CustomJList savesJlist;
     
@@ -44,21 +44,20 @@ public final class RightPanel extends JPanel{
         this.cardLayout = new CardLayout();
         this.setLayout(cardLayout);
         
-        this.historyScrollPane = new JScrollPane();
-        this.saveListScrollPane = new JScrollPane();
+        this.saveListScrollPanel = new JScrollPane();
         
         this.savesJlist = new CustomJList();
-        this.saveListScrollPane.add(this.savesJlist);
-        this.saveListScrollPane.setViewportView(this.savesJlist);
+        this.saveListScrollPanel.add(this.savesJlist);
+        this.saveListScrollPanel.setViewportView(this.savesJlist);
              
-        this.historyPanel = new JPanel();
         this.saveListPanel = new JPanel();
         this.saveListPanel.setLayout(new GridLayout(2, 1));
         this.lowerSaveListPanel = new JPanel();
         
-        this.historyPanel.add(this.historyScrollPane);
-        this.saveListPanel.add(this.saveListScrollPane);
+        this.saveListPanel.add(this.saveListScrollPanel);
         this.saveListPanel.add(this.lowerSaveListPanel);
+        
+        this.historyPanel = new HistoryLog();        
         
         this.deleteButton = new JButton("DELETE"); 
         this.loadButton = new JButton("LOAD");
@@ -67,6 +66,7 @@ public final class RightPanel extends JPanel{
         this.lowerSaveListPanel.add(deleteButton);
         
         this.add(SAVES_LIST_PANEL, saveListPanel);
+        this.add(HISTORY_PANEL, historyPanel);
         
         this.buttonList.add(this.deleteButton);
         this.buttonList.add(this.loadButton);
@@ -82,7 +82,7 @@ public final class RightPanel extends JPanel{
     /**
      * @return the historyPanel
      */
-    public JPanel getHistoryPanel() {
+    public HistoryLog getHistoryPanel() {
         return historyPanel;
     }
 

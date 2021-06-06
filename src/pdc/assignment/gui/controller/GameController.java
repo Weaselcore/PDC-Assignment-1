@@ -8,19 +8,12 @@ package pdc.assignment.gui.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
-import javax.swing.JList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import pdc.assignment.gui.model.GameModel;
 import pdc.assignment.gui.view.GameView;
 
-
 /**
- *
- * @author wease
- *//**
- *
- * @author wease
- *//**
- *
  * @author wease
  */
 public class GameController implements ActionListener{
@@ -47,6 +40,11 @@ public class GameController implements ActionListener{
         else if (source == menuView.lowerPanel.getNewGameConfirmButton()) {
             menuModel.setPlayerName(menuView.getNewGameNameTextField());
             System.out.println(menuModel.getPlayerName());
+            try {
+                menuModel.newGameSession();
+            } catch (Exception ex) {
+                Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }        
         else if (source == menuView.lowerPanel.getNewGameCancelButton()) {
             menuView.showButtonPanel();

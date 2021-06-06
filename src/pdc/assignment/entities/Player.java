@@ -32,7 +32,6 @@ public final class Player extends AbstractEntity{
 
     // Initialises player from scratch.
     public Player() throws Exception {
-        this.create();
         this.currentHealth = 20;
         this.maxHealth = 20;
         this.damage = 5;
@@ -88,27 +87,6 @@ public final class Player extends AbstractEntity{
     // When new player is being initialised, it will prompt for a name.
     @Override
     public void create() {
-        boolean confirmed = false;
-        while (!confirmed) {
-            Scanner input = new Scanner(System.in);
-            System.out.print("\nPlease enter a name for your adventurer: ");
-            String char_name = input.nextLine();
-            System.out.println("\nAre you happy with this name?: " + char_name);
-            System.out.println("Press y to continue or n to choose another name: ");
-            String confirmation = input.nextLine();
-            switch (confirmation.trim()) {
-                case "y":
-                    this.name = char_name;
-                    confirmed = true;
-                    break;
-                case "n":
-                    System.out.println("Scrapping previous name.");
-                    break;
-                default:
-                    System.out.println("Please input a valid option, restarting character creation.");
-                    break;
-            }
-        }
     }
     
     // Calculates the damage by subtracting the armour value as a flat amount.
@@ -137,6 +115,10 @@ public final class Player extends AbstractEntity{
     @Override
     public String getName() {
         return this.name;
+    }
+    
+    public void setName(String playerName) {
+        this.name = playerName;
     }
 
     // Executes an attack or super attack if available.

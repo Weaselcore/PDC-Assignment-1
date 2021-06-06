@@ -5,14 +5,12 @@
  */
 package pdc.assignment.gameclasses;
 
-import java.io.File;
 import java.sql.SQLException;
 import java.util.HashMap;
-import java.util.Map;
 import pdc.assignment.entities.EntityFactory;
 import pdc.assignment.entities.Entity;
-import pdc.assignment.database.Deserialiser;
 import pdc.assignment.database.GameData;
+import pdc.assignment.entities.Player;
 
 /**
  *
@@ -27,23 +25,25 @@ public final class GameSession {
     private Level level;
 
     // Constructor for a new game.
-    public GameSession() throws Exception {
+    public GameSession(String playerName) throws Exception {
         // Initialise game data from database.
         this.gameData = new GameData();
         this.player = EntityFactory.createNewEntity("player", this.gameData);
+        Player playerPlayer = (Player) this.player;
+        playerPlayer.setName(playerName);
         this.level = new Level(this.gameData, this.getPlayer(), this.maxLevel);
         this.gameSessionLoop();
     }
     
     // Constructor to load game from save file.
-    public GameSession(File file) throws Exception {
+    public GameSession(int id) throws Exception {
         this.gameData = new GameData();
-        Map loadData = Deserialiser.readSave(file);
-        // Create player passing old data.
-        this.player = EntityFactory.createOldEntity("old player", loadData, this.gameData);
-        // Passes in the old level value from save.
-        this.level = new Level(this.gameData, this.player, maxLevel, (int) loadData.get("level"));
-        this.gameSessionLoop();
+//        Map loadData = Deserialiser.readSave(file);
+//        // Create player passing old data.
+//        this.player = EntityFactory.createOldEntity("old player", loadData, this.gameData);
+//        // Passes in the old level value from save.
+//        this.level = new Level(this.gameData, this.player, maxLevel, (int) loadData.get("level"));
+//        this.gameSessionLoop();
     }
 
     public GameSession(HashMap loadData) throws SQLException, Exception {
@@ -60,8 +60,6 @@ public final class GameSession {
         int currentLevel;
         
         while (true) {
-            // This will only clear when run in a terminal.
-            this.getLevel().clearScreen();
             // Every level will display the level progress at the start.
             this.getLevel().displayLevel(this.maxLevel);
             

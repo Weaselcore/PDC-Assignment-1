@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Observable;
 import java.util.Set;
+import pdc.assignment.database.GameData;
 import pdc.assignment.database.Wrapper;
 import pdc.assignment.gameclasses.GameSession;
 
@@ -22,6 +23,7 @@ public class GameModel extends Observable{
     private GameSession gameSession;
     private String playerName = null;
     private LinkedHashMap saveList;
+    private GameData gameData;
 
     public void fetchListOfSaves() throws SQLException {
         LinkedHashMap linkedHashMapOfSaves = Wrapper.retrieveSaveList();
@@ -45,7 +47,12 @@ public class GameModel extends Observable{
     }
     
     public GameSession newGameSession() throws Exception {
-        this.gameSession = new GameSession();
+        this.gameSession = new GameSession(this.playerName);
+        return gameSession;
+    };
+    
+    public GameSession oldGameSession(int id) throws Exception {
+        this.gameSession = new GameSession(id);
         return gameSession;
     };
 
