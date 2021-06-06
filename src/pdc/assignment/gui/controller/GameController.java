@@ -62,15 +62,19 @@ public class GameController implements ActionListener{
         }
         else if (source == menuView.rightPanel.getLoadButton()) {
             System.out.println("Load button has been pressed.");
-            int index = menuView.rightPanel.getSavesJList().getSelectedOption();
-            int id = menuModel.getSaveId(index);
-            System.out.println(id);
+            int indexLoad = menuView.rightPanel.getSavesJList().getSelectedOption();
+            if (indexLoad != -1) {
+                int id = menuModel.getSaveId(indexLoad);
+                System.out.println(id);
+            }
         }
         else if (source == menuView.rightPanel.getDeleteButton()) {
             System.out.println("Delete button has been pressed.");
-            int index = menuView.rightPanel.getSavesJList().getSelectedOption();
-            int id = menuModel.getSaveId(index);
-            System.out.println(id);
+            int indexDelete = menuView.rightPanel.getSavesJList().getSelectedOption();
+            if (indexDelete != -1) {
+                int id = menuModel.getSaveId(indexDelete);
+                System.out.println(id);
+            }
         }
         else if (source == menuView.rightPanel.getSavesJList()) {
             System.out.println("JList has been pressed.");

@@ -57,9 +57,13 @@ public class GameModel extends Observable{
     }
     
     public int getSaveId(int index) {
-        ArrayList<String> list = new ArrayList<>(this.saveList.keySet());
-        int id = Integer.parseInt(list.get(index));
-        return id;
+        
+        if (index != -1) {
+            ArrayList<String> list = new ArrayList<>(this.saveList.keySet());
+            int id = Integer.parseInt(list.get(index));
+            return id;
+        }
+        return -1;
     }
 
 }

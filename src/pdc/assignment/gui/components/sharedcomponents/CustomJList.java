@@ -19,7 +19,7 @@ import javax.swing.event.ListSelectionEvent;
 public class CustomJList extends JList{
     
     private DefaultListModel<String> saveListToAdd = null;
-    private int selectedOption = 0;
+    private int selectedOption = -1;
     
     public CustomJList() {
         this.saveListToAdd = new DefaultListModel();
