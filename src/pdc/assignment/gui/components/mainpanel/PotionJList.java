@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pdc.assignment.gui.components.gamecomponent;
+package pdc.assignment.gui.components.mainpanel;
 
 /**
  *
  * @author wease
  */
-public class PotionJlist {
+class PotionJList {
     
 }

@@ -6,6 +6,7 @@
 package pdc.assignment.gui.components.sharedcomponents;
 
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
@@ -18,11 +19,11 @@ import javax.swing.event.ListSelectionEvent;
  */
 public class CustomJList extends JList{
     
-    private DefaultListModel<String> saveListToAdd = null;
+    private DefaultListModel<String> listModel = null;
     private int selectedOption = -1;
     
     public CustomJList() {
-        this.saveListToAdd = new DefaultListModel();
+        this.listModel = new DefaultListModel();
         this.addListSelectionListener((ListSelectionEvent e) -> {
             if (!e.getValueIsAdjusting()){
                 JList source = (JList)e.getSource();
@@ -32,13 +33,29 @@ public class CustomJList extends JList{
         });
     }
 
-    public void populateSaveList(LinkedHashMap saveList) {
-        this.saveListToAdd = new DefaultListModel();
-        saveList.keySet().forEach(key -> {
-            this.saveListToAdd.addElement(key + " " + saveList.get(key));
+    public void populateListModelHashMap(LinkedHashMap hashmap) {
+        this.listModel = new DefaultListModel();
+        hashmap.keySet().forEach(key -> {
+            this.listModel.addElement(key + " " + hashmap.get(key));
         });
         
-        this.setModel(this.saveListToAdd);
+        this.setModel(this.listModel);
+        this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        this.setCellRenderer(new DefaultListCellRenderer());
+        this.setLayout(null);
+        this.setVisibleRowCount(1);
+        this.setVisible(true);
+        this.revalidate();
+        this.repaint();
+    }
+    
+    public void populateListModelLinkedList(LinkedList list) {
+        this.listModel = new DefaultListModel();
+        list.forEach(element -> {
+            this.listModel.addElement(element.toString());
+        });
+        
+        this.setModel(this.listModel);
         this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         this.setCellRenderer(new DefaultListCellRenderer());
         this.setLayout(null);

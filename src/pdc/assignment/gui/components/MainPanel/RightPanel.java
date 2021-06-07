@@ -8,6 +8,7 @@ package pdc.assignment.gui.components.mainpanel;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 import pdc.assignment.gui.components.gamecomponent.HistoryLog;
+import pdc.assignment.gui.components.gamecomponent.PotionPanel;
 import pdc.assignment.gui.components.menucomponent.SaveListPanel;
 
 
@@ -23,6 +24,8 @@ public final class RightPanel extends JPanel{
     private final HistoryLog historyPanel;
     public final String SAVES_LIST_PANEL = "save list panel";
     private final SaveListPanel saveListPanel;
+    public final String POTION_PANEL = "potion panel";
+    private final PotionPanel potionPanel;
     
     public RightPanel() {
         //this.setPreferredSize(new Dimension(200,75));
@@ -31,10 +34,11 @@ public final class RightPanel extends JPanel{
 
         this.historyPanel = new HistoryLog();  
         this.saveListPanel = new SaveListPanel();
+        this.potionPanel = new PotionPanel();
 
         this.add(SAVES_LIST_PANEL, saveListPanel);
         this.add(HISTORY_PANEL, historyPanel);
-
+        this.add(POTION_PANEL, potionPanel);
     }
 
     /**
@@ -51,5 +55,10 @@ public final class RightPanel extends JPanel{
         return saveListPanel;
     }
 
-
+    /**
+     * @return the potionPanel
+     */
+    public PotionPanel getPotionPanel() {
+        return potionPanel;
+    }
 }

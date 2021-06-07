@@ -25,7 +25,7 @@ import pdc.assignment.gameclasses.HistoryLogger;
  */
 public final class Player extends AbstractEntity{
 
-    private LinkedList<Potion> inventory = new LinkedList<>();
+    private final LinkedList<Potion> inventory = new LinkedList<>();
     private int currentSuperAttackLevel;
     private int maxSuperAttackLevel;
     private Armour currentArmour = null;

@@ -113,6 +113,20 @@ public class GameController implements ActionListener{
                     Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
+            else if (source == gameView.lowerPanel.getGameButtonPanel().getPotionButton()) {
+                this.updatePotionList();
+                gameView.showPotionPanel();
+            }
+            else if (source == gameView.rightPanel.getPotionPanel().getCancelButton()) {
+                gameView.showHistoryLogPanel();
+            }
+            else if (source == gameView.rightPanel.getPotionPanel().getUseButton()) {
+                int potionUseIndex = gameView.rightPanel.getPotionPanel().getOption();
+                gameModel.usePotion(potionUseIndex);
+                gameView.showHistoryLogPanel();
+                this.updatePotionList();
+                this.updateHistoryLog();
+            }
         }
     }
     
@@ -126,6 +140,11 @@ public class GameController implements ActionListener{
     
     private void updateSaveList() throws SQLException {
         this.gameModel.fetchListOfSaves();
-        this.gameView.rightPanel.getSaveListPanel().getSavesJlist().populateSaveList(gameModel.getSaveList());
+        this.gameView.rightPanel.getSaveListPanel().getSavesJlist().populateListModelHashMap(gameModel.getSaveList());
+    }
+    
+    private void updatePotionList() {
+        this.gameModel.fetchListofPotions();
+        this.gameView.rightPanel.getPotionPanel().getPotionJlist().populateListModelLinkedList(gameModel.getPotionList());
     }
 }

@@ -86,8 +86,8 @@ public final class GameSession {
     /**
      * @return the player
      */
-    public Entity getPlayer() {
-        return player;
+    public Player getPlayer() {
+        return (Player) this.player;
     }
 
     /**

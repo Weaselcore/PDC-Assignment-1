@@ -10,12 +10,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.Observable;
 import java.util.Set;
 import pdc.assignment.database.GameData;
 import pdc.assignment.database.Wrapper;
 import pdc.assignment.gameclasses.GameSession;
-import pdc.assignment.gameclasses.HistoryLogger;
+import pdc.assignment.items.Potion;
 
 /**
  *
@@ -27,6 +28,7 @@ public class GameModel extends Observable{
     private String playerName = null;
     private LinkedHashMap saveList;
     private GameData gameData;
+    private LinkedList potionList;
 
     public void fetchListOfSaves() throws SQLException {
         LinkedHashMap linkedHashMapOfSaves = Wrapper.retrieveSaveList();
@@ -35,6 +37,10 @@ public class GameModel extends Observable{
         keys.forEach(key -> {
             System.out.println(key + " " + linkedHashMapOfSaves.get(key));
         });
+    }
+    
+    public void fetchListofPotions() {
+        this.potionList = this.gameSession.getPlayer().getInventory();
     }
     
     public String getPlayerName() {
@@ -51,6 +57,7 @@ public class GameModel extends Observable{
     
     public void newGameSession() throws Exception {
         this.gameSession = new GameSession(this.playerName);
+        this.potionList = this.gameSession.getPlayer().getInventory();
     };
     
     public void oldGameSession(int id) throws Exception {
@@ -92,5 +99,18 @@ public class GameModel extends Observable{
         if (saveID != -1) {
             Wrapper.deleteGame(saveID);
         }
+    }
+    
+    public void usePotion(int index) {
+        if (index != -1) {
+            this.fetchListofPotions();
+            Potion potion = (Potion) this.potionList.remove(index);
+            this.gameSession.getPlayer().setInventory("remove", potion);
+            this.gameSession.getPlayer().usePotion(potion);
+        }
+    }
+    
+    public LinkedList getPotionList() {
+        return this.potionList;
     }
 }

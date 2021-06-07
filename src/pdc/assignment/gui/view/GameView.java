@@ -100,6 +100,13 @@ public final class GameView extends Observable{
             rightJPanelToShow = rightPanel.getHistoryPanel();
         }
     }
+    
+    public void showPotionPanel() {
+        if (getRightJPanelToShow() != this.rightPanel.getPotionPanel()) {
+            rightPanel.cardLayout.show(rightPanel, rightPanel.POTION_PANEL);
+            rightJPanelToShow = rightPanel.getPotionPanel();
+        }
+    }
   
     public void addController(GameController menuController) {
         
@@ -107,6 +114,7 @@ public final class GameView extends Observable{
         allButtonsArray.addAll(lowerPanel.getButtonList());
         allButtonsArray.addAll(lowerPanel.getGameButtonPanel().getButtonList());
         allButtonsArray.addAll(rightPanel.getSaveListPanel().getButtonList());
+        allButtonsArray.addAll(rightPanel.getPotionPanel().getButtonList());
         
         allButtonsArray.forEach(button -> {
             button.addActionListener(menuController);

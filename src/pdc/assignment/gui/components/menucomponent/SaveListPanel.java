@@ -17,8 +17,7 @@ import pdc.assignment.gui.components.sharedcomponents.CustomJList;
  * @author wease
  */
 public final class SaveListPanel extends JPanel{
-    
-
+   
     private final JPanel lowerSaveListPanel;
     private final JButton loadButton;
     private final JButton deleteButton;

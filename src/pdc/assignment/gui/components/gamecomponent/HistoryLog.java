@@ -17,7 +17,7 @@ import javax.swing.JTextArea;
 public final class HistoryLog extends JPanel{
     
     private final JScrollPane historyScrollPanel;
-    private JTextArea historyTextLog;
+    private final JTextArea historyTextLog;
     
     public HistoryLog() {
         this.historyScrollPanel = new JScrollPane();

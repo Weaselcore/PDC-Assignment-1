@@ -5,7 +5,6 @@
  */
 package pdc.assignment.items;
 
-import java.io.Serializable;
 import java.util.HashMap;
 
 /**
@@ -43,7 +42,7 @@ public final class Potion extends AbstractItem{
     
     @Override
     public String toString() {
-        return "\nName: " + this.name + "\nDescription: " + this.description;
+        return this.name + "  |  Description: " + this.description;
     }
 
     /**
