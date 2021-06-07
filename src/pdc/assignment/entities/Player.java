@@ -8,7 +8,6 @@ package pdc.assignment.entities;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Map;
-import java.util.Scanner;
 import java.util.logging.Logger;
 import pdc.assignment.items.Armour;
 import pdc.assignment.items.Item;
@@ -34,7 +33,7 @@ public final class Player extends AbstractEntity{
     // Initialises player from scratch.
     public Player() throws Exception {
         this.currentHealth = 20;
-        this.maxHealth = 20;
+        this.maxHealth = 25;
         this.damage = 5;
         this.setMaxSuperAttackLevel(5);
         this.setCurrentSuperAttackLevel(0);

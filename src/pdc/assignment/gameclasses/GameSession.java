@@ -20,10 +20,10 @@ import pdc.assignment.entities.Player;
 public final class GameSession {
 
     boolean isNewGame;
-    final int maxLevel = 8;
-    private Entity player;
-    GameData gameData;
-    private Level level;
+    final int maxLevel = 4;
+    private final Entity player;
+    private final GameData gameData;
+    private final Level level;
     private boolean isWon = false;
     private boolean isLost = false;
 
@@ -72,7 +72,7 @@ public final class GameSession {
         if (this.level.getCurrentEnemy().isDead()) {
             this.winRound();
         }
-        if(!isWon) {
+        else if(!isWon) {
             this.level.enemyTurn();
             if (this.level.getPlayer().isDead()) {
                 this.isLost = true;

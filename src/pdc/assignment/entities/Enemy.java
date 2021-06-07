@@ -8,7 +8,6 @@ package pdc.assignment.entities;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Random;
 import pdc.assignment.database.GameData;
 import pdc.assignment.gameclasses.HistoryLogger;
 
@@ -18,6 +17,7 @@ import pdc.assignment.gameclasses.HistoryLogger;
  */
 public final class Enemy extends AbstractEntity {
     
+    private static int count = 0;    
     HashMap enemyData;
     
     public Enemy(GameData gameData) {
@@ -29,7 +29,7 @@ public final class Enemy extends AbstractEntity {
         
     @Override
     public void create() {
-        this.name = randomisedEnemy();
+        this.name = generateEnemy();
         HashMap enemyDetails = (HashMap) this.enemyData.get(this.name);
         this.currentHealth =  (int) enemyDetails.get("health");
         this.maxHealth = (int) enemyDetails.get("health");
@@ -95,10 +95,14 @@ public final class Enemy extends AbstractEntity {
     }
     
     // Generator that will return a name of a random enemy.
-    private String randomisedEnemy() {
+    private String generateEnemy() {
         ArrayList<String> enemyList = new ArrayList<>(Arrays.asList("Orc", "Wolf", "Thief", "Korg"));
-        Random generator = new Random();
-        int randomNumber = generator.nextInt(4);
-        return enemyList.get(randomNumber);
+        String enemyToSpawn = enemyList.get(count);
+        if (count >= 3) {
+            count = 0;
+        }else {
+            count++;
+        }
+        return enemyToSpawn;
     }
 }
