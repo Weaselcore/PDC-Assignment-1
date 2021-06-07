@@ -45,7 +45,7 @@ public final class GameSession {
         // Create player passing old data.
         this.player = EntityFactory.createOldEntity("old player", loadData, this.gameData);
         // Passes in the old level value from save.
-        this.level = new Level(this.gameData, (Player) this.player, (int) loadData.get("level"));
+        this.level = new Level(this.gameData, (Player) this.player, loadData);
         this.displayLevel();
     }
 

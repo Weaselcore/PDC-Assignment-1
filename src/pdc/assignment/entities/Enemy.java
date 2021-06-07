@@ -24,6 +24,13 @@ public final class Enemy extends AbstractEntity {
     // This will be randomly generated unlike the players name.
         this.enemyData = gameData.getEnemyData();
         this.create();
+    }
+        
+    public Enemy(GameData gameData, int Count) {
+    // This will be randomly generated unlike the players name.
+        this.enemyData = gameData.getEnemyData();
+        this.setCount(Count);
+        this.create();
         
     };
         
@@ -99,10 +106,19 @@ public final class Enemy extends AbstractEntity {
         ArrayList<String> enemyList = new ArrayList<>(Arrays.asList("Orc", "Wolf", "Thief", "Korg"));
         String enemyToSpawn = enemyList.get(count);
         if (count >= 3) {
-            count = 0;
+            setCount(0);
         }else {
             count++;
         }
         return enemyToSpawn;
     }
+
+    /**
+     * @param aCount the count to set
+     */
+    public static void setCount(int aCount) {
+        count = aCount;
+    }
+    
+    
 }

@@ -113,4 +113,8 @@ public class GameModel extends Observable{
     public LinkedList getPotionList() {
         return this.potionList;
     }
+    
+    public String getCurrentEnemyName() {
+        return this.gameSession.getLevel().getCurrentEnemy().getName();
+    }
 }

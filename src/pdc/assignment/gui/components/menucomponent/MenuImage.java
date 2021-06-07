@@ -5,9 +5,9 @@
  */
 package pdc.assignment.gui.components.menucomponent;
 
+import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
@@ -16,11 +16,15 @@ import javax.swing.JPanel;
  */
 public final class MenuImage extends JPanel {
     
-    private final JLabel imageLabel;
-    
+    Image image;  
     public MenuImage() {
-        Image image = new ImageIcon("dude with a sword.png").getImage();    
-        this.imageLabel = new JLabel(new ImageIcon(image)) ;
-        this.add(imageLabel);
+        image = new ImageIcon("hero.png").getImage();
     }
+    
+    @Override
+    public void paintComponent(Graphics G) {
+        super.paintComponent(G);
+        G.drawImage(this.image, 0, 0, this.getWidth(), this.getHeight(), null);
+    }
+
 }

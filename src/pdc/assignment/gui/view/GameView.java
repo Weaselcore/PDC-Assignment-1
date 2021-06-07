@@ -107,6 +107,13 @@ public final class GameView extends Observable{
             rightJPanelToShow = rightPanel.getPotionPanel();
         }
     }
+    
+    public void showGameImages() {
+        if (getUpperJPanelToShow() != this.upperPanel.getGameImages()) {
+            upperPanel.cardLayout.show(upperPanel, upperPanel.GAME_IMAGE);
+            upperJPanelToShow = upperPanel.getGameImages();
+        }
+    }
   
     public void addController(GameController menuController) {
         

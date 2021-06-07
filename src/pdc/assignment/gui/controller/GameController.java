@@ -50,6 +50,7 @@ public class GameController implements ActionListener{
             }
             gameView.showGameButtonPanel();
             gameView.showHistoryLogPanel();
+            gameView.showGameImages();
             this.updateHistoryLog();
         }        
         else if (source == gameView.lowerPanel.getNewGameCancelButton()) {
@@ -69,6 +70,8 @@ public class GameController implements ActionListener{
                     gameModel.oldGameSession(loadId);
                     gameView.showGameButtonPanel();
                     gameView.showHistoryLogPanel();
+                    gameView.showGameImages();
+                    this.updateGameImage();
                     this.updateHistoryLog();
                 } catch (Exception ex) {
                     Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
@@ -97,11 +100,12 @@ public class GameController implements ActionListener{
             if (source == gameView.lowerPanel.getGameButtonPanel().getAttackButton()) {
                 try {
                     gameModel.playerAttack();
+                    this.updateHistoryLog();
+                    this.updateGameImage();
                 } catch (Exception ex) {
                     Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 System.out.println("Attack button has been pressed.");
-                this.updateHistoryLog();
             }
             else if (source == gameView.lowerPanel.getGameButtonPanel().getSaveButton()) {
                 try {
@@ -146,5 +150,10 @@ public class GameController implements ActionListener{
     private void updatePotionList() {
         this.gameModel.fetchListofPotions();
         this.gameView.rightPanel.getPotionPanel().getPotionJlist().populateListModelLinkedList(gameModel.getPotionList());
+    }
+    
+    private void updateGameImage() {
+        String enemyName = this.gameModel.getCurrentEnemyName();
+        this.gameView.upperPanel.getGameImages().changeImage(enemyName);
     }
 }

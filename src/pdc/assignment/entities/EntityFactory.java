@@ -32,6 +32,9 @@ public class EntityFactory {
             case "old player":
                 Player player = new Player(loadData, gameData);
                 return player;
+            case "old enemy":
+                Enemy enemy = new Enemy(gameData, (int) loadData.get("level"));
+                return enemy;
             default:
                 throw new Exception("Invalid entity type.");
         }

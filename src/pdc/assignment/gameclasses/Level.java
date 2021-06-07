@@ -42,12 +42,12 @@ public final class Level implements Serializable{
     }  
     
     // If loading from an old save.
-    public Level(GameData gameData, Player player, int currentLevel) throws Exception {
+    public Level(GameData gameData, Player player, HashMap loadData) throws Exception {
         this.gameData = gameData;
-        this.currentLevel = currentLevel;
+        this.currentLevel = (int) loadData.get("level");
         this.player = player;
         this.lootGenerator = new LootTableGenerator(this.gameData);
-        this.generateEnemy();
+        this.currentEnemy = (Enemy) EntityFactory.createOldEntity("old enemy", loadData, gameData);
     }  
     
     public void generateEnemy() throws Exception {
