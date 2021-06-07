@@ -36,6 +36,7 @@ public final class GameSession {
         playerPlayer.setName(playerName);
         this.level = new Level(this.gameData, this.getPlayer());
         this.displayLevel();
+        this.level.displayEntityInfo();
     }
     
     // Constructor to load game from save file.
@@ -47,6 +48,7 @@ public final class GameSession {
         // Passes in the old level value from save.
         this.level = new Level(this.gameData, (Player) this.player, loadData);
         this.displayLevel();
+        this.level.displayEntityInfo();
     }
 
     private void winRound() throws Exception {
@@ -79,6 +81,8 @@ public final class GameSession {
                 HistoryLogger.append("You have tried your best but have failed."
                         + "\nGAME OVER"
                         + "\nPlease EXIT and run the program to try again.");
+            } else {
+                this.level.displayEntityInfo();
             }
         }
     }    

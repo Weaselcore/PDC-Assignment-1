@@ -172,6 +172,7 @@ public final class Player extends AbstractEntity{
     // Checks if currentWeapon and currentArmour is better, if so replaces the
     // current equipment.
     public void obtainItems(ArrayList<Item> items) throws Exception {
+        HistoryLogger.append(" ");
         items.forEach(item -> {
             if (item.getClass() == Potion.class) {
                 this.setInventory("add", (Potion) item);

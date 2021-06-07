@@ -74,8 +74,6 @@ public final class Level implements Serializable{
     // Level object is responsible for taking in player input.
     public void playerTurn(){
 //      boolean chosen = false;
-        this.getCurrentEnemy().displayInfo();
-        this.getPlayer().displayInfo();
         this.getPlayer().displaySuperAttack();
         this.getPlayer().attack(this.getCurrentEnemy());
         this.isEnemyDead = this.getCurrentEnemy().isDead();
@@ -95,7 +93,7 @@ public final class Level implements Serializable{
         stringbuilder.append("Level Progress: ");
         for (int i = 0; i < maxLevel; i++) {
             if (i != (this.currentLevel - 1)) {
-                stringbuilder.append("[ ]");
+                stringbuilder.append("[  ]");
             } else {
                 stringbuilder.append("[*]");
             }
@@ -171,6 +169,11 @@ public final class Level implements Serializable{
 
     public void incrementLevel() {
         this.currentLevel += 1;
+    }
+    
+    public void displayEntityInfo() {
+        this.getPlayer().displayInfo();
+        this.getCurrentEnemy().displayInfo();
     }
  
 }
