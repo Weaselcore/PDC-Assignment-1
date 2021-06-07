@@ -6,6 +6,7 @@
 package pdc.assignment.gameclasses;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import pdc.assignment.loot.LootTableGenerator;
@@ -23,7 +24,7 @@ public final class Level implements Serializable{
     
     private int currentLevel;
     private Enemy currentEnemy;
-    private Player player;
+    private final Player player;
     int maxLevel;
     GameData gameData;
     LootTableGenerator lootGenerator;
@@ -58,6 +59,13 @@ public final class Level implements Serializable{
         return this.isEnemyDead;
     }
     
+    /**
+     * @return the isplayerDead
+     */
+    public boolean isIsplayerDead() {
+        return isplayerDead;
+    } 
+    
     public void enemyTurn() {          
         this.getCurrentEnemy().turn(this.getPlayer());
         this.isplayerDead = this.getPlayer().isDead();
@@ -71,75 +79,11 @@ public final class Level implements Serializable{
         this.getPlayer().displaySuperAttack();
         this.getPlayer().attack(this.getCurrentEnemy());
         this.isEnemyDead = this.getCurrentEnemy().isDead();
-//
-//        while (!chosen) {
-//            Player currentPlayer = ((Player) this.player);
-//            currentPlayer.displaySuperAttack();
-//            
-//
-//            if ("1".equals(chosenOption)) {
-//                currentPlayer.attack(currentEnemy);
-//                boolean targetDead = currentEnemy.isDead();
-//                if (targetDead) {
-//                    System.out.println("\n" + this.player.getName() + " has slain " + currentEnemy.getName() + "!\n");
-//                    isDead = true;
-//                }
-//                else {
-//                    isDead = false;
-//                }
-//                chosen = true;
-//            }
-//            else if ("2".equals(chosenOption)) {
-//                if (!currentPlayer.getInventory().isEmpty()) {
-//                    Integer count = 0;
-//                    
-//                    for (Potion item: currentPlayer.getInventory()) {
-//                        System.out.println("Count: " + "[#" + (count + 1) + "] " + item);
-//                        count += 1;
-//                    }
-//                    
-//                    boolean potionChosen = false;
-//                    Scanner potionScanner = new Scanner(System.in);
-//                    
-//                    while (!potionChosen) {
-//                        
-//                        System.out.println("");
-//                        this.player.displayInfo();
-//                        ((Player) this.player).displaySuperAttack();
-//                        
-//                        System.out.println("Please select potion using corresponding # or any input to exit:");
-//                        Integer potionChoice = potionScanner.nextInt();
-//                        
-//                        if (potionChoice <= count) {
-//                            Potion potion = currentPlayer.getInventory().get(potionChoice - 1);
-//                            currentPlayer.usePotion(potion);
-//                            currentPlayer.setInventory("remove", potion);
-//                            potionChosen = true;
-//                        } else {
-//                            // Goes back to main options for turn.
-//                            System.out.println("Please input a valid #.");
-//                            break;
-//                        }
-//                    } 
-//                } else {
-//                    System.out.println("You have no potions.");
-//                }
-//            }
-//            else if ("3".equals(chosenOption)) {
-//                Wrapper.saveGame(this.saveToHashMap());
-//                System.out.println("Your game has been saved to " + this.player.getName() + ".json");
-//                System.exit(0);                
-//            }
-//            else if ("4".equals(chosenOption)) {
-//                System.out.println("Thanks for playing");
-//                System.exit(0);
-//            }
-//            else {
-//                System.out.println("Please input a proper input!");
-//            }
-//        } 
     }
     
+    public ArrayList rewardPlayer() throws Exception {
+        return this.lootGenerator.generateItem();
+    }
     
         /**
      * Displays the current level the Player is currently on, Example: [ ] [*] [
@@ -156,7 +100,7 @@ public final class Level implements Serializable{
                 stringbuilder.append("[*]");
             }
         }
-        System.out.println(stringbuilder.toString());
+        HistoryLogger.append(stringbuilder.toString());
     }
 
     /**

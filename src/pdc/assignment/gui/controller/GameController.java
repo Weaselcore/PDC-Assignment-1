@@ -50,6 +50,7 @@ public class GameController implements ActionListener{
             }
             gameView.showGameButtonPanel();
             gameView.showHistoryLogPanel();
+            this.updateHistoryLog();
         }        
         else if (source == gameView.lowerPanel.getNewGameCancelButton()) {
             gameView.showButtonPanel();
