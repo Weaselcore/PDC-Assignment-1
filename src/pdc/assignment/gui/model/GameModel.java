@@ -55,6 +55,10 @@ public class GameModel extends Observable{
         this.gameSession = new GameSession(id);
         return gameSession;
     };
+    
+    public void playerAttack() throws Exception{
+        this.gameSession.attack();
+    }
 
     /**
      * @return the saveList
@@ -71,6 +75,10 @@ public class GameModel extends Observable{
             return id;
         }
         return -1;
+    }
+    
+    public boolean hasGameEnded() {
+        return this.gameSession.getIsWon() || this.gameSession.getIsLost();
     }
 
 }

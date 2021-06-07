@@ -21,7 +21,7 @@ public final class HistoryLog extends JPanel{
     
     public HistoryLog() {
         this.historyScrollPanel = new JScrollPane();
-        this.historyScrollPanel.setPreferredSize(new Dimension(200,500));
+        this.historyScrollPanel.setPreferredSize(new Dimension(500,500));
         this.add(this.historyScrollPanel);
         this.historyTextLog = new JTextArea();
         this.add(this.historyTextLog);

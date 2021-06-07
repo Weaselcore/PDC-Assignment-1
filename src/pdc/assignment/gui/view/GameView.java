@@ -105,6 +105,7 @@ public final class GameView extends Observable{
         
         ArrayList<JButton> allButtonsArray = new ArrayList();
         allButtonsArray.addAll(lowerPanel.getButtonList());
+        allButtonsArray.addAll(lowerPanel.getGameButtonPanel().getButtonList());
         allButtonsArray.addAll(rightPanel.getSaveListPanel().getButtonList());
         
         allButtonsArray.forEach(button -> {

@@ -17,6 +17,7 @@ import pdc.assignment.items.Potion;
 import pdc.assignment.items.Weapon;
 import pdc.assignment.gameclasses.GameSession;
 import pdc.assignment.database.GameData;
+import pdc.assignment.gameclasses.HistoryLogger;
 
 /**
  *
@@ -75,12 +76,12 @@ public final class Player extends AbstractEntity{
             Armour loadedArmour = (Armour) ItemFactory.createItem("armour", (String) loadData.get("armour"), gameData);
             this.setCurrentArmour(loadedArmour);
         }
-        System.out.println("\n" + this.name + " has appeared to fight for another day!");
+        HistoryLogger.append("\n" + this.name + " has appeared to fight for another day!");
     }
 
     @Override
     public void displayInfo() {
-        System.out.println("| " + this.name + ": | Health: " + this.currentHealth
+        HistoryLogger.append("| " + this.name + ": | Health: " + this.currentHealth
                 + "/" + this.maxHealth + " | Damage: " + this.damage + " |");
     }
 
@@ -96,10 +97,10 @@ public final class Player extends AbstractEntity{
             // Prevents damage from healing player when armour is higher than incoming damage.
             double result = damage - this.getCurrentArmour().getValue();
             if (result < 0) {
-                System.out.println("Armour has negated all incoming damage!");
+                HistoryLogger.append("Armour has negated all incoming damage!");
             } else {
                 this.currentHealth -= result;
-                System.out.println(this.name + "'s armour has reduced damage by " + this.getCurrentArmour().getValue());
+                HistoryLogger.append(this.name + "'s armour has reduced damage by " + this.getCurrentArmour().getValue());
             }
         } else {
             this.currentHealth -= damage;
@@ -140,7 +141,7 @@ public final class Player extends AbstractEntity{
         }
 
         currentEnemy.takeDamage(damageToDeal);
-        System.out.println(attackString);
+        HistoryLogger.append(attackString);
     }
 
     // Builds a string depending on maxSuperAttack value and currentSuperAttack value.
@@ -154,8 +155,7 @@ public final class Player extends AbstractEntity{
                 stringbuilder.append("[*]");
             }
         }
-        System.out.println(stringbuilder.toString());
-        System.out.println("");
+        HistoryLogger.append(stringbuilder.toString());
     }
     
     // Calculates damage using base damage value and currentWeapon value.
@@ -181,17 +181,17 @@ public final class Player extends AbstractEntity{
                 Weapon newWeapon = (Weapon) item;
                 if (this.getCurrentWeapon() == null || this.getCurrentWeapon().getValue() < newWeapon.getValue()) {
                     this.setCurrentWeapon(newWeapon);
-                    System.out.println("You have acquired and equipped a better weapon." + newWeapon.toString());
+                    HistoryLogger.append("You have acquired and equipped a better weapon." + newWeapon.toString());
                 } else {
-                    System.out.println("Your current weapon is better, so you've left the loot.");
+                    HistoryLogger.append("Your current weapon is better, so you've left the loot.");
                 }
             } else if (item.getClass() == Armour.class) {
                 Armour newArmour = (Armour) item;
                 if (this.getCurrentArmour() == null || this.getCurrentWeapon().getValue() < newArmour.getValue()) {
                     this.setCurrentArmour(newArmour);
-                    System.out.println("You have acquired and equipped a better set of armour." + newArmour.toString());
+                    HistoryLogger.append("You have acquired and equipped a better set of armour." + newArmour.toString());
                 } else {
-                    System.out.println("Your current armour is better, so you've left the loot.");
+                    HistoryLogger.append("Your current armour is better, so you've left the loot.");
                 }
             }
         });
@@ -206,20 +206,20 @@ public final class Player extends AbstractEntity{
         if ("health".equals(type)) {
             if ((this.getCurrentHealth() + value) > this.getMaxHealth()){
                 this.setCurrentHealth(this.getMaxHealth());
-                System.out.println("Health potion has maxed out your health bar.");               
+                HistoryLogger.append("Health potion has maxed out your health bar.");               
             } else {
                 this.currentHealth += value;
-                System.out.println(this.name + " has healed for " + value + ". Health: " + this.currentHealth);
+                HistoryLogger.append(this.name + " has healed for " + value + ". Health: " + this.currentHealth);
             }
         } else {
             // The currentSuperAttackLevel cannot go above maxSuperAttaclLevel.
             // If the Super Attack potion is not used efficiently, it'll be wasted.
             if ((this.getCurrentSuperAttackLevel() + value) > this.getMaxSuperAttackLevel()) {
                 this.setCurrentSuperAttackLevel(this.getMaxSuperAttackLevel());
-                System.out.println("Attack potion has maxed out your super attack bar.");
+                HistoryLogger.append("Attack potion has maxed out your super attack bar.");
             } else {
                 this.setCurrentSuperAttackLevel(this.getCurrentSuperAttackLevel() + value);
-                System.out.println("Attack potion has added " + value + " to " + this.name + "'s super attack bar.");
+                HistoryLogger.append("Attack potion has added " + value + " to " + this.name + "'s super attack bar.");
             }
         }
     }
@@ -241,7 +241,7 @@ public final class Player extends AbstractEntity{
         } else if (operation.equals("add")) {
             this.inventory.add(potion);
         } else {
-            System.out.println("Error: You have used a wrong operation in setInventory.");
+            HistoryLogger.append("Error: You have used a wrong operation in setInventory.");
         }
     }
 

@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Random;
 import pdc.assignment.database.GameData;
+import pdc.assignment.gameclasses.HistoryLogger;
 
 /**
  *
@@ -36,14 +37,14 @@ public final class Enemy extends AbstractEntity {
         this.armour = (int) enemyDetails.get("armour");
         this.damage = (int) enemyDetails.get("attack");
         
-        System.out.println("\n ~ A " + this.name + " has appeared! ~ ");
-        System.out.println(" * " + this.description);
+        HistoryLogger.append("\n ~ Some " + this.name + " has appeared! ~ ");
+        HistoryLogger.append(" * " + this.description);
     }
     
     // Displays all information for the enemy.
     @Override
     public void displayInfo() {
-        System.out.println("| " + this.name + ": | Health: " 
+        HistoryLogger.append("| " + this.name + ": | Health: " 
                 + this.currentHealth + "/" + this.maxHealth + " | Damage: " 
                 + this.damage + " |");
     }
@@ -52,7 +53,7 @@ public final class Enemy extends AbstractEntity {
     @Override
     public void takeDamage(double damage) {
         this.currentHealth -= (damage-this.armour);
-        System.out.println(this.name + "'s armour has reduced damage by " + this.armour);
+        HistoryLogger.append(this.name + "'s armour has reduced damage by " + this.armour);
     }
     
     // Will check if the enemy is dead.
@@ -65,7 +66,7 @@ public final class Enemy extends AbstractEntity {
     @Override
     public void attack(Entity player) {
         player.takeDamage(this.damage);
-        System.out.println(" ~ " + this.name + " has attacked you with " + this.damage + ".");
+        HistoryLogger.append(" ~ " + this.name + " has attacked you with " + this.damage + ".");
     }
     
     // Returns the name.
@@ -79,7 +80,7 @@ public final class Enemy extends AbstractEntity {
         this.attack(player);
         boolean targetDead = player.isDead();
         if (targetDead) {
-            System.out.println(" ~~~ " + this.getName() + " has slain " + player.getName() + "!");
+            HistoryLogger.append(" ~~~ " + this.getName() + " has slain " + player.getName() + "!");
             return true;
         }
         else {
@@ -90,7 +91,7 @@ public final class Enemy extends AbstractEntity {
     // Pass in target entity to reduce their health.
     public void attack(Player player) {
         player.takeDamage(this.damage);
-        System.out.println(" ~ " + this.name + " has attacked " + this.name + " with " + this.damage + ".");
+        HistoryLogger.append(" ~ " + this.name + " has attacked " + this.name + " with " + this.damage + ".");
     }
     
     // Generator that will return a name of a random enemy.

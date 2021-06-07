@@ -21,6 +21,8 @@ public final class GameSession {
     private Entity player;
     GameData gameData;
     private Level level;
+    private boolean isWon;
+    private boolean isLost;
 
     // Constructor for a new game.
     public GameSession(String playerName) throws Exception {
@@ -30,7 +32,6 @@ public final class GameSession {
         Player playerPlayer = (Player) this.player;
         playerPlayer.setName(playerName);
         this.level = new Level(this.gameData, this.getPlayer(), this.maxLevel);
-        this.gameSessionLoop();
     }
     
     // Constructor to load game from save file.
@@ -53,26 +54,33 @@ public final class GameSession {
 //        this.gameSessionLoop();
 //    }
 
-    public void gameSessionLoop() throws Exception {
-        
-        int currentLevel;
-
-        // Every level will display the level progress at the start.
-        this.getLevel().displayLevel(this.maxLevel);
-
-        currentLevel = this.getLevel().run();
-
-//            // If the current level is higher than max level, it'll end the game.
-//            if (currentLevel > maxLevel) {
-//                System.out.println("\nYou have beaten the game!\n");
-//                System.exit(0);
-//            // 0 is the result for a defeat.
-//            } else if (currentLevel == 0) {
-//                System.out.println("\nYou have been defeated!\n");
-//                System.exit(0);
-//            }
-
+    private void winRound() throws Exception {
+        HistoryLogger.append("** You have defeated the creature!");
+        this.level.incrementLevel();
+        this.level.generateEnemy();
     }
+    
+    public void attack() throws Exception {
+        this.level.playerTurn();
+        System.out.println("Player attacked");
+        if (this.level.getCurrentEnemy().isDead()) {
+            this.winRound();
+            if (this.level.getCurrentLevel() >= maxLevel) {
+                this.isWon = true;
+                HistoryLogger.append("You have saved the kingdom."
+                        + "\nYOU WON"
+                        + "\nPlease EXIT and run the program to try again.");
+            }
+        }
+        this.level.enemyTurn();
+        if (this.level.getPlayer().isDead()) {
+            this.isLost = true;
+            HistoryLogger.append("You have tried your best but have failed."
+                    + "\nGAME OVER"
+                    + "\nPlease EXIT and run the program to try again.");
+        }        
+    }
+    
 
     /**
      * @return the player
@@ -87,4 +95,20 @@ public final class GameSession {
     public Level getLevel() {
         return level;
     }
+
+    /**
+     * @return the isWon
+     */
+    public boolean getIsWon() {
+        return isWon;
+    }
+
+    /**
+     * @return the isLost
+     */
+    public boolean getIsLost() {
+        return isLost;
+    }
+    
+    
 }

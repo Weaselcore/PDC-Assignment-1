@@ -5,22 +5,14 @@
  */
 package pdc.assignment.gameclasses;
 
-import java.io.IOException;
 import java.io.Serializable;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.Scanner;
-import pdc.assignment.entities.Enemy;
 import pdc.assignment.loot.LootTableGenerator;
 import pdc.assignment.entities.Entity;
 import pdc.assignment.entities.EntityFactory;
 import pdc.assignment.entities.Player;
-import pdc.assignment.items.Item;
-import pdc.assignment.items.Potion;
 import pdc.assignment.database.GameData;
-import pdc.assignment.database.Wrapper;
 
 /**
  *
@@ -29,21 +21,24 @@ import pdc.assignment.database.Wrapper;
 public final class Level implements Serializable{
     
     private int currentLevel;
-    Entity currentEnemy;
-    Entity player;
+    private Entity currentEnemy;
+    private Entity player;
     int maxLevel;
     GameData gameData;
     LootTableGenerator lootGenerator;
-    Entity currentEntityTurn;
+    private boolean isEnemyDead;
+    private boolean isplayerDead;
     
     // If it's a new game.
     public Level(GameData gameData, Entity player, int maxLevel) throws Exception {
         this.gameData = gameData;
         this.currentLevel = 1;
         this.player = player;
+        this.isplayerDead = false;
         this.lootGenerator = new LootTableGenerator(this.gameData);
         this.maxLevel = maxLevel;
-        this.currentEntityTurn = player;
+        this.generateEnemy();
+        this.isEnemyDead = false;
     }  
     
     // If loading from an old save.
@@ -55,65 +50,29 @@ public final class Level implements Serializable{
 //        this.maxLevel = maxLevel;
 //    }  
     
-    /**
-     * Creates a loops to handle the turns which is uses the Entity interface
-     * and type to handle both Player and Enemy.
-     * @return current level.
-     * @throws java.lang.Exception
-     */
-    public int run() throws Exception { 
-        
-        this.generateEnemy();
-
-        boolean levelInProgress = true;
-        // Since there is no parallel assignments in Java,
-        // a temp variable is used to swap around the current entityForTurn.
-        Entity entityForTurn = this.player;
-        Entity entityWaiting = this.currentEnemy;
-        Entity temp;
-
-        while (levelInProgress) {
-            boolean targetHasDied = false;
-            if (entityForTurn instanceof Player){
-                // Player
-                targetHasDied = this.playerTurn(entityWaiting); 
-            } else if (entityForTurn instanceof Enemy) {
-                // Enemy
-                targetHasDied = ((Enemy) entityForTurn).turn(entityWaiting);
-            }
-            if (targetHasDied) {
-                levelInProgress = false;
-            } else {
-                entityWaiting.displayInfo();
-                temp = entityForTurn;
-                entityForTurn = entityWaiting;
-                entityWaiting = temp;
-            }
-        }
-        
-        // After fight, if the player is left standing, create new enemy.
-        if (entityForTurn instanceof Player ) {
-            if (this.currentLevel < this.maxLevel) {
-                // Player will check if weapon/armour is better, equip.
-                System.out.println("The enemy has dropped some loot.");
-                ArrayList<Item> newLoot = this.lootGenerator.generateItem();
-                Player currentPlayer = (Player) this.player;
-                currentPlayer.obtainItems(newLoot);
-            }
-            this.currentLevel += 1;
-        }
-        else {
-            // 0 will be finished game.
-            this.currentLevel = 0;
-        }
-        return this.currentLevel;
+    public void generateEnemy() throws Exception {
+        this.currentEnemy = EntityFactory.createNewEntity("enemy", this.gameData);
+        this.isEnemyDead = false;
+    }
+    
+    public boolean isEnemyDead() {
+        return this.isEnemyDead;
+    }
+    
+    public void enemyTurn() {          
+        this.getCurrentEnemy().attack(this.getPlayer());
+        this.isplayerDead = this.getPlayer().isDead();
     }
     
     // Level object is responsible for taking in player input.
-    public boolean playerTurn(Entity currentEnemy) throws IOException, SQLException {
-//
-//        boolean chosen = false;
-       boolean isDead = false;
+    public void playerTurn(){
+//      boolean chosen = false;
+        this.getCurrentEnemy().displayInfo();
+        this.getPlayer().displayInfo();
+        Player playerPlayer = (Player) this.getPlayer();
+        playerPlayer.displaySuperAttack();
+        this.getPlayer().attack(this.getCurrentEnemy());
+        this.isEnemyDead = this.getCurrentEnemy().isDead();
 //
 //        while (!chosen) {
 //            Player currentPlayer = ((Player) this.player);
@@ -181,7 +140,6 @@ public final class Level implements Serializable{
 //                System.out.println("Please input a proper input!");
 //            }
 //        } 
-        return isDead;
     }
     
     
@@ -209,10 +167,6 @@ public final class Level implements Serializable{
     public int getCurrentLevel() {
         return currentLevel;
     }
-    
-    private void generateEnemy() throws Exception {
-        this.currentEnemy = EntityFactory.createNewEntity("enemy", this.gameData);
-    }
 
     public Entity getPlayer() {
         return this.player;
@@ -221,10 +175,10 @@ public final class Level implements Serializable{
     public HashMap saveToHashMap() {
         
         HashMap map = new HashMap(); 
-        Player playerCasted = (Player) this.player;
+        Player playerCasted = (Player) this.getPlayer();
         
         // Player name
-        String name = player.getName();
+        String name = getPlayer().getName();
         map.put("name", name);
         // Health
         int health = (int) playerCasted.getCurrentHealth();
@@ -263,8 +217,17 @@ public final class Level implements Serializable{
         }
         return map;
     }
-    
-    
+
+    /**
+     * @return the currentEnemy
+     */
+    public Entity getCurrentEnemy() {
+        return currentEnemy;
+    }
+
+    public void incrementLevel() {
+        this.currentLevel += 1;
+    }
     
     
 }
