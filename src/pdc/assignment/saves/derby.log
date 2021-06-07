@@ -1,7 +1,7 @@
-Mon Jun 07 12:55:32 NZST 2021 : Apache Derby Network Server - 10.14.2.0 - (1828579) started and ready to accept connections on port 1527
+Mon Jun 07 18:59:25 NZST 2021 : Apache Derby Network Server - 10.14.2.0 - (1828579) started and ready to accept connections on port 1527
 ----------------------------------------------------------------
-Mon Jun 07 12:55:32 NZST 2021:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0179-e3f7-b3b0-ffff9c7298b4 
+Mon Jun 07 18:59:25 NZST 2021:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0179-e544-daf1-ffff9c7298b4 
 on database directory C:\Users\wease\Documents\GitHub\PDC-Assignment-1\src\pdc\assignment\saves\gamesave with class loader sun.misc.Launcher$AppClassLoader@1d44bcfa 
 Loaded from file:/C:/Users/wease/Documents/GitHub/PDC-Assignment-1/db-derby-10.14.2.0-bin/lib/derby.jar
 java.vendor=Oracle Corporation
@@ -13,8 +13,8 @@ os.version=10.0
 derby.system.home=C:\Users\wease\Documents\GitHub\PDC-Assignment-1\src\pdc\assignment\saves
 Database Class Loader started - derby.database.classpath=''
 ----------------------------------------------------------------
-Mon Jun 07 18:56:08 NZST 2021: Shutting down Derby engine
+Mon Jun 07 19:02:08 NZST 2021: Shutting down Derby engine
 ----------------------------------------------------------------
-Mon Jun 07 18:56:08 NZST 2021:
-Shutting down instance a816c00e-0179-e3f7-b3b0-ffff9c7298b4 on database directory C:\Users\wease\Documents\GitHub\PDC-Assignment-1\src\pdc\assignment\saves\gamesave with class loader sun.misc.Launcher$AppClassLoader@1d44bcfa 
+Mon Jun 07 19:02:08 NZST 2021:
+Shutting down instance a816c00e-0179-e544-daf1-ffff9c7298b4 on database directory C:\Users\wease\Documents\GitHub\PDC-Assignment-1\src\pdc\assignment\saves\gamesave with class loader sun.misc.Launcher$AppClassLoader@1d44bcfa 
 ----------------------------------------------------------------

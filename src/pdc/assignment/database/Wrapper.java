@@ -30,7 +30,7 @@ import javax.sql.rowset.serial.SerialBlob;
 public class Wrapper {
     
     public static Connection dbConnection;
-    final static private String CONNECTION_URL = "jdbc:derby://localhost:1527/gamesave";
+    final static private String CONNECTION_URL = "jdbc:derby://localhost:1527/gamesave;create=true";
     final static private String USERNAME = "team";
     final static private String PASSWORD = "123";
     
