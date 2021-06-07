@@ -9,6 +9,7 @@ import java.util.HashMap;
 import pdc.assignment.entities.EntityFactory;
 import pdc.assignment.entities.Entity;
 import pdc.assignment.database.GameData;
+import pdc.assignment.database.Wrapper;
 import pdc.assignment.entities.Player;
 
 /**
@@ -32,28 +33,18 @@ public final class GameSession {
         this.player = EntityFactory.createNewEntity("player", this.gameData);
         Player playerPlayer = (Player) this.player;
         playerPlayer.setName(playerName);
-        this.level = new Level(this.gameData, this.getPlayer(), this.maxLevel);
+        this.level = new Level(this.gameData, this.getPlayer());
     }
     
     // Constructor to load game from save file.
     public GameSession(int id) throws Exception {
         this.gameData = new GameData();
-//        Map loadData = Deserialiser.readSave(file);
-//        // Create player passing old data.
-//        this.player = EntityFactory.createOldEntity("old player", loadData, this.gameData);
-//        // Passes in the old level value from save.
-//        this.level = new Level(this.gameData, this.player, maxLevel, (int) loadData.get("level"));
-//        this.gameSessionLoop();
+        HashMap loadData = Wrapper.loadGame(id);
+        // Create player passing old data.
+        this.player = EntityFactory.createOldEntity("old player", loadData, this.gameData);
+        // Passes in the old level value from save.
+        this.level = new Level(this.gameData, (Player) this.player, (int) loadData.get("level"));
     }
-
-//    public GameSession(HashMap loadData) throws SQLException, Exception {
-//        this.gameData = new GameData();
-//        // Create player passing old data.
-//        this.player = EntityFactory.createOldEntity("old player", loadData, this.gameData);
-//        // Passes in the old level value from save.
-//        this.level = new Level(this.gameData, this.player, maxLevel, (int) loadData.get("level"));
-//        this.gameSessionLoop();
-//    }
 
     private void winRound() throws Exception {
         HistoryLogger.append("** You have defeated the creature!");

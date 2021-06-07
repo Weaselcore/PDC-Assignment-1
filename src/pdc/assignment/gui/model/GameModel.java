@@ -49,14 +49,12 @@ public class GameModel extends Observable{
         }
     }
     
-    public GameSession newGameSession() throws Exception {
+    public void newGameSession() throws Exception {
         this.gameSession = new GameSession(this.playerName);
-        return gameSession;
     };
     
-    public GameSession oldGameSession(int id) throws Exception {
+    public void oldGameSession(int id) throws Exception {
         this.gameSession = new GameSession(id);
-        return gameSession;
     };
     
     public void playerAttack() throws Exception{
@@ -95,5 +93,4 @@ public class GameModel extends Observable{
             Wrapper.deleteGame(saveID);
         }
     }
-
 }

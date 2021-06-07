@@ -31,25 +31,23 @@ public final class Level implements Serializable{
     private boolean isplayerDead;
     
     // If it's a new game.
-    public Level(GameData gameData, Entity player, int maxLevel) throws Exception {
+    public Level(GameData gameData, Entity player) throws Exception {
         this.gameData = gameData;
         this.currentLevel = 1;
         this.player = (Player) player;
         this.isplayerDead = false;
         this.lootGenerator = new LootTableGenerator(this.gameData);
-        this.maxLevel = maxLevel;
         this.generateEnemy();
-        this.isEnemyDead = false;
     }  
     
     // If loading from an old save.
-//    public Level(GameData gameData, Entity player, int maxLevel, int currentLevel) throws Exception {
-//        this.gameData = gameData;
-//        this.currentLevel = currentLevel;
-//        this.player = player;
-//        this.lootGenerator = new LootTableGenerator(this.gameData);
-//        this.maxLevel = maxLevel;
-//    }  
+    public Level(GameData gameData, Player player, int currentLevel) throws Exception {
+        this.gameData = gameData;
+        this.currentLevel = currentLevel;
+        this.player = player;
+        this.lootGenerator = new LootTableGenerator(this.gameData);
+        this.generateEnemy();
+    }  
     
     public void generateEnemy() throws Exception {
         this.currentEnemy = (Enemy) EntityFactory.createNewEntity("enemy", this.gameData);
@@ -213,7 +211,8 @@ public final class Level implements Serializable{
         
             map.put("potions", potionList);
         } else {
-            map.put("potions", null);
+            LinkedList<String> newPotionList = new LinkedList();
+            map.put("potions", newPotionList);
         }
         HistoryLogger.append("\n* THIS SESSION HAS BEEN SAVED.");
         return map;

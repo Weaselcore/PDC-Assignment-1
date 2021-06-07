@@ -27,6 +27,7 @@ public class GameController implements ActionListener{
     public GameController(GameModel gameModel, GameView gameView) throws SQLException {
         this.gameModel = gameModel;
         this.gameView = gameView;
+        // When starting up, the save list needs to be updated from database data.
         this.updateSaveList();
     }
     
@@ -62,8 +63,15 @@ public class GameController implements ActionListener{
             System.out.println("Load button has been pressed.");
             int indexLoad = gameView.rightPanel.getSaveListPanel().getSavesJlist().getSelectedOption();
             if (indexLoad != -1) {
-                int id = gameModel.getSaveId(indexLoad);
-                System.out.println(id);
+                int loadId = gameModel.getSaveId(indexLoad);
+                try {
+                    gameModel.oldGameSession(loadId);
+                    gameView.showGameButtonPanel();
+                    gameView.showHistoryLogPanel();
+                    this.updateHistoryLog();
+                } catch (Exception ex) {
+                    Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
         else if (source == gameView.rightPanel.getSaveListPanel().getDeleteButton()) {

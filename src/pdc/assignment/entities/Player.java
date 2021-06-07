@@ -54,7 +54,7 @@ public final class Player extends AbstractEntity{
         this.setMaxSuperAttackLevel(5);
 
         // Set potions
-        if (!((LinkedList) loadData.get("potions")).isEmpty()) {
+        if (!((LinkedList) loadData.get("potions")).isEmpty() || !((LinkedList) loadData.get("potions") == null)){
             ((LinkedList) loadData.get("potions")).forEach(potionString -> {
                 Potion potion;
                 try {
@@ -63,7 +63,6 @@ public final class Player extends AbstractEntity{
                 } catch (Exception ex) {
                     Logger.getLogger(GameSession.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
                 }
-
             });
         }
         // Set weapons
