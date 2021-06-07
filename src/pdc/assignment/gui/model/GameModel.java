@@ -88,5 +88,12 @@ public class GameModel extends Observable{
         HashMap saveData = this.gameSession.saveGame();
         Wrapper.saveGame(saveData);
     }
+    
+    public void deleteGame(int index) throws SQLException {
+        int saveID = getSaveId(index);
+        if (saveID != -1) {
+            Wrapper.deleteGame(saveID);
+        }
+    }
 
 }

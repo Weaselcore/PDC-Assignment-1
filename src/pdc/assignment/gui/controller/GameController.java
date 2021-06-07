@@ -24,11 +24,10 @@ public class GameController implements ActionListener{
     GameModel gameModel;
     GameView gameView;
     
-    public GameController(GameModel menuModel, GameView menuView) throws SQLException {
-        this.gameModel = menuModel;
-        this.gameModel.fetchListOfSaves();
-        this.gameView = menuView;
-        this.gameView.rightPanel.getSaveListPanel().getSavesJlist().populateSaveList(menuModel.getSaveList());
+    public GameController(GameModel gameModel, GameView gameView) throws SQLException {
+        this.gameModel = gameModel;
+        this.gameView = gameView;
+        this.updateSaveList();
     }
     
     @Override
@@ -70,9 +69,11 @@ public class GameController implements ActionListener{
         else if (source == gameView.rightPanel.getSaveListPanel().getDeleteButton()) {
             System.out.println("Delete button has been pressed.");
             int indexDelete = gameView.rightPanel.getSaveListPanel().getSavesJlist().getSelectedOption();
-            if (indexDelete != -1) {
-                int id = gameModel.getSaveId(indexDelete);
-                System.out.println(id);
+            try {
+                gameModel.deleteGame(indexDelete);
+                this.updateSaveList();
+            } catch (SQLException ex) {
+                Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         else if (source == gameView.rightPanel.getSaveListPanel().getSavesJlist()) {
@@ -82,6 +83,7 @@ public class GameController implements ActionListener{
             System.out.println("Exit button has been pressed.");
             System.exit(0);
         }
+        // These buttons will be disabled when the game is over.
         else if (!gameModel.hasGameEnded()) {
             if (source == gameView.lowerPanel.getGameButtonPanel().getAttackButton()) {
                 try {
@@ -111,5 +113,10 @@ public class GameController implements ActionListener{
             gameView.rightPanel.getHistoryPanel().addText(element);
             gameView.rightPanel.getHistoryPanel().addText("\n");
         });
+    }
+    
+    private void updateSaveList() throws SQLException {
+        this.gameModel.fetchListOfSaves();
+        this.gameView.rightPanel.getSaveListPanel().getSavesJlist().populateSaveList(gameModel.getSaveList());
     }
 }

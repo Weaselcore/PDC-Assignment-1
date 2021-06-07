@@ -198,7 +198,7 @@ public class Wrapper {
         String statement = "DELETE FROM PLAYERDATA WHERE ID = ?";
         PreparedStatement prepStatement = Wrapper.dbConnection.prepareStatement(statement);
         prepStatement.setInt(1, id);
-        ResultSet result = prepStatement.executeQuery();
+        prepStatement.execute();
         Wrapper.close();
     }
     
