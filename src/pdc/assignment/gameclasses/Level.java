@@ -13,6 +13,7 @@ import pdc.assignment.entities.Entity;
 import pdc.assignment.entities.EntityFactory;
 import pdc.assignment.entities.Player;
 import pdc.assignment.database.GameData;
+import pdc.assignment.entities.Enemy;
 
 /**
  *
@@ -21,8 +22,8 @@ import pdc.assignment.database.GameData;
 public final class Level implements Serializable{
     
     private int currentLevel;
-    private Entity currentEnemy;
-    private Entity player;
+    private Enemy currentEnemy;
+    private Player player;
     int maxLevel;
     GameData gameData;
     LootTableGenerator lootGenerator;
@@ -33,7 +34,7 @@ public final class Level implements Serializable{
     public Level(GameData gameData, Entity player, int maxLevel) throws Exception {
         this.gameData = gameData;
         this.currentLevel = 1;
-        this.player = player;
+        this.player = (Player) player;
         this.isplayerDead = false;
         this.lootGenerator = new LootTableGenerator(this.gameData);
         this.maxLevel = maxLevel;
@@ -51,7 +52,7 @@ public final class Level implements Serializable{
 //    }  
     
     public void generateEnemy() throws Exception {
-        this.currentEnemy = EntityFactory.createNewEntity("enemy", this.gameData);
+        this.currentEnemy = (Enemy) EntityFactory.createNewEntity("enemy", this.gameData);
         this.isEnemyDead = false;
     }
     
@@ -60,7 +61,7 @@ public final class Level implements Serializable{
     }
     
     public void enemyTurn() {          
-        this.getCurrentEnemy().attack(this.getPlayer());
+        this.getCurrentEnemy().turn(this.getPlayer());
         this.isplayerDead = this.getPlayer().isDead();
     }
     
@@ -69,8 +70,7 @@ public final class Level implements Serializable{
 //      boolean chosen = false;
         this.getCurrentEnemy().displayInfo();
         this.getPlayer().displayInfo();
-        Player playerPlayer = (Player) this.getPlayer();
-        playerPlayer.displaySuperAttack();
+        this.getPlayer().displaySuperAttack();
         this.getPlayer().attack(this.getCurrentEnemy());
         this.isEnemyDead = this.getCurrentEnemy().isDead();
 //
@@ -168,7 +168,7 @@ public final class Level implements Serializable{
         return currentLevel;
     }
 
-    public Entity getPlayer() {
+    public Player getPlayer() {
         return this.player;
     }
     
@@ -215,19 +215,19 @@ public final class Level implements Serializable{
         } else {
             map.put("potions", null);
         }
+        HistoryLogger.append("\n* THIS SESSION HAS BEEN SAVED.");
         return map;
     }
 
     /**
      * @return the currentEnemy
      */
-    public Entity getCurrentEnemy() {
+    public Enemy getCurrentEnemy() {
         return currentEnemy;
     }
 
     public void incrementLevel() {
         this.currentLevel += 1;
     }
-    
-    
+ 
 }

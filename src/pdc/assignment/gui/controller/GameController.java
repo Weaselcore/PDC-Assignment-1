@@ -7,6 +7,7 @@ package pdc.assignment.gui.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -81,8 +82,7 @@ public class GameController implements ActionListener{
             System.out.println("Exit button has been pressed.");
             System.exit(0);
         }
-       
-        if (!gameModel.hasGameEnded()) {
+        else if (!gameModel.hasGameEnded()) {
             if (source == gameView.lowerPanel.getGameButtonPanel().getAttackButton()) {
                 try {
                     gameModel.playerAttack();
@@ -90,12 +90,26 @@ public class GameController implements ActionListener{
                     Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 System.out.println("Attack button has been pressed.");
-                ArrayList<String> historyLog = HistoryLogger.unload();
-                historyLog.forEach(element -> {
-                    gameView.rightPanel.getHistoryPanel().addText(element);
-                    gameView.rightPanel.getHistoryPanel().addText("\n");
-                });
+                this.updateHistoryLog();
+            }
+            else if (source == gameView.lowerPanel.getGameButtonPanel().getSaveButton()) {
+                try {
+                    gameModel.saveGame();
+                    this.updateHistoryLog();   
+                } catch (IOException ex) {
+                    Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException ex) {
+                    Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
+    }
+    
+    private void updateHistoryLog() {
+        ArrayList<String> historyLog = HistoryLogger.unload();
+        historyLog.forEach(element -> {
+            gameView.rightPanel.getHistoryPanel().addText(element);
+            gameView.rightPanel.getHistoryPanel().addText("\n");
+        });
     }
 }

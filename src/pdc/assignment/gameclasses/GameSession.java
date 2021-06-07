@@ -5,6 +5,7 @@
  */
 package pdc.assignment.gameclasses;
 
+import java.util.HashMap;
 import pdc.assignment.entities.EntityFactory;
 import pdc.assignment.entities.Entity;
 import pdc.assignment.database.GameData;
@@ -21,8 +22,8 @@ public final class GameSession {
     private Entity player;
     GameData gameData;
     private Level level;
-    private boolean isWon;
-    private boolean isLost;
+    private boolean isWon = false;
+    private boolean isLost = false;
 
     // Constructor for a new game.
     public GameSession(String playerName) throws Exception {
@@ -108,6 +109,10 @@ public final class GameSession {
      */
     public boolean getIsLost() {
         return isLost;
+    }
+    
+    public HashMap saveGame() {
+        return this.level.saveToHashMap();
     }
     
     

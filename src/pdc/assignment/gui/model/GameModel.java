@@ -5,14 +5,17 @@
  */
 package pdc.assignment.gui.model;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Observable;
 import java.util.Set;
 import pdc.assignment.database.GameData;
 import pdc.assignment.database.Wrapper;
 import pdc.assignment.gameclasses.GameSession;
+import pdc.assignment.gameclasses.HistoryLogger;
 
 /**
  *
@@ -79,6 +82,11 @@ public class GameModel extends Observable{
     
     public boolean hasGameEnded() {
         return this.gameSession.getIsWon() || this.gameSession.getIsLost();
+    }
+    
+    public void saveGame() throws IOException, SQLException{
+        HashMap saveData = this.gameSession.saveGame();
+        Wrapper.saveGame(saveData);
     }
 
 }

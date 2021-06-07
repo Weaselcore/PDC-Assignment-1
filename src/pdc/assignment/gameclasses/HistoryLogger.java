@@ -20,6 +20,14 @@ public class HistoryLogger {
     }
     
     public static ArrayList unload() {
-        return messageLogger;
+        ArrayList<String> messageToSend = new ArrayList<>();
+        
+        // This copies all elements instead of doing a shallow copy.
+        // This is required to empty the arraylist for future messages.
+        messageLogger.forEach(element -> {
+            messageToSend.add(element);
+        });
+        messageLogger.clear();
+        return messageToSend;
     }
 }
