@@ -218,6 +218,7 @@ public final class Player extends AbstractEntity{
             } else {
                 this.setCurrentSuperAttackLevel(this.getCurrentSuperAttackLevel() + value);
                 HistoryLogger.append("Attack potion has added " + value + " to " + this.name + "'s super attack bar.");
+                this.displaySuperAttack();
             }
         }
     }
