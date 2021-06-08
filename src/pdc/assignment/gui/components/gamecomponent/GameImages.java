@@ -14,6 +14,12 @@ import javax.swing.JPanel;
  *
  * @author wease
  */
+
+/**
+ * This JPanel shows the images of each monster when they appear.
+ * It dynamically changes when the monster gets defeated.
+ * 
+ */
 public class GameImages extends JPanel{
     
     private final Image thief;

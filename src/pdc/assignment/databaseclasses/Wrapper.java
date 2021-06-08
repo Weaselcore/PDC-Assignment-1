@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pdc.assignment.database;
+package pdc.assignment.databaseclasses;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -27,6 +27,11 @@ import javax.sql.rowset.serial.SerialBlob;
  *
  * @author wease
  */
+
+/**
+ * A class that bridges the program to the database.
+ * 
+ */
 public class Wrapper {
     
     public static Connection dbConnection;
@@ -49,9 +54,13 @@ public class Wrapper {
         Wrapper.dbConnection.close();
     }
     
-    // Grabs data from the local database and returns them as a HashMap.
-    // The game takes the HashMap to store it into memory and to 
-    public static HashMap load(String type) throws SQLException {
+    /**
+     * Loads all stored data from the database and returns a HashMap.
+     * @param type
+     * @return
+     * @throws SQLException 
+     */
+    public static HashMap loadGameData(String type) throws SQLException {
         
         String statement;
         ArrayList<String> columnNames;
@@ -120,6 +129,14 @@ public class Wrapper {
         return null;
     }
     
+    /**
+     * This method grabs the data and sends the data and the parent hashmap to be populated.
+     * @param columnNames
+     * @param hashMap
+     * @param statement
+     * @return
+     * @throws SQLException 
+     */
     private static HashMap fetchQuerySet(ArrayList<String> columnNames,HashMap hashMap, String statement) throws SQLException {
         Statement stmt = Wrapper.dbConnection.createStatement();
         ResultSet rs = stmt.executeQuery(statement);
@@ -129,6 +146,15 @@ public class Wrapper {
         return hashMap;
     }
     
+    /**
+     * This grabs the data from the method above so the data can be nested
+     * in the parent hashmap passed through.
+     * @param columnNameArray
+     * @param rs
+     * @param hashMap
+     * @return
+     * @throws SQLException 
+     */
     private static HashMap addSetToHashMap(ArrayList<String> columnNameArray, ResultSet rs, HashMap hashMap) throws SQLException {
         
         // For each element in the result set, add it to a hashmap with the
@@ -147,7 +173,12 @@ public class Wrapper {
         return hashMap;
     }
     
-    // The GameData is converted from HashMap into an db entry.
+    /**
+     * The level data passed will be converted into a BLOB to be saved in the database.
+     * @param level
+     * @throws IOException
+     * @throws SQLException 
+     */
     public static void saveGame(HashMap level) throws IOException, SQLException {
         
         ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
@@ -171,6 +202,15 @@ public class Wrapper {
         Wrapper.close();
     }
     
+    /**
+     * This method retrieves the save data with the given id and converts the
+     * BLOB into a hashmap.
+     * @param id
+     * @return
+     * @throws SQLException
+     * @throws IOException
+     * @throws ClassNotFoundException 
+     */
     public static HashMap loadGame(int id) throws SQLException, IOException, ClassNotFoundException {
         
         // Retrieve result set from the id.
@@ -193,6 +233,11 @@ public class Wrapper {
         return playerDataHashMap;
     }
     
+    /**
+     * This method deletes the save from the database with the given id.
+     * @param id
+     * @throws SQLException 
+     */
     public static void deleteGame(int id) throws SQLException {
         Wrapper.connect();
         String statement = "DELETE FROM PLAYERDATA WHERE ID = ?";
@@ -202,6 +247,11 @@ public class Wrapper {
         Wrapper.close();
     }
     
+    /**
+     * Retrieves a list of saves from the database to be displayed.
+     * @return
+     * @throws SQLException 
+     */
     public static LinkedHashMap retrieveSaveList() throws SQLException {
         Wrapper.connect();
         LinkedHashMap linkedHashMapOfSaves = new LinkedHashMap();

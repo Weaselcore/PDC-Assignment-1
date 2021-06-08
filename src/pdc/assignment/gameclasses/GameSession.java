@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import pdc.assignment.entities.EntityFactory;
 import pdc.assignment.entities.Entity;
-import pdc.assignment.database.GameData;
-import pdc.assignment.database.Wrapper;
+import pdc.assignment.databaseclasses.GameData;
+import pdc.assignment.databaseclasses.Wrapper;
 import pdc.assignment.entities.Player;
 
 /**
@@ -39,7 +39,7 @@ public final class GameSession {
         this.level.displayEntityInfo();
     }
     
-    // Constructor to load game from save file.
+    // Constructor to loadGameData game from save file.
     public GameSession(int id) throws Exception {
         this.gameData = new GameData();
         HashMap loadData = Wrapper.loadGame(id);
@@ -51,6 +51,10 @@ public final class GameSession {
         this.level.displayEntityInfo();
     }
 
+    /**
+     * Contains all the logic when the players defeats a monster.
+     * 
+     */
     private void winRound() throws Exception {
         HistoryLogger.append("** You have defeated the creature!");
         this.level.incrementLevel();
@@ -61,6 +65,7 @@ public final class GameSession {
                         + "\nPlease EXIT and run the program to try again.");
         }
         else {
+            // Gives loot and makes the player equip it.
             ArrayList loot = this.level.rewardPlayer();
             this.level.getPlayer().obtainItems(loot);
             this.level.generateEnemy();
@@ -68,6 +73,11 @@ public final class GameSession {
         }
     }
     
+    /**
+     * This is trigger when the player presses the attack button.
+     * 
+     * @throws java.lang.Exception
+     */
     public void attack() throws Exception {
         this.level.playerTurn();
         System.out.println("Player attacked");

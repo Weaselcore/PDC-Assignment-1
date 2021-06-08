@@ -14,14 +14,20 @@ import javax.swing.JPanel;
  *
  * @author wease
  */
-public final class GameButtonPanel extends JPanel{
-    
+
+
+/**
+ * This is a JPanel that is shown when players start a game.
+ * It will show the action buttons, attack , potion, save and exit.
+ */
+public final class GameButtonPanel extends JPanel {
+
     private final JButton attackButton;
     private final JButton potionButton;
     private final JButton saveButton;
     private final JButton exitButton;
     private final ArrayList buttonList;
-    
+
     public GameButtonPanel() {
 
         this.setLayout(new GridLayout(1, 4));
@@ -33,7 +39,7 @@ public final class GameButtonPanel extends JPanel{
         this.add(this.saveButton);
         this.exitButton = new JButton("EXIT");
         this.add(this.exitButton);
-        
+
         this.buttonList = new ArrayList();
 
         this.buttonList.add(this.attackButton);
@@ -41,13 +47,13 @@ public final class GameButtonPanel extends JPanel{
         this.buttonList.add(this.saveButton);
         this.buttonList.add(this.exitButton);
     }
-    
+
     /**
      * @return the buttonList
      */
     public ArrayList getButtonList() {
         return buttonList;
-    } 
+    }
 
     /**
      * @return the attackButton
@@ -76,8 +82,5 @@ public final class GameButtonPanel extends JPanel{
     public JButton getExitButton() {
         return exitButton;
     }
-    
-    
-    
-    
+
 }

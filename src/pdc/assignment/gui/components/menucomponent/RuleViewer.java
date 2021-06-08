@@ -14,6 +14,11 @@ import javax.swing.JPanel;
  *
  * @author wease
  */
+
+/**
+ * A JPanel that displays the rules when the rules button has been pressed.
+ *
+ */
 public final class RuleViewer extends JPanel{
     private final int compWidth = 500;
     private final int compHeight = 500;

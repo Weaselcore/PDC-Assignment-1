@@ -8,7 +8,7 @@ package pdc.assignment.entities;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import pdc.assignment.database.GameData;
+import pdc.assignment.databaseclasses.GameData;
 import pdc.assignment.gameclasses.HistoryLogger;
 
 /**

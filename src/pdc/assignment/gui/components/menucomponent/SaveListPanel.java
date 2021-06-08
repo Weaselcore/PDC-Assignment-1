@@ -16,6 +16,13 @@ import pdc.assignment.gui.components.sharedcomponents.CustomJList;
  *
  * @author wease
  */
+
+/**
+ * This is a JPanel that displays a dynamic list of saves.
+ * It is contained is a scroll panel and gets updated when a saves deleted ore created.
+ * Has a load and delete button at the bottom.
+ * It uses a customjlist class for the actual jlist.
+ */
 public final class SaveListPanel extends JPanel{
    
     private final JPanel lowerSaveListPanel;

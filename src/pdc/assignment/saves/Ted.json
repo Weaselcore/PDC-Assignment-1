@@ -1,9 +1,0 @@
-{
-  "name" : "Ted",
-  "health" : 10,
-  "superAttack" : 1,
-  "level" : 4,
-  "weapon" : "Diamond Mace",
-  "armour" : "Iron Armour",
-  "potions" : [ "Medium Health Potion", "Small Super Attack Potion", "Medium Health Potion", "Small Super Attack Potion", "Small Health Potion", "Small Super Attack Potion" ]
-}

@@ -19,6 +19,11 @@ import pdc.assignment.gui.view.GameView;
 /**
  * @author wease
  */
+
+/**
+ * A controller class that starts the brings up the program.
+ * 
+ */
 public class GameController implements ActionListener{
     
     GameModel gameModel;
@@ -34,7 +39,10 @@ public class GameController implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e){
         Object source = e.getSource();
-        // Lower panel buttons events.
+        /**
+         * Below are the buttons that are contained in the lower panels.
+         * 
+         */
         if (source == gameView.lowerPanel.getNewGameButton()){
             System.out.println("New game button has been pressed.");
             gameView.showNewGamePanel();
@@ -61,6 +69,14 @@ public class GameController implements ActionListener{
             gameView.showRulesPanel();
             System.out.println("New rules button has been pressed.");
         }
+        else if ((source == gameView.lowerPanel.getExitButton()) || (source == gameView.lowerPanel.getGameButtonPanel().getExitButton())) {
+            System.out.println("Exit button has been pressed.");
+            System.exit(0);
+        }
+        /**
+         * Below are the buttons that are contained in the right panels.
+         * 
+         */
         else if (source == gameView.rightPanel.getSaveListPanel().getLoadButton()) {
             System.out.println("Load button has been pressed.");
             int indexLoad = gameView.rightPanel.getSaveListPanel().getSavesJlist().getSelectedOption();
@@ -91,11 +107,11 @@ public class GameController implements ActionListener{
         else if (source == gameView.rightPanel.getSaveListPanel().getSavesJlist()) {
             System.out.println("JList has been pressed.");
         }
-        else if ((source == gameView.lowerPanel.getExitButton()) || (source == gameView.lowerPanel.getGameButtonPanel().getExitButton())) {
-            System.out.println("Exit button has been pressed.");
-            System.exit(0);
-        }
-        // These buttons will be disabled when the game is over.
+        /**
+         * Below are the buttons that get disabled when gamesession's isWon and
+         * isLose flags are true to prevent any event triggers after the game
+         * has finished.
+         */
         else if (!gameModel.hasGameEnded()) {
             if (source == gameView.lowerPanel.getGameButtonPanel().getAttackButton()) {
                 try {
@@ -134,6 +150,10 @@ public class GameController implements ActionListener{
         }
     }
     
+    /**
+     * This updates the history when an event is triggered.
+     * This is called to add text to the history log panel.
+     */
     private void updateHistoryLog() {
         ArrayList<String> historyLog = HistoryLogger.unload();
         historyLog.forEach(element -> {
@@ -142,16 +162,28 @@ public class GameController implements ActionListener{
         });
     }
     
+    /**
+     * This updates the save JList when the user deletes a save.
+     * 
+     */
     private void updateSaveList() throws SQLException {
         this.gameModel.fetchListOfSaves();
         this.gameView.rightPanel.getSaveListPanel().getSavesJlist().populateListModelHashMap(gameModel.getSaveList());
     }
-    
+ 
+    /**
+     * This updates the potion JList when the user gains or loses a potion.
+     * 
+     */
     private void updatePotionList() {
         this.gameModel.fetchListofPotions();
         this.gameView.rightPanel.getPotionPanel().getPotionJlist().populateListModelLinkedList(gameModel.getPotionList());
     }
     
+    /**
+     * This updates the image every time the user attacks.
+     * 
+     */    
     private void updateGameImage() {
         String enemyName = this.gameModel.getCurrentEnemyName();
         this.gameView.upperPanel.getGameImages().changeImage(enemyName);

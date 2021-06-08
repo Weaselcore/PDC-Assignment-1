@@ -5,7 +5,7 @@
  */
 package pdc.assignment.items;
 
-import pdc.assignment.database.GameData;
+import pdc.assignment.databaseclasses.GameData;
 
 /**
  * Returns the appropriate item using factory pattern to improve scalability.

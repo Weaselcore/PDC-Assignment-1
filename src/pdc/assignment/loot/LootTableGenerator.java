@@ -16,7 +16,7 @@ import pdc.assignment.items.Item;
 import pdc.assignment.items.ItemFactory;
 import pdc.assignment.items.Potion;
 import pdc.assignment.items.Weapon;
-import pdc.assignment.database.GameData;
+import pdc.assignment.databaseclasses.GameData;
 
 /**
  * A generator that creates a loot table for each item type from game data.

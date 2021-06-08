@@ -21,6 +21,11 @@ import pdc.assignment.gui.controller.GameController;
  *
  * @author ieuan
  */
+
+/**
+ * This class contains all the individual JPanels that is position as described.
+ * 
+ */
 public final class GameView extends Observable{
     
     public JFrame mainFrame;
@@ -59,6 +64,10 @@ public final class GameView extends Observable{
         this.mainFrame.setVisible(true);
     }
     
+    /**
+     * Below are the methods that make the inner JPanels to be visible.
+     * 
+     */
     public void showButtonPanel() {
         if (getLowerJPanelToShow() != this.lowerPanel.getButtonPanel()) {
             lowerPanel.cardLayout.show(lowerPanel, lowerPanel.BUTTON_PANEL);
@@ -114,7 +123,12 @@ public final class GameView extends Observable{
             upperJPanelToShow = upperPanel.getGameImages();
         }
     }
-  
+    /**
+     * This takes all the buttons initialized in all the nested JPanels and
+     * registers them to the controller.
+     * 
+     * @param menuController
+     */  
     public void addController(GameController menuController) {
         
         ArrayList<JButton> allButtonsArray = new ArrayList();

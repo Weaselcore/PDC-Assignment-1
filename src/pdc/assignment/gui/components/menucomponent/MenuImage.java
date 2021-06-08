@@ -14,6 +14,12 @@ import javax.swing.JPanel;
  *
  * @author ieuan
  */
+
+
+/**
+ * A JPanel that simply displays the menu image.
+ * 
+ */
 public final class MenuImage extends JPanel {
     
     Image image;  

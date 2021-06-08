@@ -1,9 +1,0 @@
-{
-  "name" : "Bob",
-  "health" : 10,
-  "superAttack" : 0,
-  "level" : 4,
-  "weapon" : "Copper Axe",
-  "armour" : "Leather Armour",
-  "potions" : [ "Small Super Attack Potion", "Small Super Attack Potion" ]
-}

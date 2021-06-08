@@ -16,6 +16,14 @@ import pdc.assignment.gui.components.sharedcomponents.CustomJList;
  *
  * @author wease
  */
+
+/**
+ * This is a JPanel that displays a dynamic list of potions.
+ * It is contained is a scroll panel and gets updated when a potion is used.
+ * Has a use and cancel button at the bottom.
+ * It uses a customjlist class for the actual jlist.
+ * 
+ */
 public final class PotionPanel extends JPanel{
     private final JPanel lowerPotionPanel;
     private final JButton useButton;

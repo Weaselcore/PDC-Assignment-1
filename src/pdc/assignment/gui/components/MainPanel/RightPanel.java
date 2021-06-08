@@ -16,6 +16,13 @@ import pdc.assignment.gui.components.menucomponent.SaveListPanel;
  *
  * @author wease
  */
+
+
+/**
+ * A JPanel that contains many JPanels in a card layout.
+ * When the user presses a button that alters the view, the card layout can
+ * swap the contained panels.
+ */
 public final class RightPanel extends JPanel{
     
     public final CardLayout cardLayout;
@@ -28,7 +35,6 @@ public final class RightPanel extends JPanel{
     private final PotionPanel potionPanel;
     
     public RightPanel() {
-        //this.setPreferredSize(new Dimension(200,75));
         this.cardLayout = new CardLayout();
         this.setLayout(cardLayout);
 

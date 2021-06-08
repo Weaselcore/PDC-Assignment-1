@@ -13,7 +13,7 @@ import pdc.assignment.loot.LootTableGenerator;
 import pdc.assignment.entities.Entity;
 import pdc.assignment.entities.EntityFactory;
 import pdc.assignment.entities.Player;
-import pdc.assignment.database.GameData;
+import pdc.assignment.databaseclasses.GameData;
 import pdc.assignment.entities.Enemy;
 
 /**
@@ -50,11 +50,18 @@ public final class Level implements Serializable{
         this.currentEnemy = (Enemy) EntityFactory.createOldEntity("old enemy", loadData, gameData);
     }  
     
+    /**
+     * Generates an enemy and resets the isEnemyDead flag.
+     * 
+     */
     public void generateEnemy() throws Exception {
         this.currentEnemy = (Enemy) EntityFactory.createNewEntity("enemy", this.gameData);
         this.isEnemyDead = false;
     }
     
+    /**
+     * @return the isEnemyDead
+     */
     public boolean isEnemyDead() {
         return this.isEnemyDead;
     }
@@ -66,19 +73,28 @@ public final class Level implements Serializable{
         return isplayerDead;
     } 
     
+    /**
+     * This is the logic for the enemies turn.
+     */
     public void enemyTurn() {          
         this.getCurrentEnemy().turn(this.getPlayer());
         this.isplayerDead = this.getPlayer().isDead();
     }
     
-    // Level object is responsible for taking in player input.
+    /**
+     * This is the logic for the players turn.
+     */
     public void playerTurn(){
-//      boolean chosen = false;
         this.getPlayer().displaySuperAttack();
         this.getPlayer().attack(this.getCurrentEnemy());
         this.isEnemyDead = this.getCurrentEnemy().isDead();
     }
     
+    /**
+     * This is the logic to generate 3 item objects (potion, weapon and armor)
+     * @return 
+     * @throws java.lang.Exception
+     */
     public ArrayList rewardPlayer() throws Exception {
         return this.lootGenerator.generateItem();
     }
@@ -107,11 +123,20 @@ public final class Level implements Serializable{
     public int getCurrentLevel() {
         return currentLevel;
     }
-
+    
+    /**
+     * @return the player
+     */
     public Player getPlayer() {
         return this.player;
     }
     
+    /**
+     * This method turns all the data of the player and level to save it into a
+     * HashMap
+     * 
+     * @return 
+     */
     public HashMap saveToHashMap() {
         
         HashMap map = new HashMap(); 
@@ -166,14 +191,19 @@ public final class Level implements Serializable{
     public Enemy getCurrentEnemy() {
         return currentEnemy;
     }
-
+    
+    /**
+     * Increments the level by 1.
+     */
     public void incrementLevel() {
         this.currentLevel += 1;
     }
     
+    /**
+     * Display information for both entities for each turn.
+     */
     public void displayEntityInfo() {
         this.getPlayer().displayInfo();
         this.getCurrentEnemy().displayInfo();
     }
- 
 }

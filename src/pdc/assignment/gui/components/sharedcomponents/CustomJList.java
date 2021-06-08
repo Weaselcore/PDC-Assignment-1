@@ -17,6 +17,12 @@ import javax.swing.event.ListSelectionEvent;
  *
  * @author wease
  */
+
+/**
+ * A JList with its own logic implemented for reuse.
+ * Has two populate methods to deal with Linked HashMaps and Linked Lists.
+ * 
+ */
 public class CustomJList extends JList{
     
     private DefaultListModel<String> listModel = null;

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pdc.assignment.database;
+package pdc.assignment.databaseclasses;
 
 import java.io.Serializable;
 import java.sql.SQLException;
@@ -24,10 +24,10 @@ public class GameData implements Serializable{
     
     public GameData() throws SQLException {
         Wrapper.connect();
-        this.armourData = Wrapper.load("armour");
-        this.potionData = Wrapper.load("potion");
-        this.weaponData = Wrapper.load("weapon");
-        this.enemyData = Wrapper.load("enemy");
+        this.armourData = Wrapper.loadGameData("armour");
+        this.potionData = Wrapper.loadGameData("potion");
+        this.weaponData = Wrapper.loadGameData("weapon");
+        this.enemyData = Wrapper.loadGameData("enemy");
         Wrapper.close();
     }  
 

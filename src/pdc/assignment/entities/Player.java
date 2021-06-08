@@ -15,7 +15,7 @@ import pdc.assignment.items.ItemFactory;
 import pdc.assignment.items.Potion;
 import pdc.assignment.items.Weapon;
 import pdc.assignment.gameclasses.GameSession;
-import pdc.assignment.database.GameData;
+import pdc.assignment.databaseclasses.GameData;
 import pdc.assignment.gameclasses.HistoryLogger;
 
 /**

@@ -17,6 +17,12 @@ import pdc.assignment.gui.components.gamecomponent.GameButtonPanel;
  *
  * @author wease
  */
+
+/**
+ * A JPanel that contains many JPanels in a card layout.
+ * When the user presses a button that alters the view, the card layout can
+ * swap the contained panels.
+ */
 public final class LowerPanel extends JPanel{
 
     public final CardLayout cardLayout;
@@ -35,7 +41,6 @@ public final class LowerPanel extends JPanel{
     private final JButton newGameCancelButton;
     
     private final JTextField newGameTextField;
-    
     private final ArrayList buttonList = new ArrayList();
     
     public LowerPanel() {

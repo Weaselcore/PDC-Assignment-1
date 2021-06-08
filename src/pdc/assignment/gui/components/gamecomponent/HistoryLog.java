@@ -14,6 +14,11 @@ import javax.swing.JTextArea;
  *
  * @author wease
  */
+
+/**
+ * This is a JPanel that displays the outputs when the player invokes an event.
+ * 
+ */
 public final class HistoryLog extends JPanel{
     
     private final JScrollPane historyScrollPanel;
@@ -29,7 +34,7 @@ public final class HistoryLog extends JPanel{
         
     }
 
-    
+    // Allows for updates in the controller when an action is taken.
     public void addText(String text) {
         this.historyTextLog.append(text);
     }
